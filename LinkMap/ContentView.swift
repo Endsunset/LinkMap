@@ -9,9 +9,10 @@ import SwiftUI
 import SwiftData
 import MapKit
 
-var defaultMarkerTitle = "Guangzhou", defaultLatitude = 23.128994, defaultLongitude = 113.253250
-
 struct ContentView: View {
+    @Query private var people: [Person]
+    @Query private var annotations: [AnnotationData]
+    @Environment(\.modelContext) private var context
     
     var body: some View {
         TabView {

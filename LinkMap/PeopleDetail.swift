@@ -12,7 +12,7 @@ import MapKit
 struct PeopleDetail: View {
     @Bindable var person: Person
     let isNew: Bool
-    @Query(sort: \AnnotationData.annotationId) private var annotations: [AnnotationData]
+    @Query(sort: \AnnotationData.id) private var annotations: [AnnotationData]
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
@@ -24,16 +24,17 @@ struct PeopleDetail: View {
     
     var body: some View {
         VStack {
-            /*
-            Map {
-                Marker(annotations[person.annotation], coordinate: CLLocationCoordinate2D(latitude: annotations[person.annotation].latitude, longitude: annotations[person.annotation].longitude))
-            }
-             */
             Form {
                 TextField("Name", text: $person.name)
                     .autocorrectionDisabled()
-                TextField("requirement", text: $person.requirement)
-                TextField("AnnotationId", value: $person.annotation, format: .number)
+                Picker("Annotation", selection: $person.annotationId) {
+                    ForEach(annotations, id: \.id) { annotation in
+                        Text(annotation.name).tag(annotation.id)
+                    }
+                }
+                .pickerStyle(.menu)
+                TextEditor(text: $person.requirement)
+                    .frame(minHeight: 40) // Minimum height
             }
             .navigationTitle(isNew ? "New Person" : "Person")
             .navigationBarTitleDisplayMode(.inline)

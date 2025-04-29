@@ -11,9 +11,23 @@ import SwiftData
 @main
 struct LinkMapApp: App {
     var body: some Scene {
+        #if os(iOS) || os(macOS)
+        DocumentGroupLaunchScene("LinkMap") {
+            NewDocumentButton("v1.0")
+        } background: {
+            Image(.pinkJungle)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+        }
+        DocumentGroup(editing: [AnnotationData.self, Person.self], contentType: .linkMap) {
+            ContentView()
+        }
+        #else
         WindowGroup {
             ContentView()
-                .modelContainer(for: [AnnotationData.self, Person.self])
         }
+        .modelContainer(for: [AnnotationData.self, Person.self])
+        #endif
     }
 }

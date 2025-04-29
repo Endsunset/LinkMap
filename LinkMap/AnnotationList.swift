@@ -7,9 +7,12 @@
 
 import SwiftUI
 import SwiftData
+import MapKit
+
+let center = CLLocationCoordinate2D(latitude: 35.8617, longitude: 104.1954)
 
 struct AnnotationList: View {
-    @Query(sort: \AnnotationData.annotationId) private var annotations: [AnnotationData]
+    @Query(sort: \AnnotationData.id) private var annotations: [AnnotationData]
     @Environment(\.modelContext) private var context
     @State private var newAnnotation: AnnotationData?
     
@@ -19,7 +22,6 @@ struct AnnotationList: View {
                 ForEach(annotations) { annotationData in
                     NavigationLink(annotationData.name) {
                         AnnotationDetail(annotation: annotationData)
-                        
                     }
                 }
                 .onDelete(perform: deleteAnnotation(indexes:))
@@ -27,7 +29,7 @@ struct AnnotationList: View {
             .navigationTitle("Annotations")
             .toolbar {
                 ToolbarItem {
-                    Button("Add annotation", systemImage: "plus", action: addAnnotation)
+                    Button("Add annotation", systemImage: "plus", action: addAnnotationData)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     EditButton()
@@ -46,8 +48,8 @@ struct AnnotationList: View {
         }
     }
     
-    private func addAnnotation() {
-        let newAnnotation = AnnotationData(annotationId: 1, name: "New annotation", longitude: 0.0, latitude: 0.0)
+    private func addAnnotationData() {
+        let newAnnotation = AnnotationData(name: "New annotation", longitude: center.longitude, latitude: center.latitude)
         context.insert(newAnnotation)
         self.newAnnotation = newAnnotation
     }

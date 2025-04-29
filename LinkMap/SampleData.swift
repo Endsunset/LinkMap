@@ -51,5 +51,4 @@ class SampleData {
             context.insert(person)
         }
     }
-    
 }

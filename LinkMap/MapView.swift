@@ -10,7 +10,7 @@ import SwiftData
 import MapKit
 
 struct MapView: View {
-    @Query(sort: \AnnotationData.annotationId) private var annotations: [AnnotationData]
+    @Query private var annotations: [AnnotationData]
     @Environment(\.modelContext) private var context
     
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
@@ -19,41 +19,47 @@ struct MapView: View {
     @State private var selectedAnnotation: String?
     @State private var isShowingSheet = false
     
+    @State private var annotationId: Int?
+    
+    @State private var refreshID = UUID()
+    
     var body: some View {
-        Map(position: $position, selection: $selectedAnnotation) {
-            UserAnnotation()
-            
-            ForEach(annotations) { annotationData in
-                Marker(annotationData.name, coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
-                    .tag(annotationData.name)
-                /*
-                    .tag(MKMapItem(placemark: MKPlacemark(
-                        coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude)
-                                    )))
-                 */
-            }
-        }
-        .mapStyle(.hybrid(elevation: .realistic))
-        .onChange(of: annotations) {
-            position = .userLocation(fallback: .automatic)
-        }
-        .onChange(of: selectedAnnotation) { _, newValue in
-            if newValue != nil {
-                isShowingSheet = true // Trigger sheet when annotation is selected
-            }
-        }
-        .mapControls {
-            
-        }
-        .sheet(isPresented: $isShowingSheet, onDismiss: didDismiss) {
-                PeopleList()
-                .onDisappear {
-                    selectedAnnotation = nil // Reset selection when sheet dismisses
+        ZStack(alignment: .top) {
+            Map(position: $position, selection: $selectedAnnotation) {
+                UserAnnotation()
+                
+                ForEach(annotations) { annotationData in
+                    Marker(annotationData.name, coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
+                        .tag(annotationData.name)
                 }
+            }
+            .mapStyle(.hybrid(elevation: .realistic))
+            .onChange(of: annotations) {
+                position = .userLocation(fallback: .automatic)
+            }
+            .onChange(of: selectedAnnotation) { _, newValue in
+                if newValue != nil {
+                    isShowingSheet = true // Trigger sheet when annotation is selected
+                }
+            }
+            .mapControls {
+                
+            }
+            .sheet(isPresented: $isShowingSheet) {
+                ForEach(annotations) { annotationData in
+                    if annotationData.name == selectedAnnotation {
+                        PeopleList(isSheet: true, annotationId: annotationData.id)
+                            .onDisappear {
+                                selectedAnnotation = nil // Reset selection when sheet dismisses
+                            }
+                    }
+                }
+            }
+            .id(refreshID)
+            .onAppear {
+                refreshID = UUID()  // Force map refresh
+            }
         }
-    }
-    func didDismiss() {
-        // Handle the dismissing action.
     }
 }
 

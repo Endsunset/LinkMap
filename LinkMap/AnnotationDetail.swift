@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 import MapKit
 
 struct AnnotationDetail: View {
     @Bindable var annotation: AnnotationData
     let isNew: Bool
+    @Environment(\.modelContext) private var context
     
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var context
+    
+    @State private var position: MapCameraPosition = .automatic
     
     init(annotation: AnnotationData, isNew: Bool = false) {
         self.annotation = annotation
@@ -22,14 +25,22 @@ struct AnnotationDetail: View {
     
     var body: some View {
         VStack {
-            Map {
-                Marker(annotation.name, coordinate: CLLocationCoordinate2D(latitude: annotation.latitude, longitude: annotation.longitude))
+            MapReader { proxy in
+                Map(position: $position) {
+                    Marker(annotation.name, coordinate: CLLocationCoordinate2D(latitude: annotation.latitude, longitude: annotation.longitude))
+                }
+                .onTapGesture { screenPoint in
+                    if let markerLocation = proxy.convert(screenPoint, from: .local) {
+                        annotation.latitude = markerLocation.latitude
+                        annotation.longitude = markerLocation.longitude
+                    }
+                }
             }
+            
             Form {
                 TextField("Name", text: $annotation.name)
                     .autocorrectionDisabled()
-                TextField("Latitude", value: $annotation.latitude, format: .number)
-                TextField("Longitude", value: $annotation.longitude, format: .number)
+
             }
             .navigationTitle(isNew ? "New Annotation" : "Annotation")
             .navigationBarTitleDisplayMode(.inline)
