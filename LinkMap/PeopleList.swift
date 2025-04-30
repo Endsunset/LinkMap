@@ -54,6 +54,7 @@ struct PeopleList: View {
                 }
                 
             }
+            .navigationBarBackButtonHidden(true)
             .sheet(item: $newPerson) { person in
                 NavigationStack {
                     PeopleDetail(person: person, isNew: true)

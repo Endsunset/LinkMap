@@ -13,16 +13,15 @@ struct LinkMapApp: App {
     var body: some Scene {
         #if os(iOS) || os(macOS)
         DocumentGroupLaunchScene("LinkMap") {
-            NewDocumentButton("v1.0")
+            NewDocumentButton("New Document")
         } background: {
-            Image(.pinkJungle)
+            Image(.scenaryBackground)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
         }
         DocumentGroup(editing: [AnnotationData.self, Person.self], contentType: .linkMap) {
             ContentView()
-            
         }
         #else
         WindowGroup {

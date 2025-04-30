@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import MapKit
+import CoreLocation
 
 struct MapView: View {
     @Query private var annotations: [AnnotationData]
@@ -16,7 +17,7 @@ struct MapView: View {
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     
     //@State private var mapAnnotation: [MKMapItem] = annotations
-    @State private var selectedAnnotation: String?
+    @State private var selectedAnnotation: UUID?
     @State private var isShowingSheet = false
     
     @State private var annotationId: Int?
@@ -30,7 +31,7 @@ struct MapView: View {
                 
                 ForEach(annotations) { annotationData in
                     Marker(annotationData.name, coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
-                        .tag(annotationData.name)
+                        .tag(annotationData.id)
                 }
             }
             .mapStyle(.hybrid(elevation: .realistic))
@@ -46,14 +47,35 @@ struct MapView: View {
                 
             }
             .sheet(isPresented: $isShowingSheet) {
+                /*
+                if let annotation = annotations.first(where: { $0.id == selectedAnnotation }) {
+                    NavigationStack {
+                        PeopleList(isSheet: true, annotationId: annotation.id)
+                            .navigationTitle("People")
+                            .navigationBarBackButtonHidden(true) // Hide back button
+                            .toolbar {
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    Button("Done") {
+                                        isShowingSheet = false // Dismiss sheet
+                                    }
+                                }
+                            }
+                    }
+                    .onDisappear {
+                        selectedAnnotation = nil // Reset selection
+                    }
+                }
+                 */
+                
                 ForEach(annotations) { annotationData in
-                    if annotationData.name == selectedAnnotation {
+                    if annotationData.id == selectedAnnotation {
                         PeopleList(isSheet: true, annotationId: annotationData.id)
                             .onDisappear {
                                 selectedAnnotation = nil // Reset selection when sheet dismisses
                             }
                     }
                 }
+                 
             }
             .id(refreshID)
             .onAppear {

@@ -55,12 +55,12 @@ struct PeopleDetail: View {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Cancel") {
                             context.delete(person)
-                            save()
                             dismiss()
                         }
                     }
                 }
             }
+            .navigationBarBackButtonHidden(isNew)
         }
     }
     
