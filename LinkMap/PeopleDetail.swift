@@ -38,21 +38,37 @@ struct PeopleDetail: View {
             }
             .navigationTitle(isNew ? "New Person" : "Person")
             .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: person) { _, _ in  // Saves when ANY property changes
+                save()
+            }
+            .onDisappear { //  Save when navigating back
+                save()
+            }
             .toolbar {
                 if isNew {
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Save") {
+                            save()
                             dismiss()
                         }
                     }
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Cancel") {
                             context.delete(person)
+                            save()
                             dismiss()
                         }
                     }
                 }
             }
+        }
+    }
+    
+    private func save() {
+        do {
+            try context.save()
+        } catch {
+            
         }
     }
 }

@@ -8,5 +8,5 @@
 import UniformTypeIdentifiers
 
 extension UTType {
-    static var linkMap = UTType(exportedAs: "com.EndSunset.linkMap")
+    static var linkMap = UTType(exportedAs: "com.Endsunset.linkMap")
 }

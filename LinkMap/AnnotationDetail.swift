@@ -44,21 +44,37 @@ struct AnnotationDetail: View {
             }
             .navigationTitle(isNew ? "New Annotation" : "Annotation")
             .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: annotation) { _, _ in  // Saves when ANY property changes
+                save()
+            }
+            .onDisappear { //  Save when navigating back
+                save()
+            }
             .toolbar {
                 if isNew {
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Save") {
+                            save()
                             dismiss()
                         }
                     }
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Cancel") {
                             context.delete(annotation)
+                            save()
                             dismiss()
                         }
                     }
                 }
             }
+        }
+    }
+    
+    private func save() {
+        do {
+            try context.save()
+        } catch {
+            
         }
     }
 }

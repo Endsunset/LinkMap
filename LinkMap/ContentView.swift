@@ -14,6 +14,9 @@ struct ContentView: View {
     @Query private var annotations: [AnnotationData]
     @Environment(\.modelContext) private var context
     
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    
     var body: some View {
         TabView {
             Tab("Map", systemImage: "map") {

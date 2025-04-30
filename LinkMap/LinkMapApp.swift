@@ -22,6 +22,7 @@ struct LinkMapApp: App {
         }
         DocumentGroup(editing: [AnnotationData.self, Person.self], contentType: .linkMap) {
             ContentView()
+            
         }
         #else
         WindowGroup {
@@ -30,4 +31,5 @@ struct LinkMapApp: App {
         .modelContainer(for: [AnnotationData.self, Person.self])
         #endif
     }
+    
 }

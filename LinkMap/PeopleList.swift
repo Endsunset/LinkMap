@@ -78,10 +78,6 @@ struct PeopleList: View {
             context.delete(people[index])
         }
     }
-    
-    func getIndex(of person: Person) -> Int? {
-        return people.firstIndex(where: { $0.persistentModelID == person.persistentModelID })
-    }
 }
 
 
