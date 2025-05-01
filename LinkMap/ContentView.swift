@@ -35,6 +35,8 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(SampleData.shared.modelContainer)
+    NavigationStack {
+        ContentView()
+            .modelContainer(SampleData.shared.modelContainer)
+    }
 }

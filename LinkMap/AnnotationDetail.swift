@@ -61,6 +61,7 @@ struct AnnotationDetail: View {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Cancel") {
                             context.delete(annotation)
+                            save()
                             dismiss()
                         }
                     }

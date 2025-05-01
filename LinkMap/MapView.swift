@@ -24,6 +24,12 @@ struct MapView: View {
     
     @State private var refreshID = UUID()
     
+    @State private var searchText = ""
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
+    
+    @State private var locationManager = CLLocationManager()
+    
     var body: some View {
         ZStack(alignment: .top) {
             Map(position: $position, selection: $selectedAnnotation) {
@@ -47,26 +53,6 @@ struct MapView: View {
                 
             }
             .sheet(isPresented: $isShowingSheet) {
-                /*
-                if let annotation = annotations.first(where: { $0.id == selectedAnnotation }) {
-                    NavigationStack {
-                        PeopleList(isSheet: true, annotationId: annotation.id)
-                            .navigationTitle("People")
-                            .navigationBarBackButtonHidden(true) // Hide back button
-                            .toolbar {
-                                ToolbarItem(placement: .topBarTrailing) {
-                                    Button("Done") {
-                                        isShowingSheet = false // Dismiss sheet
-                                    }
-                                }
-                            }
-                    }
-                    .onDisappear {
-                        selectedAnnotation = nil // Reset selection
-                    }
-                }
-                 */
-                
                 ForEach(annotations) { annotationData in
                     if annotationData.id == selectedAnnotation {
                         PeopleList(isSheet: true, annotationId: annotationData.id)
@@ -79,8 +65,41 @@ struct MapView: View {
             }
             .id(refreshID)
             .onAppear {
-                refreshID = UUID()  // Force map refresh
+                refreshID = UUID()
+                locationManager.requestWhenInUseAuthorization()
+                position = .userLocation(fallback: .automatic)// Force map refresh
             }
+
+            
+            TextField("Search location", text: $searchText)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .onChange(of: searchText) { _, newValue in
+                    geocodeSearchText()
+                }
+        }
+    }
+    
+    private func geocodeSearchText() {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(searchText) { placemarks, error in
+            if let error = error {
+                alertMessage = "Geocoding error: \(error.localizedDescription)"
+                showingAlert = true
+                return
+            }
+            
+            guard let placemark = placemarks?.first,
+                  let location = placemark.location else {
+                alertMessage = "Location not found"
+                showingAlert = true
+                return
+            }
+            
+            position = .region(MKCoordinateRegion(
+                center: location.coordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            ))
         }
     }
 }
