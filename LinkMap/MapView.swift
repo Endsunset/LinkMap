@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import MapKit
 import CoreLocation
+import Combine
 
 struct MapView: View {
     @Query private var annotations: [AnnotationData]
@@ -31,52 +32,55 @@ struct MapView: View {
     @State private var locationManager = CLLocationManager()
     
     var body: some View {
-        ZStack(alignment: .top) {
-            Map(position: $position, selection: $selectedAnnotation) {
-                UserAnnotation()
-                
-                ForEach(annotations) { annotationData in
-                    Marker(annotationData.name, coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
-                        .tag(annotationData.id)
-                }
-            }
-            .mapStyle(.hybrid(elevation: .realistic))
-            .onChange(of: annotations) {
-                position = .userLocation(fallback: .automatic)
-            }
-            .onChange(of: selectedAnnotation) { _, newValue in
-                if newValue != nil {
-                    isShowingSheet = true // Trigger sheet when annotation is selected
-                }
-            }
-            .mapControls {
-                
-            }
-            .sheet(isPresented: $isShowingSheet) {
-                ForEach(annotations) { annotationData in
-                    if annotationData.id == selectedAnnotation {
-                        PeopleList(isSheet: true, annotationId: annotationData.id)
-                            .onDisappear {
-                                selectedAnnotation = nil // Reset selection when sheet dismisses
-                            }
+        ZStack(alignment: .bottom) {
+            MapReader { proxy in
+                Map(position: $position, selection: $selectedAnnotation) {
+                    UserAnnotation()
+                    
+                    ForEach(annotations) { annotationData in
+                        Marker(annotationData.name, coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
+                            .tag(annotationData.id)
                     }
                 }
-                 
+                .mapStyle(.hybrid(elevation: .realistic))
+                .onChange(of: annotations) {
+                    position = .userLocation(fallback: .automatic)
+                }
+                .onChange(of: selectedAnnotation) { _, newValue in
+                    if newValue != nil {
+                        isShowingSheet = true // Trigger sheet when annotation is selected
+                    }
+                }
+                .mapControls {
+                    MapUserLocationButton()
+                    MapCompass()
+                    MapScaleView()
+                }
+                .sheet(isPresented: $isShowingSheet) {
+                    ForEach(annotations) { annotationData in
+                        if annotationData.id == selectedAnnotation {
+                            PeopleList(isSheet: true, annotationId: annotationData.id)
+                                .presentationDetents([.medium, .large])
+                                .onDisappear {
+                                    selectedAnnotation = nil // Reset selection when sheet dismisses
+                                }
+                        }
+                    }
+                    
+                }
+                .id(refreshID)
+                .onAppear {
+                    refreshID = UUID()
+                    locationManager.requestWhenInUseAuthorization()
+                    position = .userLocation(fallback: .automatic)// Force map refresh
+                }
             }
-            .id(refreshID)
-            .onAppear {
-                refreshID = UUID()
-                locationManager.requestWhenInUseAuthorization()
-                position = .userLocation(fallback: .automatic)// Force map refresh
-            }
+            .ignoresSafeArea(.keyboard)
 
             
-            TextField("Search location", text: $searchText)
+            TextField("Search location", text: $searchText, onCommit: geocodeSearchText)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-                .onChange(of: searchText) { _, newValue in
-                    geocodeSearchText()
-                }
         }
     }
     

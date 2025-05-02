@@ -16,6 +16,10 @@ struct AnnotationList: View {
     @Environment(\.modelContext) private var context
     @State private var newAnnotation: AnnotationData?
     
+    @StateObject private var locationManager = LocationManager()
+    
+    
+    
     var body: some View {
         NavigationSplitView {
             List {
@@ -49,7 +53,7 @@ struct AnnotationList: View {
     }
     
     private func addAnnotationData() {
-        let newAnnotation = AnnotationData(name: "New annotation", longitude: center.longitude, latitude: center.latitude)
+        let newAnnotation = AnnotationData(name: "New annotation", longitude: locationManager.userLocation?.longitude ?? center.latitude, latitude: locationManager.userLocation?.latitude ?? center.latitude)
         context.insert(newAnnotation)
         self.newAnnotation = newAnnotation
     }

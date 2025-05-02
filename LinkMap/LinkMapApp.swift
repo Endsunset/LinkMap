@@ -21,10 +21,7 @@ struct LinkMapApp: App {
                 .ignoresSafeArea()
         }
         DocumentGroup(editing: [AnnotationData.self, Person.self], contentType: .linkMap) {
-            NavigationView {
-                ContentView()
-                    .toolbarRole(.automatic)
-            }
+            ContentView()
         }
         #else
         WindowGroup {
