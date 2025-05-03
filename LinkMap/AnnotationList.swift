@@ -21,11 +21,13 @@ struct AnnotationList: View {
     
     
     var body: some View {
+        NavigationSplitView {
             List {
                 ForEach(annotations) { annotationData in
                     NavigationLink(annotationData.name) {
                         AnnotationDetail(annotation: annotationData)
                     }
+                    .navigationBarTitleDisplayMode(.inline)
                 }
                 .onDelete(perform: deleteAnnotation(indexes:))
             }
@@ -42,8 +44,15 @@ struct AnnotationList: View {
                 NavigationStack {
                     AnnotationDetail(annotation: annotationData, isNew: true)
                 }
+                .navigationBarTitleDisplayMode(.inline)
                 .interactiveDismissDisabled()
             }
+        } detail: {
+            Text("Select an annotation")
+                .navigationTitle("Annotation")
+                .navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     

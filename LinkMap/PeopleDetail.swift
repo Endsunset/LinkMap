@@ -36,32 +36,32 @@ struct PeopleDetail: View {
                 TextEditor(text: $person.requirement)
                     .frame(minHeight: 40) // Minimum height
             }
-            .navigationTitle(isNew ? "New Person" : "Person")
-            .navigationBarTitleDisplayMode(.inline)
-            .onChange(of: person) { _, _ in  // Saves when ANY property changes
-                save()
-            }
-            .onDisappear { //  Save when navigating back
-                save()
-            }
-            .toolbar {
-                if isNew {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Save") {
-                            save()
-                            dismiss()
-                        }
+        }
+        .navigationTitle(isNew ? "New Person" : "Person")
+        .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: person) { _, _ in  // Saves when ANY property changes
+            save()
+        }
+        .onDisappear { //  Save when navigating back
+            save()
+        }
+        .toolbar {
+            if isNew {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        save()
+                        dismiss()
                     }
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            context.delete(person)
-                            dismiss()
-                        }
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        context.delete(person)
+                        dismiss()
                     }
                 }
             }
-            .navigationBarBackButtonHidden(isNew)
         }
+        .navigationBarBackButtonHidden(isNew)
     }
     
     private func save() {

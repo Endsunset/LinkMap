@@ -24,13 +24,14 @@ struct PeopleList: View {
     }
     
     var body: some View {
+        NavigationSplitView {
             List {
                 ForEach(people) { person in
                     if annotationId == person.annotationId || annotationId == nil {
                         NavigationLink(person.name) {
                             PeopleDetail(person: person)
-                            
                         }
+                        .navigationBarTitleDisplayMode(.inline)
                     }
                 }
                 .onDelete(perform: deletePeople(indexes:))
@@ -53,13 +54,19 @@ struct PeopleList: View {
                 }
                 
             }
-            .navigationBarBackButtonHidden(true)
             .sheet(item: $newPerson) { person in
                 NavigationStack {
                     PeopleDetail(person: person, isNew: true)
                 }
+                .navigationBarTitleDisplayMode(.inline)
                 .interactiveDismissDisabled()
             }
+        } detail: {
+            Text("Select a person")
+                .navigationTitle("Person")
+                .navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private func addPerson() {

@@ -24,23 +24,11 @@ struct ContentView: View {
             }
             
             Tab("Annotation", systemImage: "mappin.and.ellipse") {
-                NavigationSplitView {
-                    AnnotationList()
-                } detail: {
-                    Text("Select an annotation")
-                        .navigationTitle("Annotation")
-                        .navigationBarTitleDisplayMode(.inline)
-                }
+                AnnotationList()
             }
             
             Tab("People", systemImage: "person.and.person") {
-                NavigationSplitView {
-                    PeopleList()
-                } detail: {
-                    Text("Select a person")
-                        .navigationTitle("Person")
-                        .navigationBarTitleDisplayMode(.inline)
-                }
+                PeopleList()
             }
         }
     }

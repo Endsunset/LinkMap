@@ -40,35 +40,34 @@ struct AnnotationDetail: View {
             Form {
                 TextField("Name", text: $annotation.name)
                     .autocorrectionDisabled()
-
             }
-            .navigationTitle(isNew ? "New Annotation" : "Annotation")
-            .navigationBarTitleDisplayMode(.inline)
-            .onChange(of: annotation) { _, _ in  // Saves when ANY property changes
-                save()
-            }
-            .onDisappear { //  Save when navigating back
-                save()
-            }
-            .toolbar {
-                if isNew {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Save") {
-                            save()
-                            dismiss()
-                        }
+        }
+        .navigationTitle(isNew ? "New Annotation" : "Annotation")
+        .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: annotation) { _, _ in  // Saves when ANY property changes
+            save()
+        }
+        .onDisappear { //  Save when navigating back
+            save()
+        }
+        .toolbar {
+            if isNew {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        save()
+                        dismiss()
                     }
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            context.delete(annotation)
-                            save()
-                            dismiss()
-                        }
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        context.delete(annotation)
+                        save()
+                        dismiss()
                     }
                 }
             }
-            .navigationBarBackButtonHidden(isNew)
         }
+        .navigationBarBackButtonHidden(isNew)
     }
     
     private func save() {
