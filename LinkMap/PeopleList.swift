@@ -24,7 +24,6 @@ struct PeopleList: View {
     }
     
     var body: some View {
-        NavigationSplitView {
             List {
                 ForEach(people) { person in
                     if annotationId == person.annotationId || annotationId == nil {
@@ -61,11 +60,6 @@ struct PeopleList: View {
                 }
                 .interactiveDismissDisabled()
             }
-        } detail: {
-            Text("Select a person")
-                .navigationTitle("Person")
-                .navigationBarTitleDisplayMode(.inline)
-        }
     }
     
     private func addPerson() {

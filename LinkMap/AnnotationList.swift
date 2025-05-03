@@ -21,7 +21,6 @@ struct AnnotationList: View {
     
     
     var body: some View {
-        NavigationSplitView {
             List {
                 ForEach(annotations) { annotationData in
                     NavigationLink(annotationData.name) {
@@ -45,12 +44,8 @@ struct AnnotationList: View {
                 }
                 .interactiveDismissDisabled()
             }
-        } detail: {
-            Text("Select an annotation")
-                .navigationTitle("Annotation")
-                .navigationBarTitleDisplayMode(.inline)
-        }
     }
+    
     
     private func addAnnotationData() {
         let newAnnotation = AnnotationData(name: "New annotation", longitude: locationManager.userLocation?.longitude ?? center.latitude, latitude: locationManager.userLocation?.latitude ?? center.latitude)

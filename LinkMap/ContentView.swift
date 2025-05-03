@@ -24,19 +24,29 @@ struct ContentView: View {
             }
             
             Tab("Annotation", systemImage: "mappin.and.ellipse") {
-                AnnotationList()
+                NavigationSplitView {
+                    AnnotationList()
+                } detail: {
+                    Text("Select an annotation")
+                        .navigationTitle("Annotation")
+                        .navigationBarTitleDisplayMode(.inline)
+                }
             }
             
             Tab("People", systemImage: "person.and.person") {
-                PeopleList()
+                NavigationSplitView {
+                    PeopleList()
+                } detail: {
+                    Text("Select a person")
+                        .navigationTitle("Person")
+                        .navigationBarTitleDisplayMode(.inline)
+                }
             }
         }
     }
 }
 
 #Preview {
-    NavigationStack {
         ContentView()
             .modelContainer(SampleData.shared.modelContainer)
-    }
 }
