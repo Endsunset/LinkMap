@@ -21,7 +21,8 @@ struct AnnotationList: View {
     
     
     var body: some View {
-        NavigationSplitView {
+        //NavigationSplitView {
+        NavigationStack {
             List {
                 ForEach(annotations) { annotationData in
                     NavigationLink(annotationData.name) {
@@ -47,12 +48,12 @@ struct AnnotationList: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .interactiveDismissDisabled()
             }
-        } detail: {
+        } /*detail: {
             Text("Select an annotation")
                 .navigationTitle("Annotation")
                 .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.inline)*/
     }
     
     
