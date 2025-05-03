@@ -18,8 +18,6 @@ struct AnnotationList: View {
     
     @StateObject private var locationManager = LocationManager()
     
-    
-    
     var body: some View {
         //NavigationSplitView {
         NavigationStack {

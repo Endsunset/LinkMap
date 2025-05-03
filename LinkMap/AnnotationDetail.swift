@@ -16,7 +16,9 @@ struct AnnotationDetail: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State private var position: MapCameraPosition = .automatic
+    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    
+    @State private var locationManager = CLLocationManager()
     
     init(annotation: AnnotationData, isNew: Bool = false) {
         self.annotation = annotation
@@ -27,6 +29,8 @@ struct AnnotationDetail: View {
         VStack {
             MapReader { proxy in
                 Map(position: $position) {
+                    UserAnnotation()
+                    
                     Marker(annotation.name, coordinate: CLLocationCoordinate2D(latitude: annotation.latitude, longitude: annotation.longitude))
                 }
                 .onTapGesture { screenPoint in
@@ -46,6 +50,9 @@ struct AnnotationDetail: View {
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: annotation) { _, _ in  // Saves when ANY property changes
             save()
+        }
+        .onAppear {
+            locationManager.requestWhenInUseAuthorization()
         }
         .onDisappear { //  Save when navigating back
             save()
