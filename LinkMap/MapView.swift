@@ -15,7 +15,7 @@ struct MapView: View {
     @Query private var annotations: [AnnotationData]
     @Environment(\.modelContext) private var context
     
-    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var position: MapCameraPosition = .automatic
     
     //@State private var mapAnnotation: [MKMapItem] = annotations
     @State private var selectedAnnotation: UUID?
@@ -31,6 +31,9 @@ struct MapView: View {
     
     @State private var locationManager = CLLocationManager()
     
+    @State private var newAnnotation: AnnotationData?
+    @State private var isAddingEnabled = false
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
@@ -44,6 +47,13 @@ struct MapView: View {
                         }
                     }
                     .mapStyle(.hybrid(elevation: .realistic))
+                    .onTapGesture { screenPoint in
+                        if isAddingEnabled {
+                            if let markerLocation = proxy.convert(screenPoint, from: .local) {
+                                addAnnotationData(longitude: markerLocation.longitude, latitude: markerLocation.latitude)
+                            }
+                        }
+                    }
                     .onChange(of: annotations) {
                         position = .userLocation(fallback: .automatic)
                     }
@@ -59,31 +69,44 @@ struct MapView: View {
                     }
                     .sheet(isPresented: $isShowingSheet) {
                         NavigationStack {
-                            ForEach(annotations) { annotationData in
-                                if annotationData.id == selectedAnnotation {
-                                    PeopleList(isSheet: true, annotationId: annotationData.id)
-                                        .presentationDetents([.medium, .large])
-                                        .onDisappear {
-                                            selectedAnnotation = nil // Reset selection when sheet dismisses
-                                        }
-                                }
-                            }
+                            PeopleList(isSheet: true, annotationId: selectedAnnotation)
+                                .presentationDetents([.medium, .large])
                         }
-                        
+                    }
+                    .sheet(item: $newAnnotation) { annotationData in
+                        NavigationStack {
+                            AnnotationDetail(annotation: annotationData, isNew: true)
+                        }
+                        .navigationBarTitleDisplayMode(.inline)
+                        .interactiveDismissDisabled()
                     }
                     .id(refreshID)
                     .onAppear {
                         refreshID = UUID()
                         locationManager.requestWhenInUseAuthorization()
-                        position = .userLocation(fallback: .automatic)// Force map refresh
+                        position = .automatic// Force map refresh
                     }
                 }
                 .ignoresSafeArea(.keyboard)
-                
-                
-                TextField("Search location", text: $searchText, onCommit: geocodeSearchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                VStack(alignment: .leading) {
+                    Button("Add Annotation") {
+                        isAddingEnabled.toggle()
+                    }
                     .padding()
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .padding()
+                    
+                    HStack {
+                        TextField("Search location", text: $searchText, onCommit: geocodeSearchText)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .submitLabel(.done)
+                            .onSubmit {
+                                
+                            }
+                    }
+                    .padding()
+                }
             }
         }
     }
@@ -108,6 +131,18 @@ struct MapView: View {
                 center: location.coordinate,
                 span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
             ))
+        }
+    }
+    
+    private func addAnnotationData(longitude: Double,latitude: Double) {
+        let newAnnotation = AnnotationData(name: "New annotation", longitude: longitude, latitude: latitude)
+        context.insert(newAnnotation)
+        self.newAnnotation = newAnnotation
+    }
+    
+    private func deleteAnnotation(indexes: IndexSet) {
+        for index in indexes {
+            context.delete(annotations[index])
         }
     }
 }

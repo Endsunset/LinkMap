@@ -16,7 +16,7 @@ struct AnnotationDetail: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var position: MapCameraPosition = .automatic
     
     @State private var locationManager = CLLocationManager()
     
