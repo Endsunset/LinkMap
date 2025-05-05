@@ -34,6 +34,12 @@ struct MapView: View {
     @State private var newAnnotation: AnnotationData?
     @State private var isAddingEnabled = false
     
+    private enum MapStyleType {
+        case standard, hybrid, imagery
+    }
+    
+    @State private var mapStyle: MapStyleType = .hybrid // Initial style matches current .hybrid
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
@@ -46,7 +52,7 @@ struct MapView: View {
                                 .tag(annotationData.id)
                         }
                     }
-                    .mapStyle(.hybrid(elevation: .realistic))
+                    .mapStyle(currentMapStyle)
                     .onTapGesture { screenPoint in
                         if isAddingEnabled {
                             if let markerLocation = proxy.convert(screenPoint, from: .local) {
@@ -55,22 +61,30 @@ struct MapView: View {
                         }
                     }
                     .onChange(of: annotations) {
-                        position = .userLocation(fallback: .automatic)
+                        position = .automatic
                     }
                     .onChange(of: selectedAnnotation) { _, newValue in
-                        if newValue != nil {
-                            isShowingSheet = true // Trigger sheet when annotation is selected
+                        if !isAddingEnabled {
+                            if newValue != nil {
+                                isShowingSheet = true // Trigger sheet when annotation is selected
+                            }
+                        } else {
+                            selectedAnnotation = nil
                         }
                     }
                     .mapControls {
                         MapUserLocationButton()
                         MapCompass()
+                        MapPitchToggle()
                         MapScaleView()
                     }
                     .sheet(isPresented: $isShowingSheet) {
                         NavigationStack {
                             PeopleList(isSheet: true, annotationId: selectedAnnotation)
                                 .presentationDetents([.medium, .large])
+                        }
+                        .onDisappear{
+                            selectedAnnotation = nil
                         }
                     }
                     .sheet(item: $newAnnotation) { annotationData in
@@ -89,13 +103,28 @@ struct MapView: View {
                 }
                 .ignoresSafeArea(.keyboard)
                 VStack(alignment: .leading) {
-                    Button("Add Annotation") {
-                        isAddingEnabled.toggle()
+                    VStack {
+                        Button {
+                            isAddingEnabled.toggle()
+                        } label: {
+                            SquareButtonLabel(systemName: isAddingEnabled ? "mappin" : "mappin.slash")
+                                .padding(.vertical)
+                        }
+                        
+                        Button {
+                            switch mapStyle {
+                            case .standard:
+                                mapStyle = .hybrid
+                            case .hybrid:
+                                mapStyle = .imagery
+                            case .imagery:
+                                mapStyle = .standard
+                            }
+                        } label: {
+                            SquareButtonLabel(systemName: "map")
+                        }
                     }
-                    .padding()
-                    .background(Color.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .padding()
+                    .padding(.horizontal)
                     
                     HStack {
                         TextField("Search location", text: $searchText, onCommit: geocodeSearchText)
@@ -133,6 +162,17 @@ struct MapView: View {
             ))
         }
     }
+    
+    private var currentMapStyle: MapStyle {
+            switch mapStyle {
+            case .standard:
+                return MapStyle.standard(elevation: .realistic)
+            case .hybrid:
+                return MapStyle.hybrid(elevation: .realistic)
+            case .imagery:
+                return MapStyle.imagery(elevation: .realistic)
+            }
+        }
     
     private func addAnnotationData(longitude: Double,latitude: Double) {
         let newAnnotation = AnnotationData(name: "New annotation", longitude: longitude, latitude: latitude)
