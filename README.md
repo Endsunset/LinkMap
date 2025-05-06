@@ -32,11 +32,5 @@ LinkMap provides a comprehensive solution with:
 ## Installation
 
 ### For Users
-1. [Download](https://testflight.apple.com/join/3gYf2dw6) from TestFlight
-2. Or build from source (see Development section)
-
-### For Developers
-```bash
-git clone https://github.com/Endsunset/LinkMap.git
-cd LinkMap
-open LinkMap.xcodeproj
+1. Download from App Store (Coming soon)
+2. [Download](https://testflight.apple.com/join/3gYf2dw6) from TestFlight
