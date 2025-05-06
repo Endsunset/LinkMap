@@ -72,15 +72,3 @@ struct PeopleDetail: View {
         }
     }
 }
-
-#Preview {
-    NavigationStack {
-        PeopleDetail(person: SampleData.shared.person)
-    }
-}
-
-#Preview("New Person") {
-    NavigationStack {
-        PeopleDetail(person: SampleData.shared.person, isNew: true)
-    }
-}

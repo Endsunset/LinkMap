@@ -5,7 +5,7 @@
 //  Created by Yuan Ping Ke on 2025/4/13.
 //
 
-import SwiftData
+/*import SwiftData
 
 @MainActor
 class SampleData {
@@ -17,8 +17,8 @@ class SampleData {
         modelContainer.mainContext
     }
     
-    var annotation: AnnotationData {
-        AnnotationData.sampleData.first!
+    var annotation: AnnotationInfo {
+        AnnotationInfo.sampleData.first!
     }
     
     var person: Person {
@@ -28,7 +28,7 @@ class SampleData {
     private init() {
         let schema = Schema([
             Person.self,
-            AnnotationData.self,
+            AnnotationInfo.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
         do {
@@ -43,7 +43,7 @@ class SampleData {
     }
     
     private func insertSampleData() {
-        for annotation in AnnotationData.sampleData {
+        for annotation in AnnotationInfo.sampleData {
             context.insert(annotation)
         }
         
@@ -52,3 +52,4 @@ class SampleData {
         }
     }
 }
+*/

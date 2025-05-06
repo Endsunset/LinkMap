@@ -82,14 +82,3 @@ struct PeopleList: View {
         }
     }
 }
-
-
-#Preview {
-    PeopleList()
-        .modelContainer(SampleData.shared.modelContainer)
-}
-
-#Preview {
-    PeopleList(isSheet: true)
-        .modelContainer(SampleData.shared.modelContainer)
-}

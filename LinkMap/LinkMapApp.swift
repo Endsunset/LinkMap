@@ -8,8 +8,11 @@
 import SwiftUI
 import SwiftData
 
+let test = true
+
 @main
 struct LinkMapApp: App {
+    
     var body: some Scene {
         #if os(iOS) || os(macOS)
         DocumentGroupLaunchScene("LinkMap") {
@@ -20,14 +23,18 @@ struct LinkMapApp: App {
                 .scaledToFill()
                 .ignoresSafeArea()
         }
-        DocumentGroup(editing: [AnnotationData.self, Person.self], contentType: .linkMap) {
+        /*DocumentGroup(editing: .linkMap, migrationPlan: LinkMapMigrationPlan.self) {
+            ContentView()
+        }*/
+        
+        DocumentGroup(editing: [AnnotationData.self,Person.self], contentType: .linkMap) {
             ContentView()
         }
         #else
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [AnnotationData.self, Person.self])
+        .modelContainer(for: [AnnotationInfo.self, Person.self])
         #endif
     }
     

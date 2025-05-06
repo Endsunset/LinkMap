@@ -67,8 +67,3 @@ struct AnnotationList: View {
         }
     }
 }
-
-#Preview {
-    AnnotationList()
-        .modelContainer(SampleData.shared.modelContainer)
-}

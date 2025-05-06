@@ -83,14 +83,17 @@ struct MapView: View {
                             PeopleList(isSheet: true, annotationId: selectedAnnotation)
                                 .presentationDetents([.medium, .large])
                         }
+                        .navigationBarBackButtonHidden(true)
                         .onDisappear{
                             selectedAnnotation = nil
                         }
                     }
                     .sheet(item: $newAnnotation) { annotationData in
                         NavigationStack {
-                            AnnotationDetail(annotation: annotationData, isNew: true)
+                            AnnotationDetail(annotation: annotationData, isNew: true, isSheet: true)
+                                .presentationDetents([.medium, .large])
                         }
+                        .navigationBarBackButtonHidden(true)
                         .navigationBarTitleDisplayMode(.inline)
                         .interactiveDismissDisabled()
                     }
@@ -185,9 +188,4 @@ struct MapView: View {
             context.delete(annotations[index])
         }
     }
-}
-
-#Preview {
-    MapView()
-        .modelContainer(SampleData.shared.modelContainer)
 }

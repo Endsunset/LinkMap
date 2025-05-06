@@ -12,6 +12,7 @@ import MapKit
 struct AnnotationDetail: View {
     @Bindable var annotation: AnnotationData
     let isNew: Bool
+    let isSheet: Bool
     @Environment(\.modelContext) private var context
     
     @Environment(\.dismiss) private var dismiss
@@ -20,23 +21,26 @@ struct AnnotationDetail: View {
     
     @State private var locationManager = CLLocationManager()
     
-    init(annotation: AnnotationData, isNew: Bool = false) {
+    init(annotation: AnnotationData, isNew: Bool = false, isSheet: Bool = false) {
         self.annotation = annotation
         self.isNew = isNew
+        self.isSheet = isSheet
     }
     
     var body: some View {
         VStack {
-            MapReader { proxy in
-                Map(position: $position) {
-                    UserAnnotation()
-                    
-                    Marker(annotation.name, coordinate: CLLocationCoordinate2D(latitude: annotation.latitude, longitude: annotation.longitude))
-                }
-                .onTapGesture { screenPoint in
-                    if let markerLocation = proxy.convert(screenPoint, from: .local) {
-                        annotation.latitude = markerLocation.latitude
-                        annotation.longitude = markerLocation.longitude
+            if !isSheet {
+                MapReader { proxy in
+                    Map(position: $position) {
+                        UserAnnotation()
+                        
+                        Marker(annotation.name, coordinate: CLLocationCoordinate2D(latitude: annotation.latitude, longitude: annotation.longitude))
+                    }
+                    .onTapGesture { screenPoint in
+                        if let markerLocation = proxy.convert(screenPoint, from: .local) {
+                            annotation.latitude = markerLocation.latitude
+                            annotation.longitude = markerLocation.longitude
+                        }
                     }
                 }
             }
@@ -44,6 +48,7 @@ struct AnnotationDetail: View {
             Form {
                 TextField("Name", text: $annotation.name)
                     .autocorrectionDisabled()
+                TextField("Detail", text: $annotation.detail)
             }
         }
         .navigationTitle(isNew ? "New Annotation" : "Annotation")
@@ -83,18 +88,5 @@ struct AnnotationDetail: View {
         } catch {
             
         }
-    }
-}
-
-
-#Preview {
-    NavigationStack {
-        AnnotationDetail(annotation: SampleData.shared.annotation)
-    }
-}
-
-#Preview("New Friend") {
-    NavigationStack {
-        AnnotationDetail(annotation: SampleData.shared.annotation, isNew: true)
     }
 }
