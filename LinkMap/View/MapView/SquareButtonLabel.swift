@@ -15,8 +15,9 @@ struct SquareButtonLabel: View {
             .resizable()
             .scaledToFit()
             .frame(width: 20, height: 20) // Fixed icon size
+            .animation(nil, value: systemName)
             .padding()
-            .background(.white)
+            .background(.background)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .frame(width: 44, height: 44)
     }

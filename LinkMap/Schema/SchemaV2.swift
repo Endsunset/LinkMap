@@ -39,7 +39,7 @@ enum LinkMapV2: VersionedSchema {
         var requirement : String
         var statue : Bool
         var annotationId : UUID?
-        var number : Int = 0
+        var number : Int = 1
         
         init(name: String = "", photo: String = "", requirement: String = "", statue: Bool = false, annotationId: UUID? = nil) {
             self.id = UUID()

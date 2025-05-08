@@ -17,7 +17,7 @@ struct AnnotationDetail: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State private var position: MapCameraPosition = .automatic
+    @State private var position: MapCameraPosition
     
     @State private var locationManager = CLLocationManager()
     
@@ -25,6 +25,7 @@ struct AnnotationDetail: View {
         self.annotation = annotation
         self.isNew = isNew
         self.isSheet = isSheet
+        self.position = .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: annotation.latitude, longitude: annotation.longitude), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)))
     }
     
     var body: some View {

@@ -17,6 +17,9 @@ struct PeopleDetail: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     
+    @State private var showPicker = false
+    let numbers = Array(1...100)
+    
     init(person: Person, isNew: Bool = false) {
         self.person = person
         self.isNew = isNew
@@ -27,14 +30,46 @@ struct PeopleDetail: View {
             Form {
                 TextField("Name", text: $person.name)
                     .autocorrectionDisabled()
+                
+                Button {
+                    showPicker.toggle()
+                } label: {
+                    HStack {
+                        Text("Number of People")
+                        Spacer()
+                        Text("\(person.number)")
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .sheet(isPresented: $showPicker) {
+                    NavigationStack {
+                        Picker("Number of People", selection: $person.number) {
+                            ForEach(numbers, id: \.self) { number in
+                                Text("\(number)").tag(number)
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .toolbar {
+                            ToolbarItem(placement: .confirmationAction) {
+                                Button("Done") {
+                                    showPicker = false
+                                }
+                            }
+                        }
+                    }
+                    .presentationDetents([.medium]) // For a half-modal appearance (iOS 16+)
+                }
+                
                 Picker("Annotation", selection: $person.annotationId) {
                     ForEach(annotations, id: \.id) { annotation in
                         Text(annotation.name).tag(annotation.id)
                     }
                 }
                 .pickerStyle(.menu)
-                TextEditor(text: $person.requirement)
-                    .frame(minHeight: 40) // Minimum height
+                TextField("Detail", text: $person.requirement, axis: .vertical)
+                    .lineLimit(10...10) // Forces single line
+                    .fixedSize(horizontal: false, vertical: true) // Prevents vertical truncation
+                    .scrollDismissesKeyboard(.interactively) // Better UX when scrolling
             }
         }
         .navigationTitle(isNew ? "New Person" : "Person")
@@ -71,4 +106,9 @@ struct PeopleDetail: View {
             
         }
     }
+}
+
+#Preview {
+    PeopleDetail(person: Person(), isNew: false)
+        .modelContainer(for: [AnnotationData.self, Person.self])
 }

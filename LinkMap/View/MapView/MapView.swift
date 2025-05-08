@@ -16,6 +16,7 @@ struct MapView: View {
     @Environment(\.modelContext) private var context
     
     @State private var position: MapCameraPosition = .automatic
+    @State private var positionRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
     
     //@State private var mapAnnotation: [MKMapItem] = annotations
     @State private var selectedAnnotation: UUID?
@@ -35,16 +36,16 @@ struct MapView: View {
     @State private var isAddingEnabled = false
     
     private enum MapStyleType {
-        case standard, hybrid, imagery
+        case standard, imagery, hybrid
     }
     
-    @State private var mapStyle: MapStyleType = .hybrid // Initial style matches current .hybrid
+    @State private var mapStyle: MapStyleType = .standard // Initial style matches current .hybrid
     
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
                 MapReader { proxy in
-                    Map(position: $position, selection: $selectedAnnotation) {
+                    Map(position: $position, bounds: nil, selection: $selectedAnnotation) {
                         UserAnnotation()
                         
                         ForEach(annotations) { annotationData in
@@ -60,8 +61,11 @@ struct MapView: View {
                             }
                         }
                     }
+                    .onMapCameraChange { context in
+                        positionRegion = context.region
+                    }
                     .onChange(of: annotations) {
-                        position = .automatic
+                        position = .region(positionRegion)
                     }
                     .onChange(of: selectedAnnotation) { _, newValue in
                         if !isAddingEnabled {
@@ -94,14 +98,13 @@ struct MapView: View {
                                 .presentationDetents([.medium, .large])
                         }
                         .navigationBarBackButtonHidden(true)
-                        .navigationBarTitleDisplayMode(.inline)
                         .interactiveDismissDisabled()
                     }
                     .id(refreshID)
                     .onAppear {
                         refreshID = UUID()
                         locationManager.requestWhenInUseAuthorization()
-                        position = .automatic// Force map refresh
+                        position = .region(positionRegion)
                     }
                 }
                 .ignoresSafeArea(.keyboard)
@@ -117,10 +120,10 @@ struct MapView: View {
                         Button {
                             switch mapStyle {
                             case .standard:
-                                mapStyle = .hybrid
-                            case .hybrid:
                                 mapStyle = .imagery
                             case .imagery:
+                                mapStyle = .hybrid
+                            case .hybrid:
                                 mapStyle = .standard
                             }
                         } label: {
@@ -170,10 +173,10 @@ struct MapView: View {
             switch mapStyle {
             case .standard:
                 return MapStyle.standard(elevation: .realistic)
-            case .hybrid:
-                return MapStyle.hybrid(elevation: .realistic)
             case .imagery:
                 return MapStyle.imagery(elevation: .realistic)
+            case .hybrid:
+                return MapStyle.hybrid(elevation: .realistic)
             }
         }
     

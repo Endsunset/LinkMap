@@ -59,7 +59,6 @@ struct PeopleList: View {
                 NavigationStack {
                     PeopleDetail(person: person, isNew: true)
                 }
-                .navigationBarTitleDisplayMode(.inline)
                 .interactiveDismissDisabled()
             }
         } /*detail: {
@@ -81,4 +80,9 @@ struct PeopleList: View {
             context.delete(people[index])
         }
     }
+}
+
+#Preview {
+    PeopleList()
+        .modelContainer(for: [AnnotationData.self, Person.self])
 }
