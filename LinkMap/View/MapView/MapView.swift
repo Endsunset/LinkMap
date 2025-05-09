@@ -54,6 +54,7 @@ struct MapView: View {
                         }
                     }
                     .mapStyle(currentMapStyle)
+                    .id(refreshID)
                     .onTapGesture { screenPoint in
                         if isAddingEnabled {
                             if let markerLocation = proxy.convert(screenPoint, from: .local) {
@@ -100,11 +101,11 @@ struct MapView: View {
                         .navigationBarBackButtonHidden(true)
                         .interactiveDismissDisabled()
                     }
-                    .id(refreshID)
                     .onAppear {
+                        isAddingEnabled = false
                         refreshID = UUID()
                         locationManager.requestWhenInUseAuthorization()
-                        position = .region(positionRegion)
+                        position = .automatic
                     }
                 }
                 .ignoresSafeArea(.keyboard)
@@ -131,7 +132,6 @@ struct MapView: View {
                         }
                     }
                     .padding(.horizontal)
-                    
                     HStack {
                         TextField("Search location", text: $searchText, onCommit: geocodeSearchText)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
