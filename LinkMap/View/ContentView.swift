@@ -27,7 +27,7 @@ struct ContentView: View {
                 AnnotationList()
             }
             
-            Tab("People", systemImage: "person.and.person") {
+            Tab("Group", systemImage: "person.and.person") {
                 PeopleList()
             }
         }

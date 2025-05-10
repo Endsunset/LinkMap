@@ -13,6 +13,7 @@ import Combine
 
 struct MapView: View {
     @Query private var annotations: [AnnotationData]
+    @Query private var people: [Person]
     @Environment(\.modelContext) private var context
     
     @State private var position: MapCameraPosition = .automatic
@@ -33,9 +34,10 @@ struct MapView: View {
     @State private var locationManager = CLLocationManager()
     
     @State private var newAnnotation: AnnotationData?
+    @State private var newPerson: Person?
     @State private var isAddingEnabled = false
     
-    private enum MapStyleType {
+    public enum MapStyleType {
         case standard, imagery, hybrid
     }
     
@@ -100,6 +102,15 @@ struct MapView: View {
                         }
                         .navigationBarBackButtonHidden(true)
                         .interactiveDismissDisabled()
+                        .onDisappear{
+                            addPerson(name: annotationData.name, id: annotationData.id)
+                        }
+                    }
+                    .sheet(item: $newPerson) { person in
+                        NavigationStack {
+                            PeopleDetail(person: person, isNew: true)
+                        }
+                        .interactiveDismissDisabled()
                     }
                     .onAppear {
                         isAddingEnabled = false
@@ -110,39 +121,31 @@ struct MapView: View {
                 }
                 .ignoresSafeArea(.keyboard)
                 VStack(alignment: .leading) {
-                    VStack {
-                        Button {
-                            isAddingEnabled.toggle()
-                        } label: {
-                            SquareButtonLabel(systemName: isAddingEnabled ? "mappin" : "mappin.slash")
-                                .padding(.vertical)
-                        }
-                        
-                        Button {
-                            switch mapStyle {
-                            case .standard:
-                                mapStyle = .imagery
-                            case .imagery:
-                                mapStyle = .hybrid
-                            case .hybrid:
-                                mapStyle = .standard
-                            }
-                        } label: {
-                            SquareButtonLabel(systemName: "map")
-                        }
-                    }
-                    .padding(.horizontal)
-                    HStack {
-                        TextField("Search location", text: $searchText, onCommit: geocodeSearchText)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .submitLabel(.done)
-                            .onSubmit {
-                                
-                            }
-                    }
-                    .padding()
+                    BottomLeftToolBar(
+                        isAddingEnabled: $isAddingEnabled,
+                        mapStyle: $mapStyle
+                    )
+                    
+                    SearchBarView(searchText: $searchText, onCommit: geocodeSearchText)
+                        .padding()
                 }
             }
+        }
+        .alert("Error", isPresented: $showingAlert) {
+                    Button("OK", role: .cancel) { }
+        } message: {
+            Text(alertMessage)
+        }
+    }
+    
+    private var currentMapStyle: MapStyle {
+        switch mapStyle {
+        case .standard:
+            return MapStyle.standard(elevation: .realistic)
+        case .imagery:
+            return MapStyle.imagery(elevation: .realistic)
+        case .hybrid:
+            return MapStyle.hybrid(elevation: .realistic)
         }
     }
     
@@ -169,19 +172,8 @@ struct MapView: View {
         }
     }
     
-    private var currentMapStyle: MapStyle {
-            switch mapStyle {
-            case .standard:
-                return MapStyle.standard(elevation: .realistic)
-            case .imagery:
-                return MapStyle.imagery(elevation: .realistic)
-            case .hybrid:
-                return MapStyle.hybrid(elevation: .realistic)
-            }
-        }
-    
     private func addAnnotationData(longitude: Double,latitude: Double) {
-        let newAnnotation = AnnotationData(name: "New annotation", longitude: longitude, latitude: latitude)
+        let newAnnotation = AnnotationData(name: "", longitude: longitude, latitude: latitude)
         context.insert(newAnnotation)
         self.newAnnotation = newAnnotation
     }
@@ -191,4 +183,20 @@ struct MapView: View {
             context.delete(annotations[index])
         }
     }
+    private func addPerson(name: String, id: UUID?) {
+        let newPerson = Person(name: name, photo: "", requirement: "", statue: false, annotationId: id)
+        context.insert(newPerson)
+        self.newPerson = newPerson
+    }
+    
+    private func deletePeople(indexes: IndexSet) {
+        for index in indexes {
+            context.delete(people[index])
+        }
+    }
+}
+
+#Preview {
+    MapView()
+        .modelContainer(for: [AnnotationData.self, Person.self])
 }

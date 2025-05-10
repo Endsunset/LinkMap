@@ -47,6 +47,7 @@ enum LinkMapV2: VersionedSchema {
             self.photo = photo
             self.requirement = requirement
             self.statue = statue
+            self.annotationId = annotationId
         }
     }
     

@@ -13,6 +13,7 @@ struct PeopleList: View {
     let annotationId: UUID?
     
     @Query(sort: \Person.id) private var people: [Person]
+    @Query(sort: \AnnotationData.id) private var annotations: [AnnotationData]
     @Environment(\.modelContext) private var context
     @State private var newPerson: Person?
     
@@ -37,7 +38,7 @@ struct PeopleList: View {
                 }
                 .onDelete(perform: deletePeople(indexes:))
             }
-            .navigationTitle("People")
+            .navigationTitle("Groups")
             .toolbar {
                 if isSheet {
                     ToolbarItem(placement: .confirmationAction) {
@@ -70,7 +71,7 @@ struct PeopleList: View {
     }
     
     private func addPerson() {
-        let newPerson = Person(name: "New name", photo: "/document", requirement: "New requirement", statue: false)
+        let newPerson = Person(name: "", photo: "", requirement: "", statue: false)
         context.insert(newPerson)
         self.newPerson = newPerson
     }

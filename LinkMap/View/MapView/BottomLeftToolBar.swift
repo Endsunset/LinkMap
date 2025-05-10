@@ -8,19 +8,9 @@
 import SwiftUI
 import MapKit
 
-/*struct BottomLeftToolBar: View {
-    @Binding var isAddingEnabled : Bool
-    
-    private enum MapStyleType {
-        case standard, imagery, hybrid
-    }
-    
-    @State private var mapStyle: MapStyleType // Initial style matches current .hybrid
-    
-    init(isAddingEnabled: Bool) {
-        self.isAddingEnabled = isAddingEnabled
-        self.mapStyle = .standard
-    }
+struct BottomLeftToolBar: View {
+    @Binding var isAddingEnabled: Bool
+    @Binding var mapStyle: MapView.MapStyleType
     
     var body: some View {
         VStack {
@@ -34,10 +24,10 @@ import MapKit
             Button {
                 switch mapStyle {
                 case .standard:
-                    mapStyle = .hybrid
-                case .hybrid:
                     mapStyle = .imagery
                 case .imagery:
+                    mapStyle = .hybrid
+                case .hybrid:
                     mapStyle = .standard
                 }
             } label: {
@@ -46,19 +36,11 @@ import MapKit
         }
         .padding(.horizontal)
     }
-    
-    private var currentMapStyle: MapStyle {
-        switch mapStyle {
-        case .standard:
-            return MapStyle.standard(elevation: .realistic)
-        case .imagery:
-            return MapStyle.imagery(elevation: .realistic)
-        case .hybrid:
-            return MapStyle.hybrid(elevation: .realistic)
-        }
-    }
 }
 
 #Preview {
-    BottomLeftToolBar(isAddingEnabled: false)
-}*/
+    BottomLeftToolBar(
+        isAddingEnabled: .constant(false),
+        mapStyle: .constant(.standard)
+    )
+}

@@ -56,7 +56,7 @@ struct AnnotationList: View {
     
     
     private func addAnnotationData() {
-        let newAnnotation = AnnotationData(name: "New annotation", longitude: locationManager.userLocation?.longitude ?? center.latitude, latitude: locationManager.userLocation?.latitude ?? center.latitude)
+        let newAnnotation = AnnotationData(name: "", longitude: locationManager.userLocation?.longitude ?? center.latitude, latitude: locationManager.userLocation?.latitude ?? center.latitude)
         context.insert(newAnnotation)
         self.newAnnotation = newAnnotation
     }

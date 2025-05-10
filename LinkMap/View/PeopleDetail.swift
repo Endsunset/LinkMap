@@ -72,7 +72,7 @@ struct PeopleDetail: View {
                     .scrollDismissesKeyboard(.interactively) // Better UX when scrolling
             }
         }
-        .navigationTitle(isNew ? "New Person" : "Person")
+        .navigationTitle(isNew ? "New Group" : "Group")
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: person) { _, _ in  // Saves when ANY property changes
             save()
@@ -106,9 +106,4 @@ struct PeopleDetail: View {
             
         }
     }
-}
-
-#Preview {
-    PeopleDetail(person: Person(), isNew: false)
-        .modelContainer(for: [AnnotationData.self, Person.self])
 }
