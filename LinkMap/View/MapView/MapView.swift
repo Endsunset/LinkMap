@@ -20,7 +20,7 @@ struct MapView: View {
     @State private var positionRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
     
     //@State private var mapAnnotation: [MKMapItem] = annotations
-    @State private var selectedAnnotation: UUID?
+    @State private var selectedAnnotation: AnnotationData?
     @State private var isShowingSheet = false
     
     @State private var annotationId: Int?
@@ -52,7 +52,7 @@ struct MapView: View {
                         
                         ForEach(annotations) { annotationData in
                             Marker(annotationData.name, coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
-                                .tag(annotationData.id)
+                                .tag(annotationData)
                         }
                     }
                     .mapStyle(currentMapStyle)
@@ -87,10 +87,9 @@ struct MapView: View {
                     }
                     .sheet(isPresented: $isShowingSheet) {
                         NavigationStack {
-                            PeopleList(isSheet: true, annotationId: selectedAnnotation)
-                                .presentationDetents([.medium, .large])
+                            MapPanel(annotation: selectedAnnotation)
                         }
-                        .navigationBarBackButtonHidden(true)
+                        .presentationDetents([.medium, .large])
                         .onDisappear{
                             selectedAnnotation = nil
                         }
@@ -109,6 +108,7 @@ struct MapView: View {
                     .sheet(item: $newPerson) { person in
                         NavigationStack {
                             PeopleDetail(person: person, isNew: true)
+                                .presentationDetents([.medium, .large])
                         }
                         .interactiveDismissDisabled()
                     }
