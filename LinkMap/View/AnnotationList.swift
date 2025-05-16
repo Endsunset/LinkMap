@@ -52,6 +52,7 @@ struct AnnotationList: View {
                 .navigationBarTitleDisplayMode(.inline)
         }
         .navigationBarTitleDisplayMode(.inline)*/
+        
     }
     
     

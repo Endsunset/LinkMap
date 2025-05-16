@@ -18,7 +18,7 @@ struct LinkMapApp: App {
         DocumentGroupLaunchScene("LinkMap") {
             NewDocumentButton("New Document")
         } background: {
-            Image(.scenaryBackground)
+            Image("UI_Background")
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
@@ -29,6 +29,7 @@ struct LinkMapApp: App {
         
         DocumentGroup(editing: [AnnotationData.self,Person.self], contentType: .linkMap) {
             ContentView()
+                .navigationBarTitleDisplayMode(.inline)
         }
         #else
         WindowGroup {

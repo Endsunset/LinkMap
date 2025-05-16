@@ -130,6 +130,13 @@ struct MapView: View {
                         .padding()
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    NavigationLink("Help") {
+                        Help()
+                    }
+                }
+            }
         }
         .alert("Error", isPresented: $showingAlert) {
                     Button("OK", role: .cancel) { }
