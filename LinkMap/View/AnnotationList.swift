@@ -23,7 +23,7 @@ struct AnnotationList: View {
         NavigationStack {
             List {
                 ForEach(annotations) { annotationData in
-                    NavigationLink(annotationData.name) {
+                    NavigationLink(annotationData.name == "" ? "Untitled Annotation" : annotationData.name) {
                         AnnotationDetail(annotation: annotationData)
                     }
                     .navigationBarTitleDisplayMode(.inline)

@@ -14,7 +14,7 @@ struct HelpShare: View {
                 Text("Share Document")
                     .font(.largeTitle)
                     .bold()
-                Text("Prepare to Share the document.")
+                Text("Prepare to share the document.")
                     .font(.title3)
                 Text("Overview")
                     .font(.title)

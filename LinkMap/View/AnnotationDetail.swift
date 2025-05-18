@@ -50,6 +50,9 @@ struct AnnotationDetail: View {
                 TextField("Name", text: $annotation.name)
                     .autocorrectionDisabled()
                 TextField("Detail", text: $annotation.detail)
+                NavigationLink("Groups") {
+                    PeopleList(annotationId: annotation.id)
+                }
             }
         }
         .navigationTitle(isNew ? "New Annotation" : "Annotation")
@@ -90,4 +93,8 @@ struct AnnotationDetail: View {
             
         }
     }
+}
+
+#Preview {
+    AnnotationDetail(annotation: AnnotationData())
 }

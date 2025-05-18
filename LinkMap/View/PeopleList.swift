@@ -30,7 +30,7 @@ struct PeopleList: View {
             List {
                 ForEach(people) { person in
                     if annotationId == person.annotationId || annotationId == nil {
-                        NavigationLink(person.name) {
+                        NavigationLink(person.name == "" ? "Untitled Group" : person.name) {
                             PeopleDetail(person: person)
                         }
                         .navigationBarTitleDisplayMode(.inline)
@@ -71,7 +71,7 @@ struct PeopleList: View {
     }
     
     private func addPerson() {
-        let newPerson = Person(name: "", photo: "", requirement: "", statue: false)
+        let newPerson = Person(name: "", photo: "", requirement: "", statue: false, annotationId: annotationId)
         context.insert(newPerson)
         self.newPerson = newPerson
     }

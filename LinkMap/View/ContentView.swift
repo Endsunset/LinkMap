@@ -33,3 +33,8 @@ struct ContentView: View {
         }
     }
 }
+
+#Preview {
+    ContentView()
+        .modelContainer(for: [AnnotationData.self, Person.self])
+}

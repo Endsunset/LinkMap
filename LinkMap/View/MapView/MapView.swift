@@ -51,7 +51,7 @@ struct MapView: View {
                         UserAnnotation()
                         
                         ForEach(annotations) { annotationData in
-                            Marker(annotationData.name, coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
+                            Marker(annotationData.name == "" ? "Untitled Annotation" : annotationData.name, coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
                                 .tag(annotationData)
                         }
                     }
@@ -100,16 +100,6 @@ struct MapView: View {
                                 .presentationDetents([.medium, .large])
                         }
                         .navigationBarBackButtonHidden(true)
-                        .interactiveDismissDisabled()
-                        .onDisappear{
-                            addPerson(name: annotationData.name, id: annotationData.id)
-                        }
-                    }
-                    .sheet(item: $newPerson) { person in
-                        NavigationStack {
-                            PeopleDetail(person: person, isNew: true)
-                                .presentationDetents([.medium, .large])
-                        }
                         .interactiveDismissDisabled()
                     }
                     .onAppear {
