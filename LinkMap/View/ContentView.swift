@@ -24,11 +24,22 @@ struct ContentView: View {
             }
             
             Tab("Annotation", systemImage: "mappin.and.ellipse") {
-                AnnotationList()
+                NavigationControllerWrapper {
+                    AnnotationList()
+                }
             }
             
             Tab("Group", systemImage: "person.and.person") {
-                PeopleList()
+                NavigationControllerWrapper {
+                    PeopleList()
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                NavigationLink("Help") {
+                    Help()
+                }
             }
         }
     }
