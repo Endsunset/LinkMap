@@ -18,12 +18,12 @@ struct Help: View {
             }
             NavigationLink("Annotation (Incomplete)") {
                 ScrollView {
-                    Text("Incomplete")
+                    HelpAnnotationList()
                 }
             }
             NavigationLink("Group (Incomplete)") {
                 ScrollView {
-                    Text("Incomplete")
+                    HelpGroupList()
                 }
             }
             NavigationLink("Share Document") {
