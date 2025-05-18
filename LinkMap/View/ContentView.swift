@@ -20,7 +20,9 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab("Map", systemImage: "map") {
-                MapView()
+                NavigationControllerWrapper {
+                    MapView()
+                }
             }
             
             Tab("Annotation", systemImage: "mappin.and.ellipse") {
@@ -38,7 +40,9 @@ struct ContentView: View {
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 NavigationLink("Help") {
-                    Help()
+                    NavigationControllerWrapper {
+                        Help()
+                    }
                 }
             }
         }

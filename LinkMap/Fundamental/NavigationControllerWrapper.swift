@@ -20,11 +20,11 @@ struct NavigationControllerWrapper<Content: View>: UIViewControllerRepresentable
         let host = UIHostingController(rootView: content())
         
         // Critical adjustments:
-        host.view.backgroundColor = .clear
+        host.view.backgroundColor = .systemBackground
         host.view.isOpaque = false
         
         let navController = UINavigationController(rootViewController: host)
-        navController.view.backgroundColor = .clear
+        navController.view.backgroundColor = .systemBackground
         navController.view.isOpaque = false
         navController.navigationBar.isHidden = true
         

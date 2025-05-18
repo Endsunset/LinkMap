@@ -10,6 +10,7 @@ import SwiftData
 import MapKit
 
 struct AnnotationDetail: View {
+    @Query(sort: \AnnotationData.id) private var annotations: [AnnotationData]
     @Bindable var annotation: AnnotationData
     let isNew: Bool
     let isSheet: Bool
@@ -35,7 +36,13 @@ struct AnnotationDetail: View {
                     Map(position: $position) {
                         UserAnnotation()
                         
-                        Marker(annotation.name, coordinate: CLLocationCoordinate2D(latitude: annotation.latitude, longitude: annotation.longitude))
+                        ForEach(annotations) { annotationData in
+                            if annotationData.id != annotation.id {
+                                Marker("", coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
+                            }
+                        }
+                        
+                        Marker(annotation.name == "" ? "Untitled Annotation" : annotation.name, coordinate: CLLocationCoordinate2D(latitude: annotation.latitude, longitude: annotation.longitude))
                     }
                     .onTapGesture { screenPoint in
                         if let markerLocation = proxy.convert(screenPoint, from: .local) {

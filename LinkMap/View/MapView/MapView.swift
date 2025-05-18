@@ -91,6 +91,8 @@ struct MapView: View {
                     .presentationDetents([.medium, .large])
                     .onDisappear{
                         selectedAnnotation = nil
+                        position = .region(positionRegion)
+                        refreshID = UUID()
                     }
                 }
                 .sheet(item: $newAnnotation) { annotationData in
@@ -105,7 +107,6 @@ struct MapView: View {
                     isAddingEnabled = false
                     refreshID = UUID()
                     locationManager.requestWhenInUseAuthorization()
-                    position = .automatic
                 }
             }
             .ignoresSafeArea(.keyboard)
