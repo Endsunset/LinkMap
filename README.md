@@ -8,6 +8,7 @@ A document-based application designed to streamline homeless feeding activity or
 ## Table of Contents
 - [Solution](#solution)
 - [Features](#features)
+- [Development](#Development)
 - [Installation](#installation)
 
 ## Solution
@@ -29,8 +30,13 @@ LinkMap provides a comprehensive solution with:
 - Record-to-marker assignment
 - File sharing capabilities
 
+# Development
+
+Create issues!
+Create pull requests!
+Help LinkMap get better!
+
 ## Installation
 
-### For Users
 1. Download from App Store (Coming soon)
 2. [Download](https://testflight.apple.com/join/3gYf2dw6) from TestFlight
