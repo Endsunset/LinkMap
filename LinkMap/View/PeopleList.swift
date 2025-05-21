@@ -26,7 +26,7 @@ struct PeopleList: View {
     
     var body: some View {
         //NavigationSplitView {
-        NavigationStack {
+        //NavigationStack {
             List {
                 ForEach(people) { person in
                     if annotationId == person.annotationId || annotationId == nil {
@@ -62,7 +62,7 @@ struct PeopleList: View {
                 }
                 .interactiveDismissDisabled()
             }
-        } /*detail: {
+         /*detail: {
             Text("Select a person")
                 .navigationTitle("Person")
                 .navigationBarTitleDisplayMode(.inline)

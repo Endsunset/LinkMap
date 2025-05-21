@@ -41,7 +41,7 @@ struct MapView: View {
         case standard, imagery, hybrid
     }
     
-    @State private var mapStyle: MapStyleType = .standard // Initial style matches current .hybrid
+    @State private var mapStyle: MapStyleType = .standard
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -130,11 +130,11 @@ struct MapView: View {
     private var currentMapStyle: MapStyle {
         switch mapStyle {
         case .standard:
-            return MapStyle.standard(elevation: .realistic)
+            return MapStyle.standard
         case .imagery:
-            return MapStyle.imagery(elevation: .realistic)
+            return MapStyle.imagery
         case .hybrid:
-            return MapStyle.hybrid(elevation: .realistic)
+            return MapStyle.hybrid
         }
     }
     

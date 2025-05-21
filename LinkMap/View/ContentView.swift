@@ -19,23 +19,20 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            Tab("Map", systemImage: "map") {
-                NavigationControllerWrapper {
-                    MapView()
-                }
+            NavigationStack {
+                MapView()
             }
+            .tabItem { Label("Map", systemImage: "map") }
             
-            Tab("Annotation", systemImage: "mappin.and.ellipse") {
-                NavigationControllerWrapper {
-                    AnnotationList()
-                }
+            NavigationStack {
+                            AnnotationList()
             }
+            .tabItem { Label("Annotations", systemImage: "mappin.and.ellipse") }
             
-            Tab("Group", systemImage: "person.and.person") {
-                NavigationControllerWrapper {
-                    PeopleList()
-                }
+            NavigationStack {
+                            PeopleList()
             }
+            .tabItem { Label("Groups", systemImage: "person.and.person") }
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
