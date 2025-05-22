@@ -10,7 +10,7 @@ import SwiftUI
 struct HelpShare: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
+            LazyVStack(alignment: .leading, spacing: 10) {
                 Text("Share Document")
                     .font(.largeTitle)
                     .bold()

@@ -10,18 +10,18 @@ import SwiftUI
 struct Help: View {
     var body: some View {
         List{
-            NavigationLink("About LinkMap (Incomplete)") {
+            NavigationLink("About LinkMap") {
                 HelpIntroduction()
             }
-            NavigationLink("Map (Incomplete)") {
+            NavigationLink("Map") {
                 HelpMap()
             }
-            NavigationLink("Annotation (Incomplete)") {
+            NavigationLink("Annotation") {
                 ScrollView {
                     HelpAnnotationList()
                 }
             }
-            NavigationLink("Group (Incomplete)") {
+            NavigationLink("Group") {
                 ScrollView {
                     HelpGroupList()
                 }

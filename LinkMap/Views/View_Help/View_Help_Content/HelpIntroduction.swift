@@ -10,7 +10,7 @@ import SwiftUI
 struct HelpIntroduction: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
+            LazyVStack(alignment: .leading, spacing: 10) {
                 Text("About LinkMap")
                     .font(.largeTitle)
                     .bold()
@@ -26,7 +26,7 @@ struct HelpIntroduction: View {
                 Text("Annotation List")
                     .font(.title)
                     .bold()
-                Text("The annotation list is where you review all the annotations you've added.")
+                Text("The annotation list is where you review all the annotations you've added, see corresponding section for further details.")
                 Image("UI_Help_Annotation_List")
                     .resizable()
                     .scaledToFit()

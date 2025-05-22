@@ -10,7 +10,7 @@ import SwiftUI
 struct HelpMap: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
+            LazyVStack(alignment: .leading, spacing: 10) {
                 Text("Map")
                     .font(.largeTitle)
                     .bold()
