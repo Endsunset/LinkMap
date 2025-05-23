@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Endsunset/LinkMap/blob/main/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-iOS%2018%2B%20%7C%20iPadOS%2018%2B-lightgrey.svg)](https://www.apple.com.cn/ios/ios-18/)
 
-A document-based application designed to streamline homeless feeding activity organization.
+A document-based application designed to streamline homeless feeding activity organization, and many more!
 
 ## Table of Contents
 - [Solution](#solution)
