@@ -18,29 +18,29 @@ struct ContentView: View {
     @State private var alertMessage = ""
     
     var body: some View {
-        ZStack(alignment: .top) {
-            TabView {
-                NavigationStack {
-                    MapView()
-                }
-                .tabItem { Label("Map", systemImage: "map") }
-                
-                NavigationStack {
+        TabView {
+            Tab("Map", systemImage: "map") {
+                MapView()
+            }
+            
+            Tab("Annotation", systemImage: "mappin.and.ellipse") {
+                VStack {
                     AnnotationList()
                 }
-                .tabItem { Label("Annotations", systemImage: "mappin.and.ellipse") }
-                
-                NavigationStack {
+            }
+            
+            Tab("Group", systemImage: "person.and.person") {
+                VStack {
                     PeopleList()
                 }
-                .tabItem { Label("Groups", systemImage: "person.and.person") }
             }
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    NavigationLink("Help") {
-                        NavigationStack {
-                            Help()
-                        }
+            
+        }
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                NavigationLink("Help") {
+                    NavigationStack {
+                        Help()
                     }
                 }
             }

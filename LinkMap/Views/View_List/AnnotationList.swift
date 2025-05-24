@@ -20,7 +20,7 @@ struct AnnotationList: View {
     
     var body: some View {
         //NavigationSplitView {
-
+        NavigationStack {
             List {
                 ForEach(annotations) { annotationData in
                     NavigationLink(annotationData.name == "" ? "Untitled Annotation" : annotationData.name) {
@@ -39,19 +39,19 @@ struct AnnotationList: View {
                     EditButton()
                 }
             }
-            .sheet(item: $newAnnotation) { annotationData in
-                NavigationStack {
-                    AnnotationDetail(annotation: annotationData, isNew: true)
-                }
-                .navigationBarTitleDisplayMode(.inline)
-                .interactiveDismissDisabled()
-            }
-         /*detail: {
+        } /*detail: {
             Text("Select an annotation")
                 .navigationTitle("Annotation")
                 .navigationBarTitleDisplayMode(.inline)
         }
         .navigationBarTitleDisplayMode(.inline)*/
+        .sheet(item: $newAnnotation) { annotationData in
+            NavigationStack {
+                AnnotationDetail(annotation: annotationData, isNew: true)
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .interactiveDismissDisabled()
+        }
         
     }
     

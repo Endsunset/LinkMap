@@ -26,14 +26,13 @@ struct PeopleList: View {
     
     var body: some View {
         //NavigationSplitView {
-        //NavigationStack {
+        NavigationStack {
             List {
                 ForEach(people) { person in
                     if annotationId == person.annotationId || annotationId == nil {
                         NavigationLink(person.name == "" ? "Untitled Group" : person.name) {
                             PeopleDetail(person: person)
                         }
-                        .navigationBarTitleDisplayMode(.inline)
                     }
                 }
                 .onDelete(perform: deletePeople(indexes:))
@@ -56,18 +55,18 @@ struct PeopleList: View {
                 }
                 
             }
-            .sheet(item: $newPerson) { person in
-                NavigationStack {
-                    PeopleDetail(person: person, isNew: true)
-                }
-                .interactiveDismissDisabled()
-            }
-         /*detail: {
+        } /*detail: {
             Text("Select a person")
                 .navigationTitle("Person")
                 .navigationBarTitleDisplayMode(.inline)
         }
         .navigationBarTitleDisplayMode(.inline)*/
+        .sheet(item: $newPerson) { person in
+            NavigationStack {
+                PeopleDetail(person: person, isNew: true)
+            }
+            .interactiveDismissDisabled()
+        }
     }
     
     private func addPerson() {
