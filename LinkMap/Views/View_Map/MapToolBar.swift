@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct BottomLeftToolBar: View {
+struct MapToolBar: View {
     @Binding var isAddingEnabled: Bool
     @Binding var mapStyle: MapView.MapStyleType
     
@@ -39,7 +39,7 @@ struct BottomLeftToolBar: View {
 }
 
 #Preview {
-    BottomLeftToolBar(
+    MapToolBar(
         isAddingEnabled: .constant(false),
         mapStyle: .constant(.standard)
     )

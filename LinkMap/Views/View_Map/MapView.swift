@@ -111,7 +111,7 @@ struct MapView: View {
             }
             .ignoresSafeArea(.keyboard)
             VStack(alignment: .leading) {
-                BottomLeftToolBar(
+                MapToolBar(
                     isAddingEnabled: $isAddingEnabled,
                     mapStyle: $mapStyle
                 )
