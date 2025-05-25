@@ -28,10 +28,8 @@ struct LinkMapApp: App {
         }*/
         
         DocumentGroup(editing: [AnnotationData.self,Person.self], contentType: .linkMap) {
-            ZStack {
-                    ContentView()
-            }
-            .ignoresSafeArea()
+            ContentView()
+                .toolbarBackground(.automatic, for: .navigationBar)
         }
         #else
         WindowGroup {
