@@ -26,7 +26,6 @@ struct AnnotationList: View {
                     NavigationLink(annotationData.name == "" ? "Untitled Annotation" : annotationData.name) {
                         AnnotationDetail(annotation: annotationData)
                     }
-                    .navigationBarTitleDisplayMode(.inline)
                 }
                 .onDelete(perform: deleteAnnotation(indexes:))
             }

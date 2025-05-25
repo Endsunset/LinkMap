@@ -29,7 +29,7 @@ struct LinkMapApp: App {
         
         DocumentGroup(editing: [AnnotationData.self,Person.self], contentType: .linkMap) {
             ContentView()
-                .toolbarBackground(.automatic, for: .navigationBar)
+                .toolbarRole(.automatic)
         }
         #else
         WindowGroup {

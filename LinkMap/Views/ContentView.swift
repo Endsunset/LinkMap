@@ -24,15 +24,11 @@ struct ContentView: View {
             }
             
             Tab("Annotation", systemImage: "mappin.and.ellipse") {
-                VStack {
-                    AnnotationList()
-                }
+                AnnotationList()
             }
             
             Tab("Group", systemImage: "person.and.person") {
-                VStack {
-                    PeopleList()
-                }
+                PeopleList()
             }
             
         }
