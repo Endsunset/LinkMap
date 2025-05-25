@@ -43,6 +43,7 @@ struct AnnotationList: View {
                     AnnotationDetail(annotation: annotationData, isNew: true)
                         .toolbarBackgroundVisibility(.hidden)
                         .navigationBarBackButtonHidden()
+                        .toolbarRole(.editor)
                 }
                 .interactiveDismissDisabled()
             }
@@ -52,6 +53,7 @@ struct AnnotationList: View {
                 .navigationBarTitleDisplayMode(.inline)
         }
         .navigationBarTitleDisplayMode(.inline)*/
+        .toolbarRole(.editor)
         
     }
     

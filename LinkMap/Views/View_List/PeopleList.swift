@@ -60,6 +60,7 @@ struct PeopleList: View {
                     PeopleDetail(person: person, isNew: true)
                         .toolbarBackgroundVisibility(.hidden)
                         .navigationBarBackButtonHidden()
+                        .toolbarRole(.editor)
                 }
                 .interactiveDismissDisabled()
             }
@@ -69,6 +70,7 @@ struct PeopleList: View {
                 .navigationBarTitleDisplayMode(.inline)
         }
         .navigationBarTitleDisplayMode(.inline)*/
+        .toolbarRole(.editor)
     }
     
     private func addPerson() {

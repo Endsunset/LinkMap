@@ -21,6 +21,7 @@ struct ContentView: View {
         TabView {
             Tab("Map", systemImage: "map") {
                 MapView()
+                    .toolbar(.visible, for: .automatic)
             }
             
             Tab("Annotation", systemImage: "mappin.and.ellipse") {
