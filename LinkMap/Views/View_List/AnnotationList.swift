@@ -39,19 +39,20 @@ struct AnnotationList: View {
                     EditButton()
                 }
             }
+            .sheet(item: $newAnnotation) { annotationData in
+                NavigationStack {
+                    AnnotationDetail(annotation: annotationData, isNew: true)
+                        .toolbarBackgroundVisibility(.hidden)
+                        .navigationBarBackButtonHidden()
+                }
+                .interactiveDismissDisabled()
+            }
         } /*detail: {
             Text("Select an annotation")
                 .navigationTitle("Annotation")
                 .navigationBarTitleDisplayMode(.inline)
         }
         .navigationBarTitleDisplayMode(.inline)*/
-        .sheet(item: $newAnnotation) { annotationData in
-            NavigationStack {
-                AnnotationDetail(annotation: annotationData, isNew: true)
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .interactiveDismissDisabled()
-        }
         
     }
     

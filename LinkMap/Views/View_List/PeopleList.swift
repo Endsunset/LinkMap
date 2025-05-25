@@ -55,18 +55,20 @@ struct PeopleList: View {
                 }
                 
             }
+            .sheet(item: $newPerson) { person in
+                NavigationStack {
+                    PeopleDetail(person: person, isNew: true)
+                        .toolbarBackgroundVisibility(.hidden)
+                        .navigationBarBackButtonHidden()
+                }
+                .interactiveDismissDisabled()
+            }
         } /*detail: {
             Text("Select a person")
                 .navigationTitle("Person")
                 .navigationBarTitleDisplayMode(.inline)
         }
         .navigationBarTitleDisplayMode(.inline)*/
-        .sheet(item: $newPerson) { person in
-            NavigationStack {
-                PeopleDetail(person: person, isNew: true)
-            }
-            .interactiveDismissDisabled()
-        }
     }
     
     private func addPerson() {
