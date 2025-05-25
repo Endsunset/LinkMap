@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import SwiftData
+@preconcurrency import SwiftData
 
 enum LinkMapV2: VersionedSchema {
-    static var versionIdentifier = Schema.Version(2, 0, 0)
+    static let versionIdentifier = Schema.Version(2, 0, 0)
     static var models: [any PersistentModel.Type] {
         [AnnotationData.self,Person.self,Item.self]
     }
@@ -48,6 +48,7 @@ enum LinkMapV2: VersionedSchema {
             self.requirement = requirement
             self.statue = statue
             self.annotationId = annotationId
+            self.number = 1
         }
     }
     

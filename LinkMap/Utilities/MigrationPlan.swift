@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftData
+@preconcurrency import SwiftData
 
 typealias AnnotationData = LinkMapV2.AnnotationData
 typealias Person = LinkMapV2.Person
