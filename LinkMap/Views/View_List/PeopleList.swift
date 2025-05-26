@@ -17,6 +17,8 @@ struct PeopleList: View {
     @Environment(\.modelContext) private var context
     @State private var newPerson: Person?
     
+    @State private var editMode = EditMode.inactive
+    
     @Environment(\.dismiss) private var dismiss
     
     init(isSheet: Bool = false, annotationId: UUID? = nil) {
@@ -46,20 +48,38 @@ struct PeopleList: View {
                         }
                     }
                 } else {
-                    ToolbarItem {
-                        Button("Add person", systemImage: "plus", action: addPerson)
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        EditButton()
+                    ToolbarItem(placement: .confirmationAction) {
+                        if editMode.isEditing {
+                            Button("Done") {
+                                editMode = .inactive
+                            }
+                        } else {
+                            Menu("Options") {
+                                Button("Add person", systemImage: "plus", action: addPerson)
+                                
+                                Button {
+                                    editMode = .active
+                                } label: {
+                                    Text("Edit")
+                                    Image(systemName: "pencil")
+                                }
+                                
+                                NavigationLink {
+                                    Help()
+                                } label: {
+                                    Text("Help")
+                                    Image(systemName: "questionmark.circle")
+                                }
+                            }
+                        }
                     }
                 }
-                
             }
+            .environment(\.editMode, $editMode)
             .sheet(item: $newPerson) { person in
                 NavigationStack {
                     PeopleDetail(person: person, isNew: true)
-                        .toolbarBackgroundVisibility(.hidden)
-                        .navigationBarBackButtonHidden()
+                        .navigationBarBackButtonHidden(true)
                         .toolbarRole(.editor)
                 }
                 .interactiveDismissDisabled()

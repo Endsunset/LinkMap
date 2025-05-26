@@ -33,15 +33,6 @@ struct ContentView: View {
             }
             
         }
-        .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
-                NavigationLink("Help") {
-                    NavigationStack {
-                        Help()
-                    }
-                }
-            }
-        }
     }
 }
 

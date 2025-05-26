@@ -66,6 +66,7 @@ struct PeopleDetail: View {
                     }
                 }
                 .pickerStyle(.menu)
+                
                 TextField("Detail", text: $person.requirement, axis: .vertical)
                     .lineLimit(10...10) // Forces single line
                     .fixedSize(horizontal: false, vertical: true) // Prevents vertical truncation
