@@ -30,14 +30,6 @@ struct MapPanel: View {
                     PeopleList(annotationId: annotationData.id)
                 }
             }
-            .navigationTitle(annotationData.name == "" ? "Untitled Annotation" : annotationData.name)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                }
-            }
         }
     }
 }

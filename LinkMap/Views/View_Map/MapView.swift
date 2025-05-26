@@ -85,7 +85,7 @@ struct MapView: View {
                     MapScaleView()
                 }
                 .sheet(isPresented: $isShowingSheet) {
-                    NavigationStack {
+                    CustomStack(title: "Map Panel", toolbarStyle: .sheet) {
                         MapPanel(annotation: selectedAnnotation)
                     }
                     .presentationDetents([.medium, .large])

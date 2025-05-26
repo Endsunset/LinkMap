@@ -56,7 +56,7 @@ struct PeopleList: View {
                 
             }
             .sheet(item: $newPerson) { person in
-                NavigationStack {
+                CustomStack(title: "New Group", toolbarStyle: .new) {
                     PeopleDetail(person: person, isNew: true)
                         .toolbarBackgroundVisibility(.hidden)
                         .navigationBarBackButtonHidden()

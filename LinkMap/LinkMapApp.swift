@@ -6,9 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
-
-let test = true
 
 @main
 struct LinkMapApp: App {
