@@ -274,6 +274,7 @@
 				INFOPLIST_FILE = LinkMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LinkMap;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to locate you on the map.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to locate you on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -313,6 +314,7 @@
 				INFOPLIST_FILE = LinkMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LinkMap;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location will be used to locate you on the map.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be used to locate you on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
