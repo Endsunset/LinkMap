@@ -21,6 +21,10 @@ struct PeopleList: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @State private var path = NavigationPath()
+    
+    @State private var displayed = false
+    
     init(isSheet: Bool = false, annotationId: UUID? = nil) {
         self.isSheet = isSheet
         self.annotationId = annotationId
@@ -77,10 +81,20 @@ struct PeopleList: View {
             }
             .environment(\.editMode, $editMode)
             .sheet(item: $newPerson) { person in
-                NavigationStack {
-                    PeopleDetail(person: person, isNew: true)
-                        .navigationBarBackButtonHidden(true)
-                        .toolbarRole(.editor)
+                NavigationStack(path: $path) {
+                    Text("Loading...")
+                        .navigationDestination(for: String.self) { _ in
+                            PeopleDetail(person: person, isNew: true)
+                        }
+                        .onAppear {
+                            if displayed {
+                                displayed = false
+                                newPerson = nil
+                            } else {
+                                displayed = true
+                                path.append("")
+                            }
+                        }
                 }
                 .interactiveDismissDisabled()
             }

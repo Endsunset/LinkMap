@@ -20,6 +20,10 @@ struct AnnotationList: View {
     
     @StateObject private var locationManager = LocationManager()
     
+    @State private var path = NavigationPath()
+    
+    @State private var displayed = false
+    
     var body: some View {
         //NavigationSplitView {
         NavigationStack {
@@ -61,10 +65,20 @@ struct AnnotationList: View {
             }
             .environment(\.editMode, $editMode)
             .sheet(item: $newAnnotation) { annotationData in
-                NavigationStack {
-                    AnnotationDetail(annotation: annotationData, isNew: true)
-                        .navigationBarBackButtonHidden(true)
-                        .toolbarRole(.editor)
+                NavigationStack(path: $path) {
+                    Text("Loading...")
+                        .navigationDestination(for: String.self) { _ in
+                            AnnotationDetail(annotation: annotationData, isNew: true)
+                        }
+                        .onAppear {
+                            if displayed {
+                                displayed = false
+                                newAnnotation = nil
+                            } else {
+                                displayed = true
+                                path.append("")
+                            }
+                        }
                 }
                 .interactiveDismissDisabled()
             }

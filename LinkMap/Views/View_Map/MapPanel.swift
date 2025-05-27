@@ -38,6 +38,7 @@ struct MapPanel: View {
                     }
                 }
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }

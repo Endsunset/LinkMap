@@ -43,6 +43,10 @@ struct MapView: View {
     
     @State private var mapStyle: MapStyleType = .standard
     
+    @State private var path = NavigationPath()
+    
+    @State private var displayed = false
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
@@ -86,8 +90,20 @@ struct MapView: View {
                         MapScaleView()
                     }
                     .sheet(isPresented: $isShowingSheet) {
-                        NavigationStack {
-                            MapPanel(annotation: selectedAnnotation)
+                        NavigationStack(path: $path) {
+                            Text("Loading...")
+                                .navigationDestination(for: String.self) { _ in
+                                    MapPanel(annotation: selectedAnnotation)
+                                }
+                                .onAppear {
+                                    if displayed {
+                                        displayed = false
+                                        isShowingSheet = false
+                                    } else {
+                                        displayed = true
+                                        path.append("")
+                                    }
+                                }
                         }
                         .presentationDetents([.medium, .large])
                         .onDisappear{
@@ -97,11 +113,23 @@ struct MapView: View {
                         }
                     }
                     .sheet(item: $newAnnotation) { annotationData in
-                        NavigationStack {
-                            AnnotationDetail(annotation: annotationData, isNew: true, isSheet: true)
-                                .presentationDetents([.medium, .large])
+                        //Resolve the unexpected toolbar item from documentgroup toolbar
+                        NavigationStack(path: $path) {
+                            Text("Loading...")
+                                .navigationDestination(for: String.self) { _ in
+                                    AnnotationDetail(annotation: annotationData, isNew: true, isSheet: true)
+                                }
+                                .onAppear {
+                                    if displayed {
+                                        displayed = false
+                                        newAnnotation = nil
+                                    } else {
+                                        displayed = true
+                                        path.append("")
+                                    }
+                                }
                         }
-                        .navigationBarBackButtonHidden(true)
+                        .presentationDetents([.medium, .large])
                         .interactiveDismissDisabled()
                     }
                     .onAppear {
