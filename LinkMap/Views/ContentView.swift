@@ -17,6 +17,10 @@ struct ContentView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     
+    @State private var path = NavigationPath()
+    
+    @State private var selectedTab = 0
+    
     var body: some View {
         TabView {
             Tab("Map", systemImage: "map") {
@@ -25,11 +29,43 @@ struct ContentView: View {
             }
             
             Tab("Annotation", systemImage: "mappin.and.ellipse") {
-                AnnotationList()
+                NavigationStack(path: $path) {
+                    Text("Refreshing...")
+                        .navigationDestination(for: String.self) { _ in
+                            AnnotationList()
+                                .navigationBarBackButtonHidden()
+                                .onDisappear {
+                                    if path.isEmpty {
+                                        path.append("")
+                                    }
+                                }
+                        }
+                }
+                .onAppear {
+                    if path.isEmpty {
+                        path.append("")
+                    }
+                }
             }
             
             Tab("Group", systemImage: "person.and.person") {
-                PeopleList()
+                NavigationStack(path: $path) {
+                    Text("Refreshing...")
+                        .navigationDestination(for: String.self) { _ in
+                            PeopleList()
+                                .navigationBarBackButtonHidden()
+                                .onDisappear {
+                                    if path.isEmpty {
+                                        path.append("")
+                                    }
+                                }
+                        }
+                }
+                .onAppear {
+                    if path.isEmpty {
+                        path.append("")
+                    }
+                }
             }
             
         }

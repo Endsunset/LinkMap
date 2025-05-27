@@ -149,11 +149,6 @@ struct MapView: View {
                         .padding()
                 }
             }
-            .alert("Error", isPresented: $showingAlert) {
-                Button("OK", role: .cancel) { }
-            } message: {
-                Text(alertMessage)
-            }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     NavigationLink("Help") {
