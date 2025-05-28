@@ -24,11 +24,9 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab("Map", systemImage: "map") {
-                MapView()
-                    .onAppear {
-                        // Force show navigation bar
-                        UINavigationBar.appearance().isHidden = false
-                    }
+                NavigationStack {
+                    MapView()
+                }
             }
             
             Tab("Annotation", systemImage: "mappin.and.ellipse") {
