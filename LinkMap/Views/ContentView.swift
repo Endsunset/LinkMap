@@ -25,7 +25,10 @@ struct ContentView: View {
         TabView {
             Tab("Map", systemImage: "map") {
                 MapView()
-                    .toolbar(.visible, for: .automatic)
+                    .onAppear {
+                        // Force show navigation bar
+                        UINavigationBar.appearance().isHidden = false
+                    }
             }
             
             Tab("Annotation", systemImage: "mappin.and.ellipse") {
