@@ -20,7 +20,7 @@ struct AnnotationDetail: View {
     
     @State private var position: MapCameraPosition
     
-    @State private var locationManager = CLLocationManager()
+    @StateObject private var locationManager = LocationManager.shared
     
     init(annotation: AnnotationData, isNew: Bool = false, isSheet: Bool = false) {
         self.annotation = annotation
@@ -68,7 +68,17 @@ struct AnnotationDetail: View {
             save()
         }
         .onAppear {
-            locationManager.requestWhenInUseAuthorization()
+            position = .automatic
+            locationManager.requestAuthorization()
+        }
+        .alert("Location Permission Required",
+               isPresented: $locationManager.showPermissionAlert) {
+            Button("Settings") {
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Please enable location services in Settings")
         }
         .onDisappear { //  Save when navigating back
             save()

@@ -8,34 +8,27 @@
 import SwiftUI
 import SwiftData
 
-let test = true
-
 @main
 struct LinkMapApp: App {
+    @State private var showPrivacyPolicy = false
     
     var body: some Scene {
-        #if os(iOS) || os(macOS)
-        DocumentGroupLaunchScene("LinkMap") {
-            NewDocumentButton("New Document")
-        } background: {
-            Image("UI_Background")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-        }
-        /*DocumentGroup(editing: .linkMap, migrationPlan: LinkMapMigrationPlan.self) {
+        // Main Document Group
+        DocumentGroup(editing: [AnnotationData.self, Person.self], contentType: .linkMap) {
             ContentView()
-        }*/
-        
-        DocumentGroup(editing: [AnnotationData.self,Person.self], contentType: .linkMap) {
-            ContentView()
+                .onAppear {
+                    // Only show if not previously accepted
+                    if !UserDefaults.standard.bool(forKey: "hasAcceptedPrivacyPolicy") {
+                        showPrivacyPolicy = true
+                    }
+                }
+                .sheet(isPresented: $showPrivacyPolicy) {
+                    PrivacyPolicyView(showPrivacyPolicy: $showPrivacyPolicy)
+                        .interactiveDismissDisabled() // Force acceptance
+                        #if os(macOS)
+                        .frame(minWidth: 500, minHeight: 600)
+                        #endif
+                }
         }
-        #else
-        WindowGroup {
-            ContentView()
-        }
-        .modelContainer(for: [AnnotationInfo.self, Person.self])
-        #endif
     }
-    
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Help: View {
+struct HelpView: View {
     var body: some View {
         List{
             NavigationLink("About LinkMap") {
@@ -36,6 +36,6 @@ struct Help: View {
 
 #Preview {
     NavigationStack {
-        Help()
+        HelpView()
     }
 }

@@ -31,7 +31,7 @@ struct MapView: View {
     @State private var showingAlert = false
     @State private var alertMessage = ""
     
-    @State private var locationManager = CLLocationManager()
+    @StateObject private var locationManager = LocationManager.shared
     
     @State private var newAnnotation: AnnotationData?
     @State private var newPerson: Person?
@@ -134,7 +134,17 @@ struct MapView: View {
                 .onAppear {
                     isAddingEnabled = false
                     refreshID = UUID()
-                    locationManager.requestWhenInUseAuthorization()
+                    position = .automatic
+                    locationManager.requestAuthorization()
+                }
+                .alert("Location Permission Required",
+                       isPresented: $locationManager.showPermissionAlert) {
+                    Button("Settings") {
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                    }
+                    Button("Cancel", role: .cancel) {}
+                } message: {
+                    Text("Please enable location services in Settings")
                 }
             }
             .ignoresSafeArea(.keyboard)
@@ -152,7 +162,7 @@ struct MapView: View {
             ToolbarItem(placement: .confirmationAction) {
                 NavigationLink("Help") {
                     NavigationStack {
-                        Help()
+                        HelpView()
                     }
                 }
             }

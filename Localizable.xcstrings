@@ -1,0 +1,593 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "%lld" : {
+
+    },
+    "1. Information We Collect" : {
+
+    },
+    "2. Location Data" : {
+
+    },
+    "3. Data Security" : {
+
+    },
+    "4. Changes to This Policy" : {
+
+    },
+    "A quick introduction to LinkMap." : {
+
+    },
+    "About LinkMap" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关于链图"
+          }
+        }
+      }
+    },
+    "Add and Delete" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加与删除"
+          }
+        }
+      }
+    },
+    "Add and Edit Annotation" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加和删除标记"
+          }
+        }
+      }
+    },
+    "Add Annotation" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加标记"
+          }
+        }
+      }
+    },
+    "Add Group" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加群组"
+          }
+        }
+      }
+    },
+    "Annotation" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "标记"
+          }
+        }
+      }
+    },
+    "Annotation List" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "标记列表"
+          }
+        }
+      }
+    },
+    "Annotations" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "标记"
+          }
+        }
+      }
+    },
+    "Basic Navigation" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "基本导航"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
+    "Detail" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "详情"
+          }
+        }
+      }
+    },
+    "Discover how this new application has made it easier than ever for you to make annotations, distribute groups, and more." : {
+
+    },
+    "Done" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完成"
+          }
+        }
+      }
+    },
+    "Edit" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑"
+          }
+        }
+      }
+    },
+    "Editing Details" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑详情"
+          }
+        }
+      }
+    },
+    "Effective Date: May 30, 2025" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "生效日期：2025年5月30日"
+          }
+        }
+      }
+    },
+    "Group" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "群组"
+          }
+        }
+      }
+    },
+    "Group List" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "群组列表"
+          }
+        }
+      }
+    },
+    "Groups" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "群组"
+          }
+        }
+      }
+    },
+    "Help" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "帮助"
+          }
+        }
+      }
+    },
+    "I Accept" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我同意"
+          }
+        }
+      }
+    },
+    "If you grant permission, the app may access your location solely to:\n- Display your position on the map\n- Facilitate local annotation placement\n\nLocation data is processed in real-time and never stored persistently or shared with third parties." : {
+
+    },
+    "Key" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "键"
+          }
+        }
+      }
+    },
+    "Key 1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "键1"
+          }
+        }
+      }
+    },
+    "LinkMap does not collect, store, or transmit any personal data to external servers. \nAll data created within the app (including map annotations and user preferences) is stored exclusively on your device using Apple's SwiftData framework." : {
+
+    },
+    "Loading..." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "加载中…"
+          }
+        }
+      }
+    },
+    "Location Permission Required" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要位置权限"
+          }
+        }
+      }
+    },
+    "Location Services" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "定位服务"
+          }
+        }
+      }
+    },
+    "Map" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地图"
+          }
+        }
+      }
+    },
+    "Map Interface" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地图界面"
+          }
+        }
+      }
+    },
+    "Map Styles" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地图样式"
+          }
+        }
+      }
+    },
+    "Most applications does not support the sharing of documents with unqiue extension. In this tutorial, you will learn how to share such documents freely." : {
+
+    },
+    "Name" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名称"
+          }
+        }
+      }
+    },
+    "New Annotation" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新的标记"
+          }
+        }
+      }
+    },
+    "New Group" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新的群组"
+          }
+        }
+      }
+    },
+    "Now there should be a .zip file on your screen, press and hold the file for a while to bring out the tool bar again." : {
+
+    },
+    "Number of People" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "人数"
+          }
+        }
+      }
+    },
+    "Once entered the app, find the document you want to compress, either by searching its name in the search bar on the top, or do as one pleases." : {
+
+    },
+    "Options" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选项"
+          }
+        }
+      }
+    },
+    "Overview" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "概述"
+          }
+        }
+      }
+    },
+    "Pinch to zoom in/out\nDrag to pan the map\nUse pitch toggle for 3D view" : {
+
+    },
+    "Please enable location services in Settings" : {
+
+    },
+    "Prepare to share the document." : {
+
+    },
+    "Press and hold the document for a while to bring out the tool bar." : {
+
+    },
+    "Press the Compress button to compress the document." : {
+
+    },
+    "Press the mappin button to enable or disable annotations adding." : {
+
+    },
+    "Press the Share button, now you should be able to share the file freely." : {
+
+    },
+    "Privacy Policy %@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隐私协议 %@"
+          }
+        }
+      }
+    },
+    "Refreshing..." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刷新中…"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存"
+          }
+        }
+      }
+    },
+    "Search location" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "搜索位置"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置"
+          }
+        }
+      }
+    },
+    "Share Document" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分享文件"
+          }
+        }
+      }
+    },
+    "Step 1" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第一步"
+          }
+        }
+      }
+    },
+    "Step 2" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第二步"
+          }
+        }
+      }
+    },
+    "Step 3" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第三步"
+          }
+        }
+      }
+    },
+    "Step 4" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第四步"
+          }
+        }
+      }
+    },
+    "Step 5" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第五步"
+          }
+        }
+      }
+    },
+    "Step 6" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第六步"
+          }
+        }
+      }
+    },
+    "Tap on any annotation to view the details." : {
+
+    },
+    "Tap on any group to view the details of the group." : {
+
+    },
+    "Tap the map style button to cycle between Standard, Imagery and Hybrid" : {
+
+    },
+    "The + button enables you creating new annotation, and the Edit button let you delete annotation, you can also slide the annotation to the left to delete them." : {
+
+    },
+    "The + button enables you creating new group, and the Edit button let you delete group, you can also slide the group to the left to delete them." : {
+
+    },
+    "The annotation list is where you review all the annotations you've added, see corresponding section for further details." : {
+
+    },
+    "The app will request location permission to show your current position (blue dot). Enable location services in Settings to allow LinkMap gain access to your location." : {
+
+    },
+    "The group list is where you review all the annotation you've added." : {
+
+    },
+    "The map interface provides several useful tools for you to view the map, and helps you to manage the annotations easily." : {
+
+    },
+    "The map interface." : {
+
+    },
+    "To share the document, you need to compress it first, this will require the using of Files, a native application on iOS device." : {
+
+    },
+    "Updated in v%@:\n- Clarified data retention policies\n- Added contact methods for data requests" : {
+
+    },
+    "Video" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "视频"
+          }
+        }
+      }
+    },
+    "Video %@.%@ not found" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video %1$@.%2$@ not found"
+          }
+        }
+      }
+    },
+    "We may update this policy. Continued use after changes constitutes acceptance." : {
+
+    },
+    "What's Changed?" : {
+
+    },
+    "Your data remains on your device at all times. We implement:\n- iOS system-level security protections\n- Sandboxing of all app data" : {
+
+    }
+  },
+  "version" : "1.0"
+}
