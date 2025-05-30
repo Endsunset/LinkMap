@@ -30,7 +30,7 @@ LinkMap provides a comprehensive solution with:
 - Record-to-marker assignment
 - File sharing capabilities
 
-# Development
+## Development
 
 Create issues!
 Create pull requests!
