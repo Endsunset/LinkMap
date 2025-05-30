@@ -38,5 +38,13 @@ Help LinkMap get better!
 
 ## Installation
 
-1. Download from App Store (Coming soon)
+1. Download from App Store
+
+| Country/Region   | Status                  |  
+|------------------|-------------------------|  
+| China mainland   | ❌ ICP Filing Missing   |  
+| Hong Kong        | ✅ Available            |  
+| Macau            | ✅ Available            |  
+| Taiwan           | ✅ Available            |  
+
 2. [Download](https://testflight.apple.com/join/3gYf2dw6) from TestFlight
