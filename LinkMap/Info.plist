@@ -14,17 +14,6 @@
 				<string>com.Endsunset.linkMap</string>
 			</array>
 		</dict>
-		<dict>
-			<key>CFBundleTypeName</key>
-			<string>ZIP Archive</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.pkware.zip-archive</string>
-			</array>
-		</dict>
-		<dict/>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
@@ -59,27 +48,6 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>linkmap</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>public.archive</string>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>ZIP Archive</string>
-			<key>UTTypeIconFiles</key>
-			<array/>
-			<key>UTTypeIdentifier</key>
-			<string>com.pkware.zip-archive</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.mime-type</key>
-				<array>
-					<string>application/zip</string>
 				</array>
 			</dict>
 		</dict>
