@@ -24,9 +24,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab("Map", systemImage: "map") {
-                NavigationStack {
-                    MapView()
-                }
+                MapView()
             }
             
             Tab("Annotation", systemImage: "mappin.and.ellipse") {
