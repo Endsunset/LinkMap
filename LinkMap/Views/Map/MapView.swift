@@ -167,6 +167,7 @@ struct MapView: View {
                 }
             }
         }
+        .toolbarRole(.editor)
     }
     
     private var currentMapStyle: MapStyle {

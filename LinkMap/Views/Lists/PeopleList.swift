@@ -96,6 +96,7 @@ struct PeopleList: View {
             }
             .interactiveDismissDisabled()
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private func addPerson() {

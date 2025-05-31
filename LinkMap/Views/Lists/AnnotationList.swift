@@ -80,6 +80,7 @@ struct AnnotationList: View {
             }
             .interactiveDismissDisabled()
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private func addAnnotationData() {
