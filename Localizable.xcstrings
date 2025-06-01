@@ -7,18 +7,6 @@
     "%lld" : {
 
     },
-    "1. Information We Collect" : {
-
-    },
-    "2. Location Data" : {
-
-    },
-    "3. Data Security" : {
-
-    },
-    "4. Changes to This Policy" : {
-
-    },
     "A quick introduction to LinkMap." : {
 
     },
@@ -166,6 +154,7 @@
       }
     },
     "Effective Date: May 30, 2025" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -225,9 +214,6 @@
         }
       }
     },
-    "If you grant permission, the app may access your location solely to:\n- Display your position on the map\n- Facilitate local annotation placement\n\nLocation data is processed in real-time and never stored persistently or shared with third parties." : {
-
-    },
     "Key" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -250,9 +236,6 @@
         }
       }
     },
-    "LinkMap does not collect, store, or transmit any personal data to external servers. \nAll data created within the app (including map annotations and user preferences) is stored exclusively on your device using Apple's SwiftData framework." : {
-
-    },
     "Loading..." : {
       "localizations" : {
         "zh-Hans" : {
@@ -272,6 +255,9 @@
           }
         }
       }
+    },
+    "Location service is required to show user location on the map." : {
+
     },
     "Location Services" : {
       "localizations" : {
@@ -383,9 +369,6 @@
       }
     },
     "Pinch to zoom in/out\nDrag to pan the map\nUse pitch toggle for 3D view" : {
-
-    },
-    "Please enable location services in Settings" : {
 
     },
     "Prepare to share the document." : {
@@ -560,6 +543,7 @@
 
     },
     "Video" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -579,13 +563,7 @@
         }
       }
     },
-    "We may update this policy. Continued use after changes constitutes acceptance." : {
-
-    },
     "What's Changed?" : {
-
-    },
-    "Your data remains on your device at all times. We implement:\n- iOS system-level security protections\n- Sandboxing of all app data" : {
 
     }
   },

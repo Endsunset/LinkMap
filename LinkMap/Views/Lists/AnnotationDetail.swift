@@ -68,17 +68,7 @@ struct AnnotationDetail: View {
             save()
         }
         .onAppear {
-            position = .automatic
-            locationManager.requestAuthorization()
-        }
-        .alert("Location Permission Required",
-               isPresented: $locationManager.showPermissionAlert) {
-            Button("Settings") {
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-            }
-            Button("Cancel", role: .cancel) {}
-        } message: {
-            Text("Please enable location services in Settings")
+            position = .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: annotation.latitude, longitude: annotation.longitude), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)))
         }
         .onDisappear { //  Save when navigating back
             save()

@@ -7,14 +7,9 @@
 
 import CoreLocation
 
-@MainActor
-final class LocationManager: NSObject, ObservableObject {
-    static let shared = LocationManager()
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @MainActor static let shared = LocationManager()
     private let manager = CLLocationManager()
-    
-    private var requested = false
-    
-    @Published var userLocation: CLLocationCoordinate2D?
     @Published var showPermissionAlert = false
     
     override init() {
@@ -22,35 +17,31 @@ final class LocationManager: NSObject, ObservableObject {
         manager.delegate = self
     }
     
-    func requestAuthorization() {
-        if !requested {
-            switch manager.authorizationStatus {
-            case .notDetermined:
-                manager.requestWhenInUseAuthorization()
-            case .authorizedWhenInUse, .authorizedAlways:
-                manager.startUpdatingLocation()
-            case .denied, .restricted:
+    func requestAuthorization(showCustomAlertIfDenied: Bool = true) {
+        let status = manager.authorizationStatus // Modern API
+        
+        switch status {
+        case .notDetermined:
+            // System will show its native prompt
+            manager.requestWhenInUseAuthorization()
+        case .denied, .restricted:
+            if showCustomAlertIfDenied {
                 showPermissionAlert = true
-                requested = true
-            @unknown default:
-                break
             }
-        }
-    }
-    
-    func startUpdates() {
-        if manager.authorizationStatus == .authorizedWhenInUse {
+        case .authorizedAlways, .authorizedWhenInUse:
+            // Already authorized - start updates if needed
             manager.startUpdatingLocation()
+        @unknown default:
+            break
         }
     }
-}
-
-extension LocationManager: @preconcurrency CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations.last?.coordinate
-    }
     
+    // Handle authorization changes
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        startUpdates()
+        let status = manager.authorizationStatus
+        
+        if status == .denied || status == .restricted {
+            showPermissionAlert = true
+        }
     }
 }

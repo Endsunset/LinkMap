@@ -11,24 +11,15 @@ import SwiftData
 @main
 struct LinkMapApp: App {
     @State private var showPrivacyPolicy = false
+    @StateObject private var locationManager = LocationManager.shared
     
     var body: some Scene {
-        // Main Document Group
         DocumentGroup(editing: [AnnotationData.self, Person.self], contentType: .linkMap) {
             ContentView()
                 .onAppear {
-                    // Only show if not previously accepted
-                    if !UserDefaults.standard.bool(forKey: "hasAcceptedPrivacyPolicy") {
-                        showPrivacyPolicy = true
-                    }
+                    locationManager.requestAuthorization(showCustomAlertIfDenied: false)
                 }
-                .sheet(isPresented: $showPrivacyPolicy) {
-                    PrivacyPolicyView(showPrivacyPolicy: $showPrivacyPolicy)
-                        .interactiveDismissDisabled() // Force acceptance
-                        #if os(macOS)
-                        .frame(minWidth: 500, minHeight: 600)
-                        #endif
-                }
+                .navigationBarHidden(false)
         }
     }
 }

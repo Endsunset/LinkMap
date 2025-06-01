@@ -11,7 +11,7 @@ final class PrivacyManager {
     @MainActor static let shared = PrivacyManager()
     
     // Update this version number whenever you make significant policy changes
-    let currentPolicyVersion = "1.0"
+    let currentPolicyVersion = "1.1"
     private let defaults = UserDefaults.standard
     
     var isInitialVersion: Bool {
