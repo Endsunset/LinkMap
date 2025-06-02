@@ -48,113 +48,111 @@ struct MapView: View {
     @State private var displayed = false
     
     var body: some View {
-        NavigationStack {
-            ZStack(alignment: .bottom) {
-                MapReader { proxy in
-                    Map(position: $position, bounds: nil, selection: $selectedAnnotation) {
-                        UserAnnotation()
-                        
-                        ForEach(annotations) { annotationData in
-                            Marker(annotationData.name == "" ? "Untitled Annotation" : annotationData.name, coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
-                                .tag(annotationData)
-                        }
-                    }
-                    .mapStyle(currentMapStyle)
-                    .id(refreshID)
-                    .onTapGesture { screenPoint in
-                        if isAddingEnabled {
-                            if let markerLocation = proxy.convert(screenPoint, from: .local) {
-                                addAnnotationData(longitude: markerLocation.longitude, latitude: markerLocation.latitude)
-                            }
-                        }
-                    }
-                    .onMapCameraChange { context in
-                        positionRegion = context.region
-                    }
-                    .onChange(of: annotations) {
-                        position = .region(positionRegion)
-                    }
-                    .onChange(of: selectedAnnotation) { _, newValue in
-                        if !isAddingEnabled {
-                            if newValue != nil {
-                                isShowingSheet = true // Trigger sheet when annotation is selected
-                            }
-                        } else {
-                            selectedAnnotation = nil
-                        }
-                    }
-                    .mapControls {
-                        MapUserLocationButton()
-                        MapCompass()
-                        MapPitchToggle()
-                        MapScaleView()
-                    }
-                    .sheet(isPresented: $isShowingSheet) {
-                        NavigationStack(path: $path) {
-                            Text("Loading...")
-                                .navigationDestination(for: String.self) { _ in
-                                    MapPanel(annotation: selectedAnnotation)
-                                }
-                                .onAppear {
-                                    if displayed {
-                                        displayed = false
-                                        isShowingSheet = false
-                                    } else {
-                                        displayed = true
-                                        path.append("")
-                                    }
-                                }
-                        }
-                        .presentationDetents([.medium, .large])
-                        .onDisappear{
-                            selectedAnnotation = nil
-                            position = .region(positionRegion)
-                            refreshID = UUID()
-                        }
-                    }
-                    .sheet(item: $newAnnotation) { annotationData in
-                        //Resolve the unexpected toolbar item from documentgroup toolbar
-                        NavigationStack(path: $path) {
-                            Text("Loading...")
-                                .navigationDestination(for: String.self) { _ in
-                                    AnnotationDetail(annotation: annotationData, isNew: true, isSheet: true)
-                                }
-                                .onAppear {
-                                    if displayed {
-                                        displayed = false
-                                        newAnnotation = nil
-                                    } else {
-                                        displayed = true
-                                        path.append("")
-                                    }
-                                }
-                        }
-                        .presentationDetents([.medium, .large])
-                        .interactiveDismissDisabled()
-                    }
-                    .onAppear {
-                        isAddingEnabled = false
-                        refreshID = UUID()
-                        position = .automatic
+        ZStack(alignment: .bottom) {
+            MapReader { proxy in
+                Map(position: $position, bounds: nil, selection: $selectedAnnotation) {
+                    UserAnnotation()
+                    
+                    ForEach(annotations) { annotationData in
+                        Marker(annotationData.name == "" ? "Untitled Annotation" : annotationData.name, coordinate: CLLocationCoordinate2D(latitude: annotationData.latitude, longitude: annotationData.longitude))
+                            .tag(annotationData)
                     }
                 }
-                .ignoresSafeArea(.keyboard)
-                VStack(alignment: .leading) {
-                    MapToolBar(
-                        isAddingEnabled: $isAddingEnabled,
-                        mapStyle: $mapStyle
-                    )
-                    
-                    SearchBarView(searchText: $searchText, onCommit: geocodeSearchText)
-                        .padding()
+                .mapStyle(currentMapStyle)
+                .id(refreshID)
+                .onTapGesture { screenPoint in
+                    if isAddingEnabled {
+                        if let markerLocation = proxy.convert(screenPoint, from: .local) {
+                            addAnnotationData(longitude: markerLocation.longitude, latitude: markerLocation.latitude)
+                        }
+                    }
+                }
+                .onMapCameraChange { context in
+                    positionRegion = context.region
+                }
+                .onChange(of: annotations) {
+                    position = .region(positionRegion)
+                }
+                .onChange(of: selectedAnnotation) { _, newValue in
+                    if !isAddingEnabled {
+                        if newValue != nil {
+                            isShowingSheet = true // Trigger sheet when annotation is selected
+                        }
+                    } else {
+                        selectedAnnotation = nil
+                    }
+                }
+                .mapControls {
+                    MapUserLocationButton()
+                    MapCompass()
+                    MapPitchToggle()
+                    MapScaleView()
+                }
+                .sheet(isPresented: $isShowingSheet) {
+                    NavigationStack(path: $path) {
+                        Text("Loading...")
+                            .navigationDestination(for: String.self) { _ in
+                                MapPanel(annotation: selectedAnnotation)
+                            }
+                            .onAppear {
+                                if displayed {
+                                    displayed = false
+                                    isShowingSheet = false
+                                } else {
+                                    displayed = true
+                                    path.append("")
+                                }
+                            }
+                    }
+                    .presentationDetents([.medium, .large])
+                    .onDisappear{
+                        selectedAnnotation = nil
+                        position = .region(positionRegion)
+                        refreshID = UUID()
+                    }
+                }
+                .sheet(item: $newAnnotation) { annotationData in
+                    //Resolve the unexpected toolbar item from documentgroup toolbar
+                    NavigationStack(path: $path) {
+                        Text("Loading...")
+                            .navigationDestination(for: String.self) { _ in
+                                AnnotationDetail(annotation: annotationData, isNew: true, isSheet: true)
+                            }
+                            .onAppear {
+                                if displayed {
+                                    displayed = false
+                                    newAnnotation = nil
+                                } else {
+                                    displayed = true
+                                    path.append("")
+                                }
+                            }
+                    }
+                    .presentationDetents([.medium, .large])
+                    .interactiveDismissDisabled()
+                }
+                .onAppear {
+                    isAddingEnabled = false
+                    refreshID = UUID()
+                    position = .automatic
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    NavigationLink("Help") {
-                        NavigationStack {
-                            HelpView()
-                        }
+            .ignoresSafeArea(.keyboard)
+            VStack(alignment: .leading) {
+                MapToolBar(
+                    isAddingEnabled: $isAddingEnabled,
+                    mapStyle: $mapStyle
+                )
+                
+                SearchBarView(searchText: $searchText, onCommit: geocodeSearchText)
+                    .padding()
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                NavigationLink("Help") {
+                    NavigationStack {
+                        HelpView()
                     }
                 }
             }
