@@ -12,12 +12,23 @@ import SwiftData
 struct LinkMapApp: App {
     @State private var showPrivacyPolicy = false
     @StateObject private var locationManager = LocationManager.shared
+    private var privacyManager = PrivacyManager.shared
     
     var body: some Scene {
         DocumentGroup(editing: [AnnotationData.self, Person.self], contentType: .linkMap) {
             ContentView()
                 .onAppear {
-                    locationManager.requestAuthorization(showCustomAlertIfDenied: false)
+                    if privacyManager.shouldShowPrivacyPolicy() {
+                        showPrivacyPolicy = true
+                    } else {
+                        locationManager.requestAuthorization(showCustomAlertIfDenied: false)
+                    }
+                }
+                .sheet(isPresented: $showPrivacyPolicy) {
+                    PrivacyPolicyView(showPrivacyPolicy: $showPrivacyPolicy)
+                        .onDisappear {
+                            locationManager.requestAuthorization(showCustomAlertIfDenied: false)
+                        }
                 }
                 .toolbarBackground(.visible, for: .navigationBar)
                 .toolbarBackground(Color(.systemBackground), for: .navigationBar)

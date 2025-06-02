@@ -11,40 +11,51 @@ struct PrivacyPolicyView: View {
     @Binding var showPrivacyPolicy: Bool
     @State private var showChanges = false
     
+    let privacyPolicyURL = URL(string: "https://endsunset.github.io/LinkMap/LinkMap-Privacy-Policy")!
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
+            Text("LinkMap")
+                .font(.largeTitle.bold())
             // Header
-            HStack {
-                Text("Privacy Policy \(PrivacyManager.shared.currentPolicyVersion)")
-                    .font(.title.bold())
-                
-                if !PrivacyManager.shared.isInitialVersion &&
-                    PrivacyManager.shared.shouldShowPrivacyPolicy() {
-                    Button(action: { showChanges.toggle() }) {
-                        Text("What's Changed?")
-                            .font(.caption)
-                            .foregroundColor(.blue)
+            Text("Terms of Use")
+                .font(.title.bold())
+            
+            VStack(alignment: .leading, spacing: 20) {
+                // Terms Text
+                VStack(alignment: .leading, spacing: 12) {
+                    
+                    Text("By using LinkMap, you acknowledge that:")
+                        .font(.headline)
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("• The application does not collect any personal data")
+                        Text("• All map functionality is provided through Apple's MapKit services")
+                        Text("• You have reviewed and agree to our Privacy Policy")
                     }
-                    .buttonStyle(.plain)
+                    .font(.subheadline)
+                    
+                    Text("LinkMap complies with all applicable privacy regulations including China's Cybersecurity Law, PIPL, and Data Security Law.")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
                 }
+                
+                // Privacy Policy Link
+                VStack(alignment: .leading) {
+                    Text("For complete details, please review our")
+                    Link("Privacy Policy", destination: privacyPolicyURL)
+                        .foregroundColor(.accentColor)
+                }
+                .font(.subheadline)
+                .padding(.vertical)
             }
-                                
-            if !PrivacyManager.shared.isInitialVersion && showChanges {
-                Text("""
-                    Updated in v\(PrivacyManager.shared.currentPolicyVersion):
-                    - Clarified data retention policies
-                    - Added contact methods for data requests
-                    """)
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(8)
-            }
+                
             // Acceptance Button
             Button(action: {
                 PrivacyManager.shared.recordAcceptance()
                 showPrivacyPolicy = false
             }) {
-                Text("I Accept")
+                Text("I understand and agree to these terms")
                     .bold()
                     .frame(maxWidth: .infinity)
             }

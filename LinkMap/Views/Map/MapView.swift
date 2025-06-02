@@ -136,16 +136,6 @@ struct MapView: View {
                         isAddingEnabled = false
                         refreshID = UUID()
                         position = .automatic
-                        locationManager.requestAuthorization()
-                    }
-                    .alert("Location Permission Required",
-                           isPresented: $locationManager.showPermissionAlert) {
-                        Button("Settings") {
-                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                        }
-                        Button("Cancel", role: .cancel) {}
-                    } message: {
-                        Text("Location service is required to show user location on the map.")
                     }
                 }
                 .ignoresSafeArea(.keyboard)

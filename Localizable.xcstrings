@@ -7,6 +7,15 @@
     "%lld" : {
 
     },
+    "• All map functionality is provided through Apple's MapKit services" : {
+
+    },
+    "• The application does not collect any personal data" : {
+
+    },
+    "• You have reviewed and agree to our Privacy Policy" : {
+
+    },
     "A quick introduction to LinkMap." : {
 
     },
@@ -100,6 +109,9 @@
         }
       }
     },
+    "By using LinkMap, you acknowledge that:" : {
+
+    },
     "Cancel" : {
       "localizations" : {
         "zh-Hans" : {
@@ -164,6 +176,9 @@
         }
       }
     },
+    "For complete details, please review our" : {
+
+    },
     "Group" : {
       "localizations" : {
         "zh-Hans" : {
@@ -205,6 +220,7 @@
       }
     },
     "I Accept" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -213,6 +229,9 @@
           }
         }
       }
+    },
+    "I understand and agree to these terms" : {
+
     },
     "Key" : {
       "extractionState" : "manual",
@@ -236,6 +255,12 @@
         }
       }
     },
+    "LinkMap" : {
+
+    },
+    "LinkMap complies with all applicable privacy regulations including China's Cybersecurity Law, PIPL, and Data Security Law." : {
+
+    },
     "Loading..." : {
       "localizations" : {
         "zh-Hans" : {
@@ -247,6 +272,7 @@
       }
     },
     "Location Permission Required" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -255,9 +281,6 @@
           }
         }
       }
-    },
-    "Location service is required to show user location on the map." : {
-
     },
     "Location Services" : {
       "localizations" : {
@@ -386,7 +409,11 @@
     "Press the Share button, now you should be able to share the file freely." : {
 
     },
+    "Privacy Policy" : {
+
+    },
     "Privacy Policy %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -427,6 +454,7 @@
       }
     },
     "Settings" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -515,6 +543,9 @@
     "Tap the map style button to cycle between Standard, Imagery and Hybrid" : {
 
     },
+    "Terms of Use" : {
+
+    },
     "The + button enables you creating new annotation, and the Edit button let you delete annotation, you can also slide the annotation to the left to delete them." : {
 
     },
@@ -539,9 +570,6 @@
     "To share the document, you need to compress it first, this will require the using of Files, a native application on iOS device." : {
 
     },
-    "Updated in v%@:\n- Clarified data retention policies\n- Added contact methods for data requests" : {
-
-    },
     "Video" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -562,9 +590,6 @@
           }
         }
       }
-    },
-    "What's Changed?" : {
-
     }
   },
   "version" : "1.0"
