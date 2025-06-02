@@ -1,62 +1,73 @@
 # LinkMap Privacy Policy
 
-**Last Updated:** May 31, 2025
+**Last Updated:** June 2, 2025  
+**Effective Date:** May 31, 2025
 
 ## 1. Introduction
 
-LinkMap ("the App") is committed to protecting your privacy. This Privacy Policy explains our practices regarding the handling of information when you use our application.
+LinkMap ("the App", "we", "us", or "our") respects your privacy and is committed to protecting it through our compliance with this policy. This Privacy Policy describes:
 
-## 2. Information We Do Not Collect
+- The types of information we may collect or that you may provide
+- Our practices for collecting, using, maintaining, protecting, and disclosing that information
 
-LinkMap is designed with privacy as a fundamental principle. We expressly declare that:
+## 2. Information Collection and Use
 
-- We do not collect any personal information
-- We do not track or store your location data
-- We do not record your usage patterns
-- We do not require or store any user credentials
-- We do not employ any analytics or tracking mechanisms
+### 2.1 Data Collection
 
-## 3. MapKit Services
+LinkMap is designed with privacy in mind:
 
-The App utilizes Apple's MapKit framework for mapping functionality. Please note:
+- **No Personal Data Collection:** We do not collect, store, or process any personal information from users
+- **No Usage Analytics:** We do not track user behavior or collect usage statistics
+- **No Device Information:** We do not access device identifiers or hardware information
+
+### 2.2 MapKit Services
+
+The App utilizes Apple's MapKit framework for mapping services:
 
 - All map data processing occurs locally on your device
-- Any queries made through MapKit are subject to Apple's Privacy Policy
-- We have no access to or control over Apple's data collection practices
-- For details on Apple's privacy practices, please refer to [Apple's Privacy Policy](https://www.apple.com/legal/privacy/)
+- Map queries are handled directly by Apple's services
+- We have no access to location data or search queries made through MapKit
 
-## 4. Data Security
+For information about Apple's data practices, please review [Apple's Privacy Policy](https://www.apple.com/legal/privacy/).
 
-As we do not collect any user data:
+## 3. Data Security
 
-- No data transmission occurs between the App and our servers
-- No data storage solutions are employed
-- No third-party data sharing takes place
+We implement appropriate technical measures to ensure:
 
-## 5. Compliance with Chinese Regulations
+- **Local Processing:** All app functionality operates on your device without external data transmission
+- **No Data Retention:** No user-generated content is stored on our servers (as we don't operate any)
+- **No Third-Party Sharing:** We do not share data with any third parties
 
-LinkMap fully complies with all applicable laws and regulations in China, including:
+## 4. Children's Privacy
 
-- 《中华人民共和国网络安全法》(Cybersecurity Law of the People's Republic of China)
-- 《个人信息保护法》(Personal Information Protection Law, PIPL)
-- 《数据安全法》(Data Security Law)
+LinkMap:
+
+- Is not directed to children under the age of 13
+- Does not knowingly collect personal information from children under 13
+- Complies with the Children's Online Privacy Protection Act (COPPA)
+
+## 5. Compliance with Regulations
+
+We adhere to all applicable privacy laws and regulations, including:
+
+- **China:** 
+  - 《中华人民共和国网络安全法》(Cybersecurity Law)
+  - 《个人信息保护法》(PIPL)
+  - 《数据安全法》(Data Security Law)
+- **International:**
+  - GDPR (for EU users)
+  - CCPA (for California residents)
 
 ## 6. Policy Updates
 
-We may update this Privacy Policy periodically. Any changes will be:
+We may update this Privacy Policy to reflect changes in our practices. When we do:
 
-- Posted within the App
-- Published on our App Store listing
-- Dated with the effective revision date
-
-Your continued use of the App after such changes constitutes acceptance of the updated policy.
+- We will post the new policy with a revised "Last Updated" date
+- Material changes will be notified through the App Store listing
+- Your continued use after changes constitutes acceptance
 
 ## 7. Contact Information
 
-For any questions regarding this Privacy Policy, please contact us at:
+For questions about this privacy policy or our privacy practices, please contact us via:
 
-**Address:** [GitHub Issues](https://github.com/Endsunset/LinkMap/issues)
-
----
-
-**Effective Date:** May 31, 2025
+- [GitHub Issues](https://github.com/Endsunset/LinkMap/issues)
