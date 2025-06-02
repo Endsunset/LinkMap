@@ -19,7 +19,8 @@ struct LinkMapApp: App {
                 .onAppear {
                     locationManager.requestAuthorization(showCustomAlertIfDenied: false)
                 }
-                .navigationBarHidden(false)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbarBackground(Color(.systemBackground), for: .navigationBar)
         }
     }
 }
