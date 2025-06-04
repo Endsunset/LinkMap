@@ -40,11 +40,10 @@ Help LinkMap get better!
 
 1. Download from App Store
 
-| Country/Region   | Status                  |  
-|------------------|-------------------------|  
-| China mainland   | ❌ ICP Filing Missing   |  
-| Hong Kong        | ✅ Available            |  
-| Macau            | ✅ Available            |  
-| Taiwan           | ✅ Available            |  
+| Region            | Status        | Detail                     |  
+|-------------------|---------------|----------------------------|  
+| China mainland    | Not Available | ICP Filing Number Missing  |  
+| European Union    | Not Available | Trader Status Not Provided |  
+| Others            | Available     | -                          |  
 
 2. [Download](https://testflight.apple.com/join/3gYf2dw6) from TestFlight
