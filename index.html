@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkMap - Documentation</title>
+    <link rel="stylesheet" href="https://endsunset.github.io/assets/styles/main.css">
+    <link rel="stylesheet" href="https://endsunset.github.io/assets/styles/components/header.css">
+    <link rel="stylesheet" href="https://endsunset.github.io/assets/styles/components/footer.css">
+    <style>
+        :root {
+            --border-radius: 0.5rem;
+            --shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* Original Header (now moved down) */
+        .project-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            height: 30vh;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            z-index: 100;
+            margin-top: 0; /* Remove any default margin */
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 0.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-top: 0;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1rem 1.5rem rgba(0,0,0,0.1);
+        }
+        
+        .availability-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .availability-table th, 
+        .availability-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        
+        .availability-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .availability-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .testflight-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 1rem 0;
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(3, 102, 214, 0.3);
+        }
+        
+        .testflight-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(3, 102, 214, 0.3);
+        }
+        
+        ul {
+            padding-left: 1.25rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-height: 800px) {
+            .project-header {
+                min-height: 150px;
+                padding: 1rem;
+            }
+            
+            .container {
+                padding-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header will be inserted here -->
+    <div id="header-container"></div>
+
+    <!-- Original Header (renamed to project-header) -->
+    <header class="project-header">
+        <h1>LinkMap</h1>
+        <p>Document-based application for homeless feeding activity organization</p>
+    </header>
+    
+    <div class="container">
+        <section id="Introduction">
+            <h2>About LinkMap</h2>
+            <p>LinkMap is a purpose-built iOS app that transforms how volunteers coordinate homeless feeding activities. By combining powerful data management with interactive mapping, it gives organizers complete visibility and control over every aspect of their outreach efforts.</p>
+            
+            <p>At its core, LinkMap helps you track what matters most: the locations you serve, the items you distribute, and the people who make it happen. Every deployment, location, and volunteer is connected through an intuitive map-based interface, making complex coordination feel simple.</p>
+            
+            <p>Teams stay connected with built-in communication tools, and event sign-ups keep everyone aligned. Whether you're managing a single route or coordinating multiple teams across the city, LinkMap provides the structure you need to focus on what really matters—helping those in need.</p>
+        </section>
+        
+        <section id="features">
+            <h2>Core Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Integrated Map Visualization</h3>
+                    <p>Map integration with advanced interaction for location tracking and route planning.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Marker-Based Geographic Organization</h3>
+                    <p>Organize all activity data by precise geographic markers for clear spatial planning.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Portable Project Files</h3>
+                    <p>Complete, self-contained project files that are easy to share and back up.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Standardized Document Format</h3>
+                    <p>All data stored in structured .linkmap files for consistency and reliability.</p>
+                </div>
+            </div>
+            <h2>Upcoming Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Event Creation & Volunteer Sign-Up</h3>
+                    <p>Create feeding events and allow volunteers to sign up directly through the app.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>In-App Communication Channel</h3>
+                    <p>Built-in communication tools for seamless community coordination.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Requirement Tracking & Resource Distribution</h3>
+                    <p>Track what items are needed and manage distribution efficiently.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Comprehensive Data Management</h3>
+                    <p>Powerful tools integrated with map for managing data efficiently.</p>
+                </div>
+            </div>
+            <h2>Technology & Frameworks</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Swift & SwiftUI</h3>
+                    <p>Modern, native iOS app built with Apple's latest frameworks for optimal performance and reliability.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>MapKit</h3>
+                    <p>Powerful map integration with custom markers, location tracking, and route planning for field operations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>SwiftData</h3>
+                    <p>Efficient local data persistence for deployments, locations, and groups—works offline, syncs when ready.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>CloudKit</h3>
+                    <p>Data sync across devices with iCloud integration, enabling seamless team collaboration.</p>
+            </div>
+        </section>
+        
+        <section id="installation">
+            <h2>Installation</h2>
+            <h3>App Store & Availability</h3>
+            <a href="https://apps.apple.com/us/app/linkmap/id6745166200" class="testflight-btn">Download Latest Release</a>
+            <table class="availability-table">
+                <thead>
+                    <tr>
+                        <th>Region</th>
+                        <th>Status</th>
+                        <th>Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>China mainland</td>
+                        <td>Not available</td>
+                        <td>ICP Filing Number Missing</td>
+                    </tr>
+                    <tr>
+                        <td>Others</td>
+                        <td>Available</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>TestFlight</h3>
+            <a href="https://testflight.apple.com/join/gVZeaRHw" class="testflight-btn">Download Beta Version</a>
+        </section>
+        
+        <section id="development">
+            <h2>Contribute to Development</h2>
+            <p>We welcome community contributions to make LinkMap better!</p>
+            <ul>
+                <li>Try out our TestFlight Beta for latest features!</li>
+                <li>Feel free to write any feedbacks via TestFlight!</li>
+                <li>Suggest new features for future versions!</li>
+            </ul>
+        </section>
+    </div>
+    
+    <div id="footer-container"></div>
+    
+    <script type="module" src="https://endsunset.github.io/assets/scripts/main.js"></script>
+</body>
+</html>
