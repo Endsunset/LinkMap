@@ -1,6 +1,6 @@
 # LinkMap
 
-A document-based iOS app designed to streamline homeless feeding activity organization.
+A multi-functional application for homeless feeding activity organization.
 
 **Visit the offical [website](https://endsunset.github.io/LinkMap/) for more details**
 
