@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkMap - Documentation</title>
+    <title>LinkMap - Map Planning Tool</title>
     <link rel="stylesheet" href="https://endsunset.github.io/assets/styles/main.css">
     <link rel="stylesheet" href="https://endsunset.github.io/assets/styles/components/header.css">
     <link rel="stylesheet" href="https://endsunset.github.io/assets/styles/components/footer.css">
@@ -179,56 +179,56 @@
     <!-- Original Header (renamed to project-header) -->
     <header class="project-header">
         <h1>LinkMap</h1>
-        <p>A multi-functional application for homeless feeding activity organization.</p>
+        <p>A private map workspace for planning feeding routes, locations, supplies, and shared field work.</p>
     </header>
     
     <div class="container">
         <section id="Introduction">
             <h2>About LinkMap</h2>
-            <p>LinkMap is a purpose-built iOS app that transforms how volunteers coordinate homeless feeding activities. By combining powerful data management with interactive mapping, it gives organizers complete visibility and control over every aspect of their outreach efforts.</p>
+            <p>LinkMap is a purpose-built iOS app for organizing homeless feeding activity around private map workspaces. It helps planners define service areas, maintain reusable locations and items, and prepare project routes with practical field details.</p>
             
-            <p>At its core, LinkMap helps you track what matters most: the locations you serve, the items you distribute, and the people who make it happen. Every deployment, location, and volunteer is connected through an intuitive map-based interface, making complex coordination feel simple.</p>
+            <p>The released app centers work around owner-created workspaces. Each workspace can contain regions, layers, locations, reusable supply items, projects, assignments, routes, route stops, supplies, and distribution records.</p>
             
-            <p>Teams stay connected with built-in communication tools, and event sign-ups keep everyone aligned. Whether you're managing a single route or coordinating multiple teams across the city, LinkMap provides the structure you need to focus on what really matters—helping those in need.</p>
+            <p>Workspace data is stored in the user's private iCloud database and can be shared with collaborators through CloudKit sharing when collaboration is needed.</p>
         </section>
         
         <section id="features">
             <h2>Core Features</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h3>Integrated Map Visualization</h3>
-                    <p>Map integration with advanced interaction for location tracking and route planning.</p>
+                    <h3>Workspace Maps</h3>
+                    <p>Create private workspaces that organize service geography into regions, layers, and reusable locations.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Marker-Based Geographic Organization</h3>
-                    <p>Organize all activity data by precise geographic markers for clear spatial planning.</p>
+                    <h3>Project Planning</h3>
+                    <p>Build project cycles with assignments, routes, ordered route stops, supplies, and distribution records.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Portable Project Files</h3>
-                    <p>Complete, self-contained project files that are easy to share and back up.</p>
+                    <h3>Reusable Resources</h3>
+                    <p>Maintain shared workspace items and location records so each project can reuse established planning data.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Standardized Document Format</h3>
-                    <p>All data stored in structured .linkmap files for consistency and reliability.</p>
+                    <h3>CloudKit Sharing</h3>
+                    <p>Share owner-created workspaces with collaborators through iCloud while keeping workspace data private by default.</p>
                 </div>
             </div>
-            <h2>Upcoming Features</h2>
+            <h2>Planning Capabilities</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h3>Event Creation & Volunteer Sign-Up</h3>
-                    <p>Create feeding events and allow volunteers to sign up directly through the app.</p>
+                    <h3>Region & Layer Mapping</h3>
+                    <p>Model service areas with workspace-owned regions, vertical layers, and mapped location geometry.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>In-App Communication Channel</h3>
-                    <p>Built-in communication tools for seamless community coordination.</p>
+                    <h3>Route Preparation</h3>
+                    <p>Plan route order, connect stops to reusable locations, and keep field work tied to the project map.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Requirement Tracking & Resource Distribution</h3>
-                    <p>Track what items are needed and manage distribution efficiently.</p>
+                    <h3>Supply Tracking</h3>
+                    <p>Assign reusable items to project teams and record distributions at each route stop.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Comprehensive Data Management</h3>
-                    <p>Powerful tools integrated with map for managing data efficiently.</p>
+                    <h3>Project History</h3>
+                    <p>Preserve completed or archived project records without changing reusable workspace resources.</p>
                 </div>
             </div>
             <h2>Technology & Frameworks</h2>
@@ -240,17 +240,18 @@
                 
                 <div class="feature-card">
                     <h3>MapKit</h3>
-                    <p>Powerful map integration with custom markers, location tracking, and route planning for field operations.</p>
+                    <p>Native map integration for workspace regions, layers, locations, and route planning.</p>
                 </div>
                 
                 <div class="feature-card">
                     <h3>SwiftData</h3>
-                    <p>Efficient local data persistence for deployments, locations, and groups—works offline, syncs when ready.</p>
+                    <p>Efficient local app persistence for workspace lists, navigation state, and planning preferences.</p>
                 </div>
                 
                 <div class="feature-card">
                     <h3>CloudKit</h3>
-                    <p>Data sync across devices with iCloud integration, enabling seamless team collaboration.</p>
+                    <p>Private and shared iCloud databases for owner-created workspaces and collaborator access.</p>
+                </div>
             </div>
         </section>
         
@@ -285,12 +286,12 @@
         </section>
         
         <section id="development">
-            <h2>Contribute to Development</h2>
-            <p>We welcome community contributions to make LinkMap better!</p>
+            <h2>Development Feedback</h2>
+            <p>Use TestFlight or GitHub Issues to report map workflow bugs, file format problems, and feature requests.</p>
             <ul>
-                <li>Try out our TestFlight Beta for latest features!</li>
-                <li>Feel free to write any feedbacks via TestFlight!</li>
-                <li>Suggest new features for future versions!</li>
+                <li>Try the TestFlight beta for the latest map planning updates.</li>
+                <li>Report reproducible issues with device, iOS version, and steps to reproduce.</li>
+                <li>Suggest improvements that make location planning, marker editing, or project files easier to use.</li>
             </ul>
         </section>
     </div>

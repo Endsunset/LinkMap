@@ -1,20 +1,19 @@
 # LinkMap
 
-A multi-functional application for homeless feeding activity organization.
+LinkMap is an iOS app for planning homeless feeding activity with private map workspaces.
 
-**Visit the offical [website](https://endsunset.github.io/LinkMap/) for more details**
+Use LinkMap to organize service areas, reusable locations, supply items, project routes, assignments, and distribution records. Workspace data is stored with iCloud and can be shared with collaborators through CloudKit sharing when needed.
 
-## Get Involved
+**Visit the official [website](https://endsunset.github.io/LinkMap/) for more details.**
 
-LinkMap is an community project, and we’d love your help making it better for everyone organizing homeless feeding activities.
+## Current Release
 
-### Report a Bug
-Found something broken? Let us know by [opening an bug issue](https://github.com/Endsunset/LinkMap/issues) — include as much detail as you can (device, iOS version, steps to reproduce).
+- Private workspace maps for regions, layers, and locations
+- Project planning with routes, route stops, assignments, supplies, and distributions
+- Reusable workspace locations and item records
+- iCloud storage and CloudKit sharing for collaborator access
+- App Store release and TestFlight beta availability
 
-### Suggest a Feature
-Have an idea to improve LinkMap? We’re all ears! [Create a feature request issue](https://github.com/Endsunset/LinkMap/issues) and describe what you’d like to see.
+## Feedback
 
-### Join the Conversation
-Stay updated and connect with other users and contributors:
-- **GitHub Issues** – for bugs and feature ideas
-- **GitHub Discussions** – for communications
+Use [GitHub Issues](https://github.com/Endsunset/LinkMap/issues) to report bugs or request improvements. Please include device model, iOS version, app version, and steps to reproduce when reporting a problem.
