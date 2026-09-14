@@ -34,12 +34,32 @@ No build step or package manager is required for the current site.
 
 ### CloudKit setup
 
-1. Create or select the web-enabled CloudKit container in CloudKit Console.
-2. Update `containerIdentifier` and `environment` in `app.js`.
-3. Add the deployed GitHub Pages origin to the CloudKit web service configuration.
-4. Test sign-in from the deployed HTTPS site. CloudKit JS does not work from an unconfigured local origin.
+The website uses CloudKit JS authentication with the native app's container,
+`iCloud.name.Endsunset.LinkMap`. Apple's SDK renders the sign-in/sign-out controls,
+restores its persisted session on page load, and notifies the page when the user
+signs in or out. Account names are displayed only when Apple provides them.
+Signing in does not yet expose project editing on the web.
 
-The checked-in identifier is a placeholder so the page does not accidentally connect to a real container before configuration.
+1. In [CloudKit Console](https://icloud.developer.apple.com/), select
+   `iCloud.name.Endsunset.LinkMap` and create a **web API token** under API Access.
+2. Restrict Allowed Origins to `https://endsunset.github.io` (no `/LinkMap/` path).
+   Add a local preview origin separately if needed. Leave the custom sign-in
+   callback unset so CloudKit JS can manage its standard sign-in window.
+3. Paste the browser token into `apiToken` in `cloudkit-config.js`. The checked-in
+   environment is `production`, matching the released app; use `development`
+   only for development data and accounts.
+4. Commit and push the configuration, then test at
+   `https://endsunset.github.io/LinkMap/`. Allow Apple's sign-in window if your
+   browser blocks it.
+
+The browser API token is public configuration and is delivered to every visitor.
+Never add an Apple password, private key, server-to-server key, or user session
+token to these files. CloudKit JS manages user credentials and session cookies.
+Until a web API token is supplied, the site clearly reports sign-in as unavailable.
+SDK/network failures show a retry action without claiming the user is signed in.
+
+Implementation follows Apple's [authentication reference](https://developer.apple.com/documentation/cloudkitjs/cloudkit.container/setupauth)
+and [CloudKit Catalog](https://cdn.apple-cloudkit.com/cloudkit-catalog/).
 
 ### Local preview
 

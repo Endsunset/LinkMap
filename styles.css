@@ -85,3 +85,10 @@ h1 em { color: var(--coral); font-style: normal; }
 @media (max-width: 760px) {
   .site-header { padding-top: 22px; }.nav-links { display: none; }.hero { display: block; margin-top: 8vh; }.hero-copy { margin-bottom: 55px; }.map-art { height: 105vw; min-height: 360px; }.section-heading { align-items: start; display: block; }.section-heading h2 { margin-top: 28px; }.principles { display: block; }.principle { margin-bottom: 38px; padding-top: 16px; }.principle h3 { margin-top: 22px; }.about-band { padding: 75px 8vw; }.site-footer { align-items: start; flex-direction: column; gap: 16px; }
 }
+[hidden] { display: none !important; }
+.auth-panel { border-top: 1px solid var(--line); margin-top: 28px; padding-top: 16px; scroll-margin-top: 24px; }
+.auth-panel .status-message { color: var(--muted); font-size: .9rem; margin: 0 0 12px; }
+.auth-panel > strong { display: block; margin-bottom: 8px; overflow-wrap: anywhere; }
+.auth-controls { min-height: 44px; }
+.auth-panel[data-state="loading"] { opacity: .7; }
+:focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; }
