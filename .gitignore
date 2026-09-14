@@ -1,0 +1,16 @@
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# Xcode and Swift local state
+**/xcuserdata/
+**/UserInterfaceState.xcuserstate
+
+# Local development data stores
+*.dstore
+**/*.dstore
+
+# Editor and dependency output
+.vscode/
+node_modules/
+dist/
