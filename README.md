@@ -1,80 +1,88 @@
-# LinkMap
+# Contributing to LinkMap Web
 
-LinkMap is an iOS app for planning homeless feeding activity with private map workspaces.
+This repository contains LinkMap’s public website and browser authentication flow,
+served by GitHub Pages at [endsunset.github.io/LinkMap](https://endsunset.github.io/LinkMap/).
+For product information, see the website. The native iOS app and CloudKit data model
+live in [LinkMap-core](https://github.com/Endsunset/LinkMap-core).
 
-Use LinkMap to organize service areas, reusable locations, supply items, project routes, assignments, and distribution records. Workspace data is stored with iCloud and can be shared with collaborators through CloudKit sharing when needed.
+## Working locally
 
-**Visit the official [website](https://endsunset.github.io/LinkMap/) for more details.**
-
-## Current Release
-
-- Private workspace maps for regions, layers, and locations
-- Project planning with routes, route stops, assignments, supplies, and distributions
-- Reusable workspace locations and item records
-- iCloud storage and CloudKit sharing for collaborator access
-- App Store release and TestFlight beta availability
-
-## Feedback
-
-Use [GitHub Issues](https://github.com/Endsunset/LinkMap/issues) to report bugs or request improvements. Please include device model, iOS version, app version, and steps to reproduce when reporting a problem.
-
-## Web development
-
-The static web home for LinkMap. LinkMap helps teams organize shared projects, map operating areas, manage places and resources, and plan activity cycles such as routes, assignments, supplies, and distributions.
-
-This repository is intentionally separate from the native [LinkMap app](https://github.com/Endsunset/LinkMap-core). The web home is a public entry point for the product; the app remains the primary project workspace while the web experience is developed.
-
-### Stack
-
-- Plain HTML, CSS, and JavaScript
-- CloudKit JS for Apple sign-in and future web data workflows
-- GitHub Pages for static hosting
-
-No build step or package manager is required for the current site.
-
-### CloudKit setup
-
-The website uses CloudKit JS authentication with the native app's container,
-`iCloud.name.Endsunset.LinkMap`. Apple's SDK renders the sign-in/sign-out controls,
-restores its persisted session on page load, and notifies the page when the user
-signs in or out. Account names are displayed only when Apple provides them.
-Signing in does not yet expose project editing on the web.
-
-1. In [CloudKit Console](https://icloud.developer.apple.com/), select
-   `iCloud.name.Endsunset.LinkMap` and create a **web API token** under API Access.
-2. Restrict Allowed Origins to `https://endsunset.github.io` (no `/LinkMap/` path).
-   Add a local preview origin separately if needed. Leave the custom sign-in
-   callback unset so CloudKit JS can manage its standard sign-in window.
-3. Paste the browser token into `apiToken` in `cloudkit-config.js`. The checked-in
-   environment is `production`, matching the released app; use `development`
-   only for development data and accounts.
-4. Commit and push the configuration, then test at
-   `https://endsunset.github.io/LinkMap/`. Allow Apple's sign-in window if your
-   browser blocks it.
-
-The browser API token is public configuration and is delivered to every visitor.
-Never add an Apple password, private key, server-to-server key, or user session
-token to these files. CloudKit JS manages user credentials and session cookies.
-Until a web API token is supplied, the site clearly reports sign-in as unavailable.
-SDK/network failures show a retry action without claiming the user is signed in.
-
-Implementation follows Apple's [authentication reference](https://developer.apple.com/documentation/cloudkitjs/cloudkit.container/setupauth)
-and [CloudKit Catalog](https://cdn.apple-cloudkit.com/cloudkit-catalog/).
-
-### Local preview
-
-Serve the repository over HTTP from its root, for example:
+Clone this repository and serve its root over HTTP:
 
 ```sh
+git clone https://github.com/Endsunset/LinkMap.git
+cd LinkMap
 python3 -m http.server 8000
 ```
 
-Then open `http://localhost:8000`.
+Open `http://localhost:8000`. The site uses plain HTML, CSS, and JavaScript;
+there is no package installation, compilation, or generated output directory.
 
-### GitHub Pages
+## Repository map
 
-In the repository settings, enable Pages from the branch and root directory containing `index.html`. The site has no generated output directory.
+| File | Responsibility |
+| --- | --- |
+| `index.html` | User-facing product content, navigation, and account controls |
+| `styles.css` | Shared styles and responsive layouts |
+| `app.js` | CloudKit authentication, session state, and error recovery |
+| `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
+| `privacy-policy.md` | Published privacy policy |
 
-### Related project
+Apple’s CloudKit JS SDK provides the sign-in and sign-out buttons and manages the
+persisted session. The web app currently supports authentication; project viewing
+and editing remain in the native app. Keep website copy accurate about this boundary.
 
-The native app and its CloudKit data model live in [LinkMap-core](https://github.com/Endsunset/LinkMap-core).
+## Making a contribution
+
+1. Check existing [issues](https://github.com/Endsunset/LinkMap/issues), or open one
+   describing the problem. Discuss larger changes before implementation.
+2. Create a branch from `main` and make a focused change. Keep unrelated formatting
+   and refactoring out of the patch.
+3. Preview your changes and complete the relevant checks below.
+4. Open a pull request against `main`. Explain the problem, the resulting behavior,
+   and how you verified it. Include desktop and mobile screenshots for visible changes
+   and link any related issue.
+
+Useful contributions include clearer product explanations, accessibility improvements,
+responsive layout fixes, and authentication reliability. Native features and data
+model changes belong in LinkMap-core; coordinate changes that affect both repositories.
+
+## Implementation conventions
+
+- Keep the site build-free unless a proposed feature justifies changing the stack.
+- Use semantic HTML, descriptive link labels, visible keyboard focus, and accessible
+  status messages. Preserve the existing visual style across screen sizes.
+- Use relative asset paths and links: the deployed site lives under `/LinkMap/`.
+- Keep user-facing copy focused on what people can do and how their data is handled.
+- Render account information as text and let Apple’s SDK handle authentication.
+  Do not store user credentials or session tokens in application code.
+- Use the existing CloudKit integration. Content and layout contributions do not
+  require a new container or token. Coordinate configuration changes with the maintainer;
+  never commit private keys or account credentials.
+
+## Verification
+
+For content and layout changes, check navigation, local asset loading, keyboard access,
+and narrow and wide layouts. Run `git diff --check` before submitting.
+
+For JavaScript changes, run `node --check app.js` and
+`node --check cloudkit-config.js` if Node.js is available. Authentication changes
+should cover signed-out startup, restored sessions, sign-in, sign-out, repeated
+transitions, and SDK or network failures. Confirm account information clears on sign-out.
+
+Local origins may not be authorized for live CloudKit authentication. A local sign-in
+failure alone does not indicate a UI regression. Coordinate live authentication checks
+with the maintainer on an authorized origin, and state any unverified behavior in the PR.
+
+## Publishing
+
+GitHub Pages serves the repository root from `main`. Changes merged into `main`
+update the public site after the Pages deployment completes. Review product claims,
+links, and authentication behavior before merging; there is no separate build artifact
+to publish.
+
+## Reporting a bug
+
+Use [GitHub Issues](https://github.com/Endsunset/LinkMap/issues). Include the page URL,
+browser and device, steps to reproduce, expected behavior, and actual behavior.
+Remove personal account details and session tokens from screenshots or logs.

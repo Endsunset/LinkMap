@@ -92,3 +92,8 @@ h1 em { color: var(--coral); font-style: normal; }
 .auth-controls { min-height: 44px; }
 .auth-panel[data-state="loading"] { opacity: .7; }
 :focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; }
+
+.storage-section .principle p { max-width: 340px; }
+.storage-details { border-top: 1px solid var(--line); color: var(--muted); margin-top: 44px; max-width: 800px; padding-top: 20px; }
+.storage-details p { margin: 0 0 16px; }
+.storage-details a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
