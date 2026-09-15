@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Sign in to LinkMap, manage your iCloud session, and check the CloudKit connection.">
-  <title>Login &amp; Account | LinkMap</title>
+  <title>Account | LinkMap</title>
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="account.css">
   <script src="https://cdn.apple-cloudkit.com/ck/2/cloudkit.js" async></script>
@@ -15,14 +15,14 @@
   <header class="site-header"><a class="brand" href="../">LinkMap</a><a href="../docs/">Documentation</a></header>
   <main class="account-page">
     <p class="eyebrow">Your LinkMap account</p>
-    <h1>Login &amp; account</h1>
-    <p>Sign in with your Apple Account. Apple handles your credentials and iCloud session.</p>
+    <h1>Account</h1>
+    <p>Manage your Apple Account session and check the CloudKit connection.</p>
     <section class="account-card" aria-labelledby="login-title" data-auth aria-busy="true">
       <h2 id="login-title">Apple Account</h2>
       <strong data-account hidden></strong>
       <p role="status" aria-live="polite" data-status>Checking your sign-in status…</p>
       <div class="auth-controls" data-auth-controls hidden>
-        <div id="apple-sign-in-button"></div>
+        <a class="button button-small button-outline" href="../#sign-in" data-sign-in-link hidden>Sign in on the homepage</a>
         <div id="apple-sign-out-button"></div>
       </div>
       <button class="button button-small button-outline" type="button" data-auth-retry hidden>Retry sign-in check</button>

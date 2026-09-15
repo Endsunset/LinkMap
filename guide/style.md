@@ -75,5 +75,7 @@ uses an animated grid column to push the article; mobile never shifts it.
 Use 240ms transitions and disable them for reduced-motion preferences. Without JavaScript, keep the links available
 and group disclosures functional through native `details` elements.
 
-The homepage uses a standard Sign in link to `login/`. Keep Apple’s SDK buttons,
-authentication state, account controls, and connection checks on the login page.
+The homepage Sign in action opens a white modal dialog with Apple’s SDK sign-in
+button. Keep a visible Close control, native Escape and focus handling, and backdrop
+dismissal. A successful session closes the dialog and changes the header to Account.
+Use `account/` for account information, connection status, and the SDK sign-out button.

@@ -24,7 +24,7 @@ there is no package installation, compilation, or generated output directory.
 | --- | --- |
 | `index.html` | User-facing product content, navigation, and account controls |
 | `styles.css` | Shared styles and responsive layouts |
-| `login/account.js` | CloudKit authentication, session state, and error recovery |
+| `account/account.js` | CloudKit authentication, session state, and error recovery |
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
 | `privacy-policy.md` | Privacy policy source; rendered to `privacy-policy/index.html` |
 | `docs/` | Documentation home, individual user guides, and their content snapshot |
@@ -67,7 +67,7 @@ model changes belong in LinkMap-core; coordinate changes that affect both reposi
 For content and layout changes, check navigation, local asset loading, keyboard access,
 and narrow and wide layouts. Run `git diff --check` before submitting.
 
-For JavaScript changes, run `node --check login/account.js` and
+For JavaScript changes, run `node --check account/account.js` and
 `node --check cloudkit-config.js` if Node.js is available. Authentication changes
 should cover signed-out startup, restored sessions, sign-in, sign-out, repeated
 transitions, and SDK or network failures. Confirm account information clears on sign-out.
@@ -117,17 +117,18 @@ Follow [the style guide](guide/style.md) for colors, typography, component accen
 and accessibility. Shared CSS applies the white-surface and red-accent theme across
 the homepage, user guides, and privacy policy.
 
-## Login and account page
+## Authentication and account
 
-`login/` owns CloudKit authentication and account status. The homepage links there and uses `home-session.js` to check the saved CloudKit
-session without rendering Apple controls. Confirmed sessions show Account in the
-header and hide the hero sign-in action; returning to the page refreshes the check. The page restores the SDK session,
-handles sign-in/sign-out, and independently checks the public database with
-`publicCloudDatabase.fetchAllRecordZones()`. This read-only probe does not fetch
-project records or verify access to private/shared data. Rejections, response errors,
-and timeouts are shown as unconfirmed access rather than successful connectivity.
+The homepage owns a native dialog for Apple sign-in. `home-session.js` manages
+opening, closing, and the homepage account links; `account/account.js` owns the
+shared CloudKit session lifecycle. Successful sign-in closes the dialog and updates
+the header to Account. The hero sign-in action is hidden for a confirmed session.
 
-The current browser API token uses the CloudKit Console **postMessage** sign-in
-callback. CloudKit JS owns the popup message handling; `setUpAuth()` and
-`whenUserSignsIn()` supply the account state. Do not add a custom redirect page or
-mark a user signed in based on an arbitrary window message.
+`account/` displays account status, Apple’s sign-out control, and the read-only public
+database probe. Signed-out users return to `../#sign-in` to open the homepage dialog.
+There is no `login/` route. Both pages use the same persisted SDK session and refresh
+it when restored from browser history. Public connectivity is separate from login
+and does not verify private/shared project access.
+
+The browser token uses CloudKit’s postMessage callback. The SDK owns popup messages;
+application code observes SDK-verified identity rather than window messages.

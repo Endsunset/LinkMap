@@ -19,6 +19,7 @@
   }
 
   async function checkPublicDatabase() {
+    if (!publicStatus || !publicRetry) return;
     const currentCheck = ++publicAttempt;
     publicRetry.disabled = true;
     publicStatus.textContent = 'Checking the public database…';
@@ -43,6 +44,9 @@
     controls.hidden = state !== "signed-in" && state !== "signed-out";
     retry.hidden = state !== "error";
     account.hidden = state !== "signed-in";
+    const signInLink = document.querySelector('[data-sign-in-link]');
+    if (signInLink) signInLink.hidden = state !== 'signed-out';
+    window.dispatchEvent(new CustomEvent('linkmap-auth', { detail: { state } }));
     const name = identity?.nameComponents;
     account.textContent = state === "signed-in"
       ? [name?.givenName, name?.familyName].filter(Boolean).join(" ") || "Your iCloud account"
@@ -89,7 +93,7 @@
     if (!config?.apiToken?.trim() || !config.containerIdentifier?.startsWith("iCloud.") ||
         !["development", "production"].includes(config.environment)) {
       render("unavailable", "Web sign-in is not available yet. You can continue using LinkMap in the iOS app.");
-      publicStatus.textContent = 'Connection check unavailable: web sign-in is not configured.';
+      if (publicStatus) publicStatus.textContent = 'Connection check unavailable: web sign-in is not configured.';
       return;
     }
 
@@ -116,12 +120,12 @@
     } catch {
       if (currentAttempt === attempt) {
         showError();
-        if (!container) publicStatus.textContent = 'Connection check unavailable: CloudKit could not start.';
+        if (!container && publicStatus) publicStatus.textContent = 'Connection check unavailable: CloudKit could not start.';
       }
     }
   }
 
-  publicRetry.addEventListener('click', checkPublicDatabase);
+  publicRetry?.addEventListener('click', checkPublicDatabase);
   retry.addEventListener("click", () => {
     if (!window.CloudKit) {
       window.location.reload();
@@ -129,5 +133,6 @@
     }
     initializeAuth();
   });
+  window.addEventListener('pageshow', event => { if (event.persisted) initializeAuth(); });
   initializeAuth();
 })();
