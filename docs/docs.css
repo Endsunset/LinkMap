@@ -37,3 +37,5 @@ body { font-family: system-ui, sans-serif; }
   .docs-navigation { width: 100%; border-top: 1px solid var(--line); padding-top: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.policy-main { margin: 40px auto 80px; padding: 0 5vw; max-width: 920px; }
+.policy-main h2 { margin-top: 36px; }

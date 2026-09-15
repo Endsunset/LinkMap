@@ -26,7 +26,7 @@ there is no package installation, compilation, or generated output directory.
 | `styles.css` | Shared styles and responsive layouts |
 | `app.js` | CloudKit authentication, session state, and error recovery |
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
-| `privacy-policy.md` | Published privacy policy |
+| `privacy-policy.md` | Privacy policy source; rendered to `privacy-policy/index.html` |
 | `docs/` | Documentation home, individual user guides, and their content snapshot |
 | `scripts/build-docs.py` | Optional renderer for updating documentation HTML |
 
@@ -103,3 +103,10 @@ to LinkMap-core. Keep instructions clear that they describe the iOS app.
 
 GitHub Pages serves the checked-in HTML directly. Documentation works without
 JavaScript and adds no deployment build step.
+
+## Internal page URLs
+
+Follow `AGENTS.md`: page hyperlinks use directory URLs such as `docs/`,
+`docs/project/`, and `privacy-policy/`, backed by `index.html` files. Asset URLs
+keep their extensions. Update the rendering scripts alongside generated pages.
+Run `python3 scripts/build-privacy.py` after editing the policy source.
