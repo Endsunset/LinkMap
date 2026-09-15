@@ -119,8 +119,9 @@ the homepage, user guides, and privacy policy.
 
 ## Login and account page
 
-`login/` owns CloudKit authentication and account status. The homepage links there
-without loading CloudKit or account scripts. The page restores the SDK session,
+`login/` owns CloudKit authentication and account status. The homepage links there and uses `home-session.js` to check the saved CloudKit
+session without rendering Apple controls. Confirmed sessions show Account in the
+header and hide the hero sign-in action; returning to the page refreshes the check. The page restores the SDK session,
 handles sign-in/sign-out, and independently checks the public database with
 `publicCloudDatabase.fetchAllRecordZones()`. This read-only probe does not fetch
 project records or verify access to private/shared data. Rejections, response errors,
