@@ -26,3 +26,8 @@ Commit generated pages with their source changes. No deployment build is require
 
 Treat `/Library/Developer/Projects/LinkMap-core` as read-only when referencing native
 app code or documentation. Make web changes in this repository only.
+
+## Visual style
+
+Follow `guide/style.md` for all web UI changes. Use white backgrounds throughout
+and red accents for emphasis, actions, and trailing badge or active-state edges.

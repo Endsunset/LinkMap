@@ -110,3 +110,9 @@ Follow `AGENTS.md`: page hyperlinks use directory URLs such as `docs/`,
 `docs/project/`, and `privacy-policy/`, backed by `index.html` files. Asset URLs
 keep their extensions. Update the rendering scripts alongside generated pages.
 Run `python3 scripts/build-privacy.py` after editing the policy source.
+
+## Visual style
+
+Follow [the style guide](guide/style.md) for colors, typography, component accents,
+and accessibility. Shared CSS applies the white-surface and red-accent theme across
+the homepage, user guides, and privacy policy.
