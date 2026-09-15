@@ -125,3 +125,8 @@ handles sign-in/sign-out, and independently checks the public database with
 `publicCloudDatabase.fetchAllRecordZones()`. This read-only probe does not fetch
 project records or verify access to private/shared data. Rejections, response errors,
 and timeouts are shown as unconfirmed access rather than successful connectivity.
+
+The current browser API token uses the CloudKit Console **postMessage** sign-in
+callback. CloudKit JS owns the popup message handling; `setUpAuth()` and
+`whenUserSignsIn()` supply the account state. Do not add a custom redirect page or
+mark a user signed in based on an arbitrary window message.
