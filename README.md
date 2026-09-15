@@ -24,7 +24,7 @@ there is no package installation, compilation, or generated output directory.
 | --- | --- |
 | `index.html` | User-facing product content, navigation, and account controls |
 | `styles.css` | Shared styles and responsive layouts |
-| `app.js` | CloudKit authentication, session state, and error recovery |
+| `login/account.js` | CloudKit authentication, session state, and error recovery |
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
 | `privacy-policy.md` | Privacy policy source; rendered to `privacy-policy/index.html` |
 | `docs/` | Documentation home, individual user guides, and their content snapshot |
@@ -67,7 +67,7 @@ model changes belong in LinkMap-core; coordinate changes that affect both reposi
 For content and layout changes, check navigation, local asset loading, keyboard access,
 and narrow and wide layouts. Run `git diff --check` before submitting.
 
-For JavaScript changes, run `node --check app.js` and
+For JavaScript changes, run `node --check login/account.js` and
 `node --check cloudkit-config.js` if Node.js is available. Authentication changes
 should cover signed-out startup, restored sessions, sign-in, sign-out, repeated
 transitions, and SDK or network failures. Confirm account information clears on sign-out.
@@ -116,3 +116,12 @@ Run `python3 scripts/build-privacy.py` after editing the policy source.
 Follow [the style guide](guide/style.md) for colors, typography, component accents,
 and accessibility. Shared CSS applies the white-surface and red-accent theme across
 the homepage, user guides, and privacy policy.
+
+## Login and account page
+
+`login/` owns CloudKit authentication and account status. The homepage links there
+without loading CloudKit or account scripts. The page restores the SDK session,
+handles sign-in/sign-out, and independently checks the public database with
+`publicCloudDatabase.fetchAllRecordZones()`. This read-only probe does not fetch
+project records or verify access to private/shared data. Rejections, response errors,
+and timeouts are shown as unconfirmed access rather than successful connectivity.

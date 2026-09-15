@@ -6,7 +6,34 @@
   const account = document.querySelector("[data-account]");
   const controls = document.querySelector("[data-auth-controls]");
   const retry = document.querySelector("[data-auth-retry]");
+  const publicStatus = document.querySelector('[data-public-status]');
+  const publicRetry = document.querySelector('[data-public-retry]');
+  let publicAttempt = 0;
   let container;
+
+  function withTimeout(promise) {
+    let timer;
+    return Promise.race([promise, new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error('Connection timed out')), 15000);
+    })]).finally(() => clearTimeout(timer));
+  }
+
+  async function checkPublicDatabase() {
+    const currentCheck = ++publicAttempt;
+    publicRetry.disabled = true;
+    publicStatus.textContent = 'Checking the public database…';
+    try {
+      const response = await withTimeout(container.publicCloudDatabase.fetchAllRecordZones());
+      if (currentCheck !== publicAttempt) return;
+      if (!response || response.hasErrors || response.errors?.length) throw new Error('CloudKit rejected the check');
+      publicStatus.textContent = 'Connected: the public CloudKit database responded successfully.';
+    } catch {
+      if (currentCheck !== publicAttempt) return;
+      publicStatus.textContent = 'Could not confirm public database access. The connection or this operation may be unavailable. This does not determine your sign-in status.';
+    } finally {
+      if (currentCheck === publicAttempt) publicRetry.disabled = false;
+    }
+  }
   let attempt = 0;
 
   function render(state, message, identity) {
@@ -26,8 +53,9 @@
     render("error", "We couldn’t connect to iCloud. Check your connection and try again. If this continues, please contact us using the Feedback link.");
   }
 
-  function updateSession(identity, currentAttempt) {
+  function updateSession(identity, currentAttempt, checkConnection = true) {
     if (currentAttempt !== attempt) return;
+    if (checkConnection) checkPublicDatabase();
     render(identity ? "signed-in" : "signed-out", identity
       ? "You’re signed in to iCloud. Use the LinkMap app to work with your projects; web project tools are still in development."
       : "Sign in with your Apple Account to connect to LinkMap.", identity);
@@ -61,6 +89,7 @@
     if (!config?.apiToken?.trim() || !config.containerIdentifier?.startsWith("iCloud.") ||
         !["development", "production"].includes(config.environment)) {
       render("unavailable", "Web sign-in is not available yet. You can continue using LinkMap in the iOS app.");
+      publicStatus.textContent = 'Connection check unavailable: web sign-in is not configured.';
       return;
     }
 
@@ -82,12 +111,17 @@
         });
         container = window.CloudKit.getDefaultContainer();
       }
-      updateSession(await container.setUpAuth(), currentAttempt);
+      checkPublicDatabase();
+      updateSession(await withTimeout(container.setUpAuth()), currentAttempt, false);
     } catch {
-      if (currentAttempt === attempt) showError();
+      if (currentAttempt === attempt) {
+        showError();
+        if (!container) publicStatus.textContent = 'Connection check unavailable: CloudKit could not start.';
+      }
     }
   }
 
+  publicRetry.addEventListener('click', checkPublicDatabase);
   retry.addEventListener("click", () => {
     if (!window.CloudKit) {
       window.location.reload();

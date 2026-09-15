@@ -75,5 +75,5 @@ uses an animated grid column to push the article; mobile never shifts it.
 Use 240ms transitions and disable them for reduced-motion preferences. Without JavaScript, keep the links available
 and group disclosures functional through native `details` elements.
 
-Use the actual CloudKit SDK sign-in/sign-out control in the homepage header. Do not
-add custom sign-in buttons that only scroll to another control.
+The homepage uses a standard Sign in link to `login/`. Keep Apple’s SDK buttons,
+authentication state, account controls, and connection checks on the login page.
