@@ -26,7 +26,8 @@
         <a href="#about">About</a>
         <a href="docs/">Documentation</a>
       </nav>
-      <a class="button button-small button-outline" href="account/" data-account-link>Sign in</a>
+      <button class="button button-small button-outline" type="button" data-header-sign-in aria-haspopup="dialog" aria-controls="sign-in">Sign in</button>
+      <a class="button button-small button-outline" href="account/" data-account-link hidden>Account</a>
     </header>
 
     <dialog class="login-dialog" id="sign-in" aria-labelledby="sign-in-title">
@@ -49,7 +50,7 @@
           <h1 id="hero-title">Put every part of the work <em>on the map.</em></h1>
           <p class="hero-description">Plan service areas, locations, routes, and supplies in one shared map. LinkMap helps teams coordinate field activities, including community food distributions, with projects stored in iCloud.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#sign-in" data-home-sign-in>Sign in</a>
+            <button class="button button-primary" type="button" data-home-sign-in aria-haspopup="dialog" aria-controls="sign-in">Sign in</button>
             <a class="text-link" href="#approach">See how it works <span aria-hidden="true">&#8595;</span></a>
           </div>
         </div>

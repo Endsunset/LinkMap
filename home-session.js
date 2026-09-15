@@ -1,23 +1,19 @@
 (() => {
   "use strict";
   const accountLink = document.querySelector('[data-account-link]');
+  const headerSignIn = document.querySelector('[data-header-sign-in]');
   const signIn = document.querySelector('[data-home-sign-in]');
   const dialog = document.querySelector('#sign-in');
   const announcement = document.querySelector('[data-home-auth-status]');
   let signedIn = false;
 
   function openLogin() {
-    if (signedIn) {
-      window.location.assign(accountLink.href);
-      return;
-    }
+    if (signedIn) return;
     if (!dialog.open) dialog.showModal();
   }
 
-  accountLink.addEventListener('click', event => {
-    if (!signedIn) { event.preventDefault(); openLogin(); }
-  });
-  signIn.addEventListener('click', event => { event.preventDefault(); openLogin(); });
+  headerSignIn.addEventListener('click', openLogin);
+  signIn.addEventListener('click', openLogin);
   dialog.addEventListener('click', event => {
     if (event.target !== dialog) return;
     const rect = dialog.getBoundingClientRect();
@@ -34,7 +30,8 @@
     const state = event.detail.state;
     if (state === 'loading') return;
     signedIn = state === 'signed-in';
-    accountLink.textContent = signedIn ? 'Account' : 'Sign in';
+    accountLink.hidden = !signedIn;
+    headerSignIn.hidden = signedIn;
     signIn.hidden = signedIn;
     if (signedIn) {
       const wasOpen = dialog.open;
