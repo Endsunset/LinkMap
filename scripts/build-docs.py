@@ -37,7 +37,10 @@ def shell(title, description, content, active='index'):
     <a href="https://apps.apple.com/us/app/linkmap/id6745166200">Get the app</a>
   </header>
   <div class="docs-layout">
-    <nav class="docs-navigation" aria-label="Documentation">{navigation}</nav>
+    <details class="docs-sidebar" open>
+      <summary class="docs-sidebar-toggle"><span class="sidebar-expanded">Hide guides</span><span class="sidebar-collapsed">Show guides</span></summary>
+      <nav class="docs-navigation" aria-label="Documentation">{navigation}</nav>
+    </details>
     <main id="main" class="docs-main" tabindex="-1">{content}</main>
   </div>
   <footer class="site-footer"><a href="{site_prefix}">LinkMap home</a><a href="{site_prefix}privacy-policy/">Privacy policy</a></footer>

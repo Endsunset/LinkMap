@@ -57,3 +57,12 @@ Apply these rules to the homepage, guides, privacy policy, and future web pages.
 Update shared styles instead of adding conflicting page-specific color values.
 Follow `AGENTS.md` for clean folder links. Documentation renderers keep using the
 shared stylesheets, so regeneration must preserve this theme.
+
+## Documentation sidebar
+
+Place guide links in a left sidebar on wide screens. Use a native `details` and
+`summary` control labeled “Hide guides” / “Show guides” so navigation can collapse
+with a mouse, touch, or keyboard without JavaScript. Keep the toggle visible when
+collapsed and give the reading column the released space. On narrow screens, place
+the collapsible navigation above the article. Keep the white background, red
+trailing accent, and current-page indicator.
