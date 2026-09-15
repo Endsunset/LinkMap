@@ -69,5 +69,11 @@ Keep the sidebar icon toggle in the header even when the pane is hidden. Collaps
 it releases the full column for reading. Expose the toggle state through
 `aria-expanded` and `aria-controls`, and support Escape from inside the pane.
 Remember the visibility choice for the browsing session. On narrow screens, start
-collapsed and open above the article. Without JavaScript, keep the links available
+collapsed and slide over the article from the left, with a dismissible backdrop.
+Keep background content inert and contain keyboard focus while open. Desktop
+uses an animated grid column to push the article; mobile never shifts it.
+Use 240ms transitions and disable them for reduced-motion preferences. Without JavaScript, keep the links available
 and group disclosures functional through native `details` elements.
+
+Use the actual CloudKit SDK sign-in/sign-out control in the homepage header. Do not
+add custom sign-in buttons that only scroll to another control.

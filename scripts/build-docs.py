@@ -40,6 +40,7 @@ def shell(title, description, content, active='index'):
     <a href="{docs_prefix}">Documentation</a>
     <a href="https://apps.apple.com/us/app/linkmap/id6745166200">Get the app</a>
   </header>
+  <button class="docs-backdrop" type="button" aria-label="Close documentation sidebar" tabindex="-1" aria-hidden="true"></button>
   <div class="docs-layout">
     <aside class="docs-sidebar" id="docs-sidebar" aria-label="Guide navigator">
       <div class="docs-sidebar-heading">LinkMap documentation</div>

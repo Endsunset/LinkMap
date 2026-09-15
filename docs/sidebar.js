@@ -8,12 +8,18 @@
   const links = [...sidebar.querySelectorAll('nav a')];
   const status = sidebar.querySelector('.docs-filter-status');
   const smallScreen = window.matchMedia('(max-width: 700px)');
+  const backdrop = document.querySelector('.docs-backdrop');
+  const background = [...document.querySelectorAll('.docs-main, .site-footer, .docs-header a, .skip-link')];
+  let isOpen = true;
   let saved;
   try { saved = sessionStorage.getItem('linkmap-docs-sidebar'); } catch {}
 
   function setOpen(open, remember = false) {
     if (!open && sidebar.contains(document.activeElement)) button.focus();
-    sidebar.hidden = !open;
+    isOpen = open;
+    sidebar.inert = !open;
+    sidebar.setAttribute('aria-hidden', String(!open));
+    background.forEach(element => { element.inert = open && smallScreen.matches; });
     document.body.classList.toggle('sidebar-collapsed', !open);
     button.setAttribute('aria-expanded', String(open));
     button.setAttribute('aria-label', `${open ? 'Hide' : 'Show'} documentation sidebar`);
@@ -26,13 +32,26 @@
 
   button.hidden = false;
   sidebar.querySelector('.docs-filter').hidden = false;
-  setOpen(saved ? saved === 'open' : !smallScreen.matches);
-  button.addEventListener('click', () => setOpen(sidebar.hidden, true));
-  sidebar.addEventListener('keydown', event => {
+  document.body.classList.add('sidebar-ready');
+  setOpen(!smallScreen.matches && saved !== 'closed');
+  button.addEventListener('click', () => {
+    setOpen(!isOpen, true);
+    if (isOpen && smallScreen.matches) filter.focus();
+  });
+  backdrop.addEventListener('click', () => { setOpen(false, true); button.focus(); });
+  document.addEventListener('keydown', event => {
+    if (!isOpen) return;
     if (event.key === 'Escape') { setOpen(false, true); button.focus(); }
+    if (event.key === 'Tab' && smallScreen.matches) {
+      const targets = [button, ...sidebar.querySelectorAll('input, summary, a[href]')]
+        .filter(element => element.getClientRects().length && !element.closest('[hidden]'));
+      const first = targets[0], last = targets[targets.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
   });
   smallScreen.addEventListener('change', () => {
-    if (!saved) setOpen(!smallScreen.matches);
+    setOpen(!smallScreen.matches && saved !== 'closed');
   });
 
   let previousGroups;

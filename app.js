@@ -6,7 +6,6 @@
   const account = document.querySelector("[data-account]");
   const controls = document.querySelector("[data-auth-controls]");
   const retry = document.querySelector("[data-auth-retry]");
-  const accountLink = document.querySelector("[data-account-link]");
   let container;
   let attempt = 0;
 
@@ -21,7 +20,6 @@
     account.textContent = state === "signed-in"
       ? [name?.givenName, name?.familyName].filter(Boolean).join(" ") || "Your iCloud account"
       : "";
-    accountLink.textContent = state === "signed-in" ? "Account" : "Sign in";
   }
 
   function showError() {
