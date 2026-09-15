@@ -27,6 +27,8 @@ there is no package installation, compilation, or generated output directory.
 | `app.js` | CloudKit authentication, session state, and error recovery |
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
 | `privacy-policy.md` | Published privacy policy |
+| `docs/` | Documentation home, individual user guides, and their content snapshot |
+| `scripts/build-docs.py` | Optional renderer for updating documentation HTML |
 
 Apple’s CloudKit JS SDK provides the sign-in and sign-out buttons and manages the
 persisted session. The web app currently supports authentication; project viewing
@@ -86,3 +88,18 @@ to publish.
 Use [GitHub Issues](https://github.com/Endsunset/LinkMap/issues). Include the page URL,
 browser and device, steps to reproduce, expected behavior, and actual behavior.
 Remove personal account details and session tokens from screenshots or logs.
+
+## Updating the user guides
+
+The `docs/` section mirrors the 12 guides in the native app’s Settings → Documentation
+section. Its initial content was copied from `Documentation/Contents/Documentation*Content.swift`
+in LinkMap-core. The original app repository is not modified by this website.
+
+Edit `docs/content.json`, then run `python3 scripts/build-docs.py` and commit the
+updated HTML alongside the content. Each entry records its original source filename
+and SHA-256 checksum for comparison with future native documentation changes.
+The renderer reads only the snapshot in this repository; it does not require or write
+to LinkMap-core. Keep instructions clear that they describe the iOS app.
+
+GitHub Pages serves the checked-in HTML directly. Documentation works without
+JavaScript and adds no deployment build step.

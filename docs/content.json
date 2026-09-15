@@ -1,0 +1,557 @@
+[
+  {
+    "slug": "how-linkmap-works",
+    "group": "Start here",
+    "title": "How LinkMap Works",
+    "summary": "LinkMap is organized around a simple idea: build a shared Project once, then use it to plan and record many rounds of work.",
+    "source": "DocumentationArticleContent.swift",
+    "source_sha256": "8f22b5deb755f2ba3c121a0e0933988cde6cac5059c010b6aa4fa9005db17982",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open Settings, then Documentation. Start with this article when you want the big picture before choosing a specific Project workflow.",
+        "points": []
+      },
+      {
+        "title": "The Main Loop",
+        "body": "A Project is the place where the work lives. The Project holds the map, the reusable resources, and every Activity created from them. Start by shaping the Project, then create an Activity whenever there is a specific work cycle to prepare, run, review, and archive.",
+        "points": []
+      },
+      {
+        "title": "What Comes First",
+        "body": null,
+        "points": [
+          "Create a Project for the real place, operation, event, site, or service area you want to manage.",
+          "Build the Project map with Regions, Layers, and Locations so the team has a shared view of where work happens.",
+          "Add Items for reusable resources such as supplies, equipment, materials, or packages.",
+          "Create an Activity only when you are ready to plan a specific round of work.",
+          "Inside the Activity, create Routes, Stops, Assignments, and Supplies to turn the Project setup into a plan.",
+          "During the Activity, use the Map and dashboard to log what happened, then review reports before archiving."
+        ]
+      },
+      {
+        "title": "Why Projects and Activities Are Separate",
+        "body": "Project setup should last longer than one day of work. A Location or Item may be useful across many Activities, while a Route, Assignment, Supply list, or Distribution usually belongs to one Activity. Keeping these parts separate lets each new Activity reuse the same map and resources without rewriting the Project from scratch.",
+        "points": []
+      },
+      {
+        "title": "A Practical Way to Think About It",
+        "body": null,
+        "points": [
+          "Project answers: where are we working, what places matter, and what resources exist?",
+          "Activity answers: what are we doing this time, who is doing it, where do they go, and what should they carry?",
+          "Logging answers: what actually happened, at which stop, and with which items?",
+          "Reports answer: what should be shared or reviewed after the work is done?"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "basic-workflow",
+    "group": "Start here",
+    "title": "Basic Workflow Example",
+    "summary": "This example follows one Project from setup through a completed Activity.",
+    "source": "DocumentationExampleContent.swift",
+    "source_sha256": "195dd1c739066bdd5349cc5e3f839d7be6f678c2a6e45e9346e36ef23e50c3db",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open Settings, then Documentation, then Basic Workflow Example. Use this page as a first walkthrough before setting up a real Project.",
+        "points": []
+      },
+      {
+        "title": "1. Create the Project",
+        "body": "Create a Project for the site or operation. For example, a campus supply run, an event venue, a neighborhood service area, or a field response zone. Once the Project opens, the Map tab becomes available for that Project.",
+        "points": []
+      },
+      {
+        "title": "2. Build the Map",
+        "body": null,
+        "points": [
+          "Create Regions for broad areas, such as North Wing, Main Hall, Block A, or Service Zone 3.",
+          "Create Layers when the same Region has levels or surfaces, such as Floor 1, Floor 2, Basement, Roof, or Indoor Map.",
+          "Add Locations for entrances, rooms, supply points, delivery points, checkpoints, stations, or other places the team needs to visit.",
+          "Assign each Location to the correct Region and Layer so the map selector can filter the view cleanly."
+        ]
+      },
+      {
+        "title": "3. Add Items",
+        "body": "Add reusable Items before activity planning. If your team repeatedly works with water, kits, medicine, tools, printed materials, or equipment, create each one as an Item once. Later, Activities can use those Items as planned Supplies or logged Distributions.",
+        "points": []
+      },
+      {
+        "title": "4. Plan the Activity",
+        "body": null,
+        "points": [
+          "Create an Activity for the specific work cycle, such as Morning Delivery, Day 1 Setup, Inspection Round, or Emergency Response.",
+          "Create Routes by choosing Project Locations and arranging the Stops in the order the team should visit them.",
+          "Create Assignments for people, teams, crews, or vehicles.",
+          "Add Supplies to each Assignment so the plan includes what each group should carry or prepare.",
+          "Link Routes to Assignments when each group should follow a particular route."
+        ]
+      },
+      {
+        "title": "5. Run and Review",
+        "body": null,
+        "points": [
+          "Open the Map while the Project is active and select the Activity you are running.",
+          "Use the Assignment picker when you want to focus on one team's route and locations.",
+          "Open the Activity Dashboard near the relevant Stop and log Distributions as work is completed.",
+          "Review the Assignment report after the Activity to summarize routes, supplies, and completed work.",
+          "Archive the Activity when it should become historical and no longer edited as active work."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "project",
+    "group": "Project",
+    "title": "Project",
+    "summary": "A Project is the top-level workspace. It contains the map, Items, Activities, collaboration, and work history.",
+    "source": "DocumentationProjectContent.swift",
+    "source_sha256": "ed3380af3fa6eec82609c2fa09acd6c0acd93b1c98fef2730e059d1d546cb3af",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open the Home tab to create, browse, or reopen Projects. After you open a Project detail page, the first tab is labeled Project, and the Map tab follows that Project.",
+        "points": []
+      },
+      {
+        "title": "What a Project Is For",
+        "body": "Use a Project for one real-world place or operation that needs repeated planning. A Project can be private to you or shared with collaborators. It is the common base that keeps the map, resources, and Activity history together.",
+        "points": []
+      },
+      {
+        "title": "What Goes Inside",
+        "body": null,
+        "points": [
+          "Map: the Regions, Layers, and Locations that describe where work happens.",
+          "Items: reusable resources that may be carried, delivered, used, or counted.",
+          "Activities: individual work cycles that use the Project map and Items.",
+          "Reports and history: completed Activity information that remains available for review.",
+          "Sharing: collaboration access for people working from the same Project."
+        ]
+      },
+      {
+        "title": "How Project Navigation Works",
+        "body": null,
+        "points": [
+          "The Home tab shows your available Projects and recent Project access, then becomes the Project tab while a Project is open.",
+          "Opening a Project shows its detail page and makes the Map tab follow that Project.",
+          "Project detail is the starting place for Activities and Items.",
+          "Map-building tools are available from the Map tab while the Project is open."
+        ]
+      },
+      {
+        "title": "Good Project Setup",
+        "body": "A useful Project usually starts with a clear name, a few Regions or Layers if the place is complex, the Locations the team will actually visit, and the Items the team will repeatedly plan or log. You can add more structure later as the Project becomes clearer.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "slug": "map",
+    "group": "Map",
+    "title": "Map",
+    "summary": "The Project map is where LinkMap connects places, routes, selections, and activity logging.",
+    "source": "DocumentationMapContent.swift",
+    "source_sha256": "7b0fb41d1dca3180d756509a83a470963d31df10da4a6c60a8ec0f63dac91524",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open a Project, then switch to the Map tab. Project map tools are available from the map toolbar while the Project is active.",
+        "points": []
+      },
+      {
+        "title": "When the Map Appears",
+        "body": "The Map tab is tied to the Project you currently have open. When no Project is open, Settings is shown instead. This keeps the map focused on one Project at a time.",
+        "points": []
+      },
+      {
+        "title": "What the Map Shows",
+        "body": null,
+        "points": [
+          "Project Locations as markers or areas.",
+          "Region and Layer context for filtering the visible map content.",
+          "Selected Activity routes and stops.",
+          "Selected Assignment route focus when an Assignment is chosen.",
+          "Search results when you look for an external place."
+        ]
+      },
+      {
+        "title": "Activity and Assignment Pickers",
+        "body": "The Activity picker chooses which Activity's Routes, Stops, and logging context should appear. The Assignment picker narrows the view to one team or work group, making it easier to follow that Assignment's route and locations during active work.",
+        "points": []
+      },
+      {
+        "title": "Common Map Actions",
+        "body": null,
+        "points": [
+          "Tap a Location marker to center it and open its actions.",
+          "Open Location detail when you need names, layer membership, photos, or other details.",
+          "Use edit mode to create a Location, move a Location, or edit Location areas.",
+          "Use Project map tools to manage Regions, Layers, Location membership, and map style.",
+          "Open the Activity Dashboard from the map when you need to log work near a Stop."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "regions-and-layers",
+    "group": "Map",
+    "title": "Regions and Layers",
+    "summary": "Regions and Layers make large or vertical maps understandable before you add Activity plans.",
+    "source": "DocumentationRegionsAndLayersContent.swift",
+    "source_sha256": "c31ab64d2002d84087e88160f3bc3a715b724b7d3b67eea71cdc4a1ccd2453a8",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open a Project, switch to the Map tab, then use the Project map tools to open Region and Layer management.",
+        "points": []
+      },
+      {
+        "title": "Regions",
+        "body": "A Region is a broad area inside a Project map. Use Regions for buildings, zones, neighborhoods, halls, departments, service areas, or any large division that helps people understand where Locations belong.",
+        "points": []
+      },
+      {
+        "title": "Layers",
+        "body": "A Layer is a level or surface inside a Region. Layers are useful when one area has multiple floors, stacked routes, indoor sections, or alternate map surfaces. Layer level 0 is reserved for the display-only Map row, so normal Layers should use other levels.",
+        "points": []
+      },
+      {
+        "title": "How They Work Together",
+        "body": null,
+        "points": [
+          "Create a Region first when an area needs its own group of Layers or Locations.",
+          "Create Layers inside a Region when the same area needs multiple levels or surfaces.",
+          "Assign Locations to the matching Region and Layer so the map selector can focus the view.",
+          "Use Layer areas when a Layer should be shown as a polygon on the map.",
+          "Use layer ordering when the list of levels needs to match the real map structure."
+        ]
+      },
+      {
+        "title": "Editing Areas",
+        "body": "Layer area editing happens from the Map. You add vertices by tapping the map or reference vertices, remove target vertices when needed, and save when the shape is correct. Cancel restores the previous saved shape.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "slug": "locations",
+    "group": "Map",
+    "title": "Locations",
+    "summary": "Locations are reusable places on the Project map. Activities use them later as route stops and logging points.",
+    "source": "DocumentationLocationsContent.swift",
+    "source_sha256": "c3d21a5a06243f0c63af59904e7b78e8d753b3c43a793c5acb05199c4e6998cb",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open a Project, then use the Map tab or Project Location list. Location detail can also open from a Location marker on the Map.",
+        "points": []
+      },
+      {
+        "title": "What Counts as a Location",
+        "body": "A Location can be a room, checkpoint, entrance, address, station, storage area, pickup point, delivery point, or any place the team needs to see on the map. Locations belong to the Project, so the same Location can be reused by many Activities.",
+        "points": []
+      },
+      {
+        "title": "Ways to Add Locations",
+        "body": null,
+        "points": [
+          "Create a Location from the Project Location list.",
+          "Create a Location directly on the Map by entering map edit mode and tapping its position.",
+          "Upload local annotation data when prepared location data already exists outside LinkMap.",
+          "Add existing Project Locations to a Layer without creating duplicate places."
+        ]
+      },
+      {
+        "title": "Editing Locations",
+        "body": null,
+        "points": [
+          "Move a Location from the Map when its coordinate needs correction.",
+          "Edit a Location area when a place covers a polygon rather than a single point.",
+          "Set Region and Layer membership so map filtering stays accurate.",
+          "Detach a Location from a Layer when it should remain in the Project but no longer appear on that Layer.",
+          "Use photos where available to keep visual context with the place."
+        ]
+      },
+      {
+        "title": "How Activities Use Locations",
+        "body": "Routes are built from Project Locations. Each Location chosen for a Route becomes an ordered Stop for that Activity. When work is logged at a Stop, the Location gives the dashboard and report the place context.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "slug": "items",
+    "group": "Project",
+    "title": "Items",
+    "summary": "Items are the reusable resources a Project plans with and records during work.",
+    "source": "DocumentationItemsContent.swift",
+    "source_sha256": "3495d4298f76a0e4bacc08038346a8036df32612ed25bfc571e9446bfc93e4bf",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open a Project detail page, then open Items. Items are managed at the Project level before they are used by Activities.",
+        "points": []
+      },
+      {
+        "title": "What Items Are For",
+        "body": "Create Items for things the team needs to count, carry, deliver, use, or prepare. Examples include water, kits, food boxes, medicine, tools, radios, printed materials, replacement parts, or inspection equipment.",
+        "points": []
+      },
+      {
+        "title": "Items Stay at the Project Level",
+        "body": "Items belong to the Project because they are meant to be reused. One Item can appear in many Activities without being recreated. This keeps planning consistent across different work cycles.",
+        "points": []
+      },
+      {
+        "title": "How Items Become Supplies",
+        "body": null,
+        "points": [
+          "Open an Activity and create Assignments for the people or teams doing the work.",
+          "Add Supplies to an Assignment by choosing from the Project's Items.",
+          "Set the quantity for each Supply so the Assignment has a clear preparation plan."
+        ]
+      },
+      {
+        "title": "How Items Become Distributions",
+        "body": null,
+        "points": [
+          "During active work, open the Activity Dashboard from the Map.",
+          "Choose the relevant Stop context.",
+          "Log a Distribution when an Item is delivered, used, or completed there.",
+          "Reports can then compare planned Supplies with completed work."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "activities",
+    "group": "Activities",
+    "title": "Activities",
+    "summary": "An Activity is one planned cycle of work inside a Project.",
+    "source": "DocumentationActivitiesContent.swift",
+    "source_sha256": "a4ea81ec71f9a5e7f5df6621a2564275055e5f0a38de3c4ddbafcd572004ce59",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open a Project detail page, then open Activities. Activity detail is where Routes, Assignments, Supplies, reports, and archive status come together.",
+        "points": []
+      },
+      {
+        "title": "When to Create an Activity",
+        "body": "Create an Activity when the Project is ready for a specific round of work: a delivery run, inspection, deployment, setup session, response shift, maintenance round, or any other bounded task cycle.",
+        "points": []
+      },
+      {
+        "title": "What an Activity Contains",
+        "body": null,
+        "points": [
+          "Routes that describe where work should happen and in what order.",
+          "Stops created from Project Locations.",
+          "Assignments for people, teams, crews, vehicles, or work groups.",
+          "Supplies that describe what each Assignment should carry or prepare.",
+          "Logging and reports that capture what happened while the Activity was running."
+        ]
+      },
+      {
+        "title": "Using Previous Work",
+        "body": "When a new Activity is similar to an older one, you can use the previous structure as a starting point where the app offers that flow. This is useful for repeated routes, recurring assignments, or daily work that changes only slightly.",
+        "points": []
+      },
+      {
+        "title": "Active and Archived",
+        "body": null,
+        "points": [
+          "Active Activities are still part of planning or execution.",
+          "Archived Activities are historical and kept for review.",
+          "Once an Activity is archived, activity-owned edits are no longer part of the normal workflow.",
+          "Archive after reports and logged results no longer need active changes."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "routes-and-stops",
+    "group": "Activities",
+    "title": "Routes and Stops",
+    "summary": "Routes turn Project Locations into an ordered plan. Stops are the individual places in that order.",
+    "source": "DocumentationRoutesAndStopsContent.swift",
+    "source_sha256": "f0e982842d451c4db93cc7dd6e96b2461dac61a16cd99bdcf8f3f0eb341e6a0a",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open a Project, open Activities, choose an Activity, then open Routes. Stops are created and ordered as part of the Route workflow.",
+        "points": []
+      },
+      {
+        "title": "Building a Route",
+        "body": null,
+        "points": [
+          "Open an Activity, then create a Route from the Activity's route area.",
+          "Choose Locations from the Project map data.",
+          "Order the selected Locations in the sequence the team should follow.",
+          "Save the Route so its ordered Stops become available for map display and logging."
+        ]
+      },
+      {
+        "title": "Stops",
+        "body": "A Stop is one ordered destination in a Route. Stops are created from Locations, but they belong to the Activity's plan. This means the same Project Location can be reused in different Activities or different Routes without changing the original Location.",
+        "points": []
+      },
+      {
+        "title": "Routes on the Map",
+        "body": null,
+        "points": [
+          "Selecting an Activity shows its route context on the Project map.",
+          "Selecting an Assignment can focus the map on routes linked to that Assignment.",
+          "Selecting a Stop gives the dashboard the right place to log work.",
+          "Route line geometry is shown for planning and navigation context while the saved plan remains based on ordered Stops."
+        ]
+      },
+      {
+        "title": "Good Route Planning",
+        "body": "Build Routes after Locations are reasonably organized. Clear Location names, Region membership, and Layer membership make it much easier to choose the right stops and avoid sending a team to the wrong place.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "slug": "assignments-and-supplies",
+    "group": "Activities",
+    "title": "Assignments and Supplies",
+    "summary": "Assignments define who does the work. Supplies define what they plan to carry, use, or deliver.",
+    "source": "DocumentationAssignmentsAndSuppliesContent.swift",
+    "source_sha256": "5502c6cc9596f1d0de594f84aea472bcea5ba46212190139018451fbf0197a30",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open a Project, open Activities, choose an Activity, then open Assignments or Supplies. Assignment reports open from Assignment detail.",
+        "points": []
+      },
+      {
+        "title": "Assignments",
+        "body": "Use Assignments for people, teams, crews, vehicles, stations, or work groups. An Assignment gives the Activity a clear owner for part of the plan. It can be linked to Routes and can have Supplies attached to it.",
+        "points": []
+      },
+      {
+        "title": "Linking Routes",
+        "body": null,
+        "points": [
+          "Create the Route that describes where the work should happen.",
+          "Create or open the Assignment responsible for that route.",
+          "Link the Route to the Assignment when the route belongs to that person or team.",
+          "Use the Assignment picker on the Map to focus on that Assignment's route and locations."
+        ]
+      },
+      {
+        "title": "Supplies",
+        "body": "Supplies are planned quantities of Project Items for an Assignment. If an Item is the reusable resource, a Supply is the amount one Assignment plans to carry, prepare, or use during this Activity.",
+        "points": []
+      },
+      {
+        "title": "Reports",
+        "body": null,
+        "points": [
+          "Assignment reports use the Assignment's routes, supplies, and logged work as source material.",
+          "Preview reports before sharing them outside the app.",
+          "Edit report text when a generated report needs clearer final wording.",
+          "Report Style settings control generated report language separately from the app's interface language."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "logging-and-reports",
+    "group": "Activities",
+    "title": "Logging and Reports",
+    "summary": "Logging captures what happened during an Activity. Reports turn the plan and results into reviewable text.",
+    "source": "DocumentationLoggingAndReportsContent.swift",
+    "source_sha256": "9b9b08e90f09a0044646d39a2bef5bf2c19753d1928907321eb53aea946c55cf",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open a Project, switch to the Map tab, select an Activity, then open the Activity Dashboard. Reports open from Assignment detail.",
+        "points": []
+      },
+      {
+        "title": "Before Logging",
+        "body": "Logging works best after the Activity has Routes, Stops, Assignments, and Supplies. The dashboard uses that plan to understand which place and work context should receive the completed result.",
+        "points": []
+      },
+      {
+        "title": "Using the Activity Dashboard",
+        "body": null,
+        "points": [
+          "Open the Project map and select the Activity you are running.",
+          "Choose an Assignment when you want to focus on one team or work group.",
+          "Open the dashboard from the Map toolbar near the Stop where work is happening.",
+          "Use the Stop picker when you need to switch the logging context.",
+          "Leave the dashboard with Done when the current logging pass is finished."
+        ]
+      },
+      {
+        "title": "Distributions",
+        "body": "A Distribution records the quantity of an Item completed at a Stop. Depending on the Project, that might mean delivered, installed, used, checked, handed out, collected, or otherwise completed.",
+        "points": []
+      },
+      {
+        "title": "Reports After Work",
+        "body": null,
+        "points": [
+          "Open an Assignment report to review planned routes, supplies, and logged results.",
+          "Copy a report preview when the summary needs to be pasted into another app.",
+          "Edit the generated report when human wording matters.",
+          "Archive the Activity after the work and reports are complete enough to preserve as history."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "sharing",
+    "group": "Collaboration",
+    "title": "Sharing",
+    "summary": "Sharing lets other people open and work from the same Project.",
+    "source": "DocumentationSharingContent.swift",
+    "source_sha256": "31878495bc8128a3adda482c1c4cabb4f02d468f4d4f32af1eef8bddcc75c4fb",
+    "sections": [
+      {
+        "title": "Where to Find It",
+        "body": "Open a Project detail page, then use the Project toolbar menu for collaboration links, QR codes, and sharing controls.",
+        "points": []
+      },
+      {
+        "title": "When to Share",
+        "body": "Share a Project when collaborators need the same map, Items, Activities, Routes, Assignments, Supplies, and logged results. Sharing is Project-based, so collaborators join the whole Project rather than only one Activity.",
+        "points": []
+      },
+      {
+        "title": "Invite Methods",
+        "body": null,
+        "points": [
+          "Start collaboration from the Project tools.",
+          "Use a LinkMap collaboration link when the invite should be sent through another app.",
+          "Use the QR code when collaborators are nearby and can scan from their device.",
+          "After accepting, collaborators see the shared Project in their Project list."
+        ]
+      },
+      {
+        "title": "Working Together",
+        "body": null,
+        "points": [
+          "Keep Project setup clear before a busy Activity so everyone sees the same map structure.",
+          "Use Activity and Assignment names that collaborators can recognize quickly.",
+          "Refresh lists when expecting newly shared or recently changed Project data.",
+          "Use reports when the team needs a readable summary outside the live map."
+        ]
+      },
+      {
+        "title": "Ending Collaboration",
+        "body": "When collaboration ends, shared access is removed. Collaborators stop seeing the Project after their Project list refreshes.",
+        "points": []
+      }
+    ]
+  }
+]
