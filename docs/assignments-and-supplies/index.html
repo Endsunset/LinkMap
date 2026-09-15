@@ -7,19 +7,28 @@
   <title>Assignments and Supplies | LinkMap Documentation</title>
   <link rel="stylesheet" href="../../styles.css">
   <link rel="stylesheet" href="../docs.css">
+  <script src="../sidebar.js" defer></script>
 </head>
-<body>
+<body class="docs-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header docs-header">
+    <button class="docs-sidebar-button" type="button" aria-label="Hide documentation sidebar" aria-controls="docs-sidebar" aria-expanded="true" hidden>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 3v14M4 7h1M4 10h1M4 13h1" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
     <a class="brand" href="../../">LinkMap</a>
     <a href="../">Documentation</a>
     <a href="https://apps.apple.com/us/app/linkmap/id6745166200">Get the app</a>
   </header>
   <div class="docs-layout">
-    <details class="docs-sidebar" open>
-      <summary class="docs-sidebar-toggle"><span class="sidebar-expanded">Hide guides</span><span class="sidebar-collapsed">Show guides</span></summary>
-      <nav class="docs-navigation" aria-label="Documentation"><a href="../">Documentation home</a><h2>Start here</h2><ul><li><a href="../how-linkmap-works/">How LinkMap Works</a></li><li><a href="../basic-workflow/">Basic Workflow Example</a></li></ul><h2>Project</h2><ul><li><a href="../project/">Project</a></li><li><a href="../items/">Items</a></li></ul><h2>Map</h2><ul><li><a href="../map/">Map</a></li><li><a href="../regions-and-layers/">Regions and Layers</a></li><li><a href="../locations/">Locations</a></li></ul><h2>Activities</h2><ul><li><a href="../activities/">Activities</a></li><li><a href="../routes-and-stops/">Routes and Stops</a></li><li><a href="../assignments-and-supplies/" aria-current="page">Assignments and Supplies</a></li><li><a href="../logging-and-reports/">Logging and Reports</a></li></ul><h2>Collaboration</h2><ul><li><a href="../sharing/">Sharing</a></li></ul></nav>
-    </details>
+    <aside class="docs-sidebar" id="docs-sidebar" aria-label="Guide navigator">
+      <div class="docs-sidebar-heading">LinkMap documentation</div>
+      <div class="docs-filter" hidden>
+        <label for="guide-filter">Filter guides</label>
+        <input id="guide-filter" type="search" placeholder="Filter guides" autocomplete="off" aria-controls="guide-navigation">
+        <p class="docs-filter-status" role="status" hidden></p>
+      </div>
+      <nav class="docs-navigation" id="guide-navigation" aria-label="Documentation"><a href="../">Documentation home</a><details class="docs-nav-group" open><summary>Start here</summary><ul><li><a href="../how-linkmap-works/">How LinkMap Works</a></li><li><a href="../basic-workflow/">Basic Workflow Example</a></li></ul></details><details class="docs-nav-group" open><summary>Project</summary><ul><li><a href="../project/">Project</a></li><li><a href="../items/">Items</a></li></ul></details><details class="docs-nav-group" open><summary>Map</summary><ul><li><a href="../map/">Map</a></li><li><a href="../regions-and-layers/">Regions and Layers</a></li><li><a href="../locations/">Locations</a></li></ul></details><details class="docs-nav-group" open><summary>Activities</summary><ul><li><a href="../activities/">Activities</a></li><li><a href="../routes-and-stops/">Routes and Stops</a></li><li><a href="../assignments-and-supplies/" aria-current="page">Assignments and Supplies</a></li><li><a href="../logging-and-reports/">Logging and Reports</a></li></ul></details><details class="docs-nav-group" open><summary>Collaboration</summary><ul><li><a href="../sharing/">Sharing</a></li></ul></details></nav>
+    </aside>
     <main id="main" class="docs-main" tabindex="-1"><p class="docs-breadcrumb"><a href="../">Documentation</a> / Activities</p><h1>Assignments and Supplies</h1><p class="docs-intro">Assignments define who does the work. Supplies define what they plan to carry, use, or deliver.</p><p class="docs-note">This guide describes the LinkMap iOS app.</p><nav class="docs-toc" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#section-1">Where to Find It</a></li><li><a href="#section-2">Assignments</a></li><li><a href="#section-3">Linking Routes</a></li><li><a href="#section-4">Supplies</a></li><li><a href="#section-5">Reports</a></li></ul></nav><article><section id="section-1"><h2>Where to Find It</h2><p>Open a Project, open Activities, choose an Activity, then open Assignments or Supplies. Assignment reports open from Assignment detail.</p></section><section id="section-2"><h2>Assignments</h2><p>Use Assignments for people, teams, crews, vehicles, stations, or work groups. An Assignment gives the Activity a clear owner for part of the plan. It can be linked to Routes and can have Supplies attached to it.</p></section><section id="section-3"><h2>Linking Routes</h2><ul><li>Create the Route that describes where the work should happen.</li><li>Create or open the Assignment responsible for that route.</li><li>Link the Route to the Assignment when the route belongs to that person or team.</li><li>Use the Assignment picker on the Map to focus on that Assignment&#x27;s route and locations.</li></ul></section><section id="section-4"><h2>Supplies</h2><p>Supplies are planned quantities of Project Items for an Assignment. If an Item is the reusable resource, a Supply is the amount one Assignment plans to carry, prepare, or use during this Activity.</p></section><section id="section-5"><h2>Reports</h2><ul><li>Assignment reports use the Assignment&#x27;s routes, supplies, and logged work as source material.</li><li>Preview reports before sharing them outside the app.</li><li>Edit report text when a generated report needs clearer final wording.</li><li>Report Style settings control generated report language separately from the app&#x27;s interface language.</li></ul></section></article><nav class="docs-pagination" aria-label="Guide navigation"><a href="../routes-and-stops/">Previous: Routes and Stops</a><a href="../logging-and-reports/">Next: Logging and Reports</a></nav></main>
   </div>
   <footer class="site-footer"><a href="../../">LinkMap home</a><a href="../../privacy-policy/">Privacy policy</a></footer>

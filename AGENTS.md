@@ -31,3 +31,11 @@ app code or documentation. Make web changes in this repository only.
 
 Follow `guide/style.md` for all web UI changes. Use white backgrounds throughout
 and red accents for emphasis, actions, and trailing badge or active-state edges.
+
+## Commit and push
+
+Unless the user explicitly specifies otherwise, commit and push completed changes
+after the relevant verification passes. Stage only files belonging to the requested
+work, use a descriptive commit message, and push to the current branch's configured
+remote. Do not include unrelated local changes or force-push. Report the commit and
+push result when finished.

@@ -13,12 +13,12 @@ def shell(title, description, content, active='index'):
     site_prefix = '../' if active == 'index' else '../../'
     navigation = f'<a href="{docs_prefix}"' + (' aria-current="page"' if active == 'index' else '') + '>Documentation home</a>'
     for group in dict.fromkeys(p['group'] for p in pages):
-        navigation += f'<h2>{e(group)}</h2><ul>'
+        navigation += f'<details class="docs-nav-group" open><summary>{e(group)}</summary><ul>'
         for page in pages:
             if page['group'] == group:
                 current = ' aria-current="page"' if active == page['slug'] else ''
                 navigation += f'<li><a href="{docs_prefix}{page["slug"]}/"{current}>{e(page["title"])}</a></li>'
-        navigation += '</ul>'
+        navigation += '</ul></details>'
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -28,19 +28,28 @@ def shell(title, description, content, active='index'):
   <title>{e(title)} | LinkMap Documentation</title>
   <link rel="stylesheet" href="{site_prefix}styles.css">
   <link rel="stylesheet" href="{docs_prefix}docs.css">
+  <script src="{docs_prefix}sidebar.js" defer></script>
 </head>
-<body>
+<body class="docs-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header docs-header">
+    <button class="docs-sidebar-button" type="button" aria-label="Hide documentation sidebar" aria-controls="docs-sidebar" aria-expanded="true" hidden>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 3v14M4 7h1M4 10h1M4 13h1" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
     <a class="brand" href="{site_prefix}">LinkMap</a>
     <a href="{docs_prefix}">Documentation</a>
     <a href="https://apps.apple.com/us/app/linkmap/id6745166200">Get the app</a>
   </header>
   <div class="docs-layout">
-    <details class="docs-sidebar" open>
-      <summary class="docs-sidebar-toggle"><span class="sidebar-expanded">Hide guides</span><span class="sidebar-collapsed">Show guides</span></summary>
-      <nav class="docs-navigation" aria-label="Documentation">{navigation}</nav>
-    </details>
+    <aside class="docs-sidebar" id="docs-sidebar" aria-label="Guide navigator">
+      <div class="docs-sidebar-heading">LinkMap documentation</div>
+      <div class="docs-filter" hidden>
+        <label for="guide-filter">Filter guides</label>
+        <input id="guide-filter" type="search" placeholder="Filter guides" autocomplete="off" aria-controls="guide-navigation">
+        <p class="docs-filter-status" role="status" hidden></p>
+      </div>
+      <nav class="docs-navigation" id="guide-navigation" aria-label="Documentation">{navigation}</nav>
+    </aside>
     <main id="main" class="docs-main" tabindex="-1">{content}</main>
   </div>
   <footer class="site-footer"><a href="{site_prefix}">LinkMap home</a><a href="{site_prefix}privacy-policy/">Privacy policy</a></footer>

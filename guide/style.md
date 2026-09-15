@@ -60,9 +60,14 @@ shared stylesheets, so regeneration must preserve this theme.
 
 ## Documentation sidebar
 
-Place guide links in a left sidebar on wide screens. Use a native `details` and
-`summary` control labeled “Hide guides” / “Show guides” so navigation can collapse
-with a mouse, touch, or keyboard without JavaScript. Keep the toggle visible when
-collapsed and give the reading column the released space. On narrow screens, place
-the collapsible navigation above the article. Keep the white background, red
-trailing accent, and current-page indicator.
+Use a dedicated left navigation pane below the documentation header on desktop,
+with independent scrolling, a thin vertical divider, and compact indented links.
+Group topics in expandable sections. Highlight the current guide with red text
+and a trailing red edge. Include a labeled filter with result feedback.
+
+Keep the sidebar icon toggle in the header even when the pane is hidden. Collapsing
+it releases the full column for reading. Expose the toggle state through
+`aria-expanded` and `aria-controls`, and support Escape from inside the pane.
+Remember the visibility choice for the browsing session. On narrow screens, start
+collapsed and open above the article. Without JavaScript, keep the links available
+and group disclosures functional through native `details` elements.
