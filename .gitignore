@@ -14,3 +14,6 @@
 .vscode/
 node_modules/
 dist/
+
+# Python renderer cache
+__pycache__/

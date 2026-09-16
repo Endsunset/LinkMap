@@ -3,6 +3,10 @@ body { font-family: system-ui, sans-serif; }
 .docs-header > a { font-size: 1rem; }
 .docs-page .docs-header { position: sticky; top: 0; z-index: 5; height: 64px; max-width: none; padding: 0 24px; background: var(--surface); flex-wrap: nowrap; gap: 18px; }
 .docs-page .docs-header .brand { margin-right: auto; }
+.docs-header .nav-links { gap: 18px; margin: 0; }
+@media (max-width: 900px) {
+  .docs-header .nav-links { display: none; }
+}
 .docs-sidebar-button { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 36px; height: 36px; padding: 0; color: var(--accent); border: 1px solid var(--line); border-radius: 5px; background: var(--surface); cursor: pointer; }
 .docs-layout { --sidebar-width: 280px; display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); transition: grid-template-columns 240ms ease; min-height: calc(100dvh - 64px); }
 .docs-sidebar { width: var(--sidebar-width); box-sizing: border-box; transition: transform 240ms ease, visibility 240ms; position: sticky; top: 64px; height: calc(100dvh - 64px); overflow-y: auto; min-width: 0; border-right: 1px solid var(--line); padding: 24px 16px; background: var(--surface); }

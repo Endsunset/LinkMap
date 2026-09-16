@@ -2,6 +2,7 @@
 from pathlib import Path
 import html
 import re
+from site_header import render_header
 
 root = Path(__file__).resolve().parents[1]
 
@@ -38,7 +39,7 @@ output.mkdir(exist_ok=True)
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header docs-header"><a class="brand" href="../">LinkMap</a><a href="../docs/">Documentation</a></header>
+''' + render_header('../') + '''
   <main id="main" class="docs-main policy-main" tabindex="-1">
 ''' + '\n'.join(blocks) + '''
   </main>

@@ -23,6 +23,9 @@ there is no package installation, compilation, or generated output directory.
 | File | Responsibility |
 | --- | --- |
 | `index.html` | User-facing product content, navigation, and account controls |
+| `components/header.html` | Shared header template for all pages |
+| `scripts/site_header.py` | Header renderer used by page generators |
+| `header.js` | Shared header authentication state |
 | `styles.css` | Shared styles and responsive layouts |
 | `account/account.js` | CloudKit authentication, session state, and error recovery |
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
@@ -120,7 +123,7 @@ the homepage, user guides, and privacy policy.
 ## Authentication and account
 
 The homepage owns a native dialog for Apple sign-in. `home-session.js` manages
-opening, closing, and the homepage account links; `account/account.js` owns the
+opening and closing the dialog; `header.js` updates the shared account links; `account/account.js` owns the
 shared CloudKit session lifecycle. Successful sign-in closes the dialog and updates
 the header to Account. The hero sign-in action is hidden for a confirmed session.
 
@@ -132,3 +135,14 @@ and does not verify private/shared project access.
 
 The browser token uses CloudKit’s postMessage callback. The SDK owns popup messages;
 application code observes SDK-verified identity rather than window messages.
+
+## Updating the shared header
+
+Edit `components/header.html` and run `python3 scripts/build-headers.py` to refresh
+all checked-in pages. Commit the template and generated HTML together. The docs and
+privacy renderers also use `scripts/site_header.py`, so regenerating either section
+preserves the shared header. Navigation is rendered as HTML and works without
+JavaScript; nested pages use relative links back to the homepage sections and sign-in
+dialog. The docs header includes its sidebar toggle. `header.js` reacts to verified
+CloudKit session events on the homepage and account page; other pages link to the
+homepage for sign-in without loading the authentication SDK.

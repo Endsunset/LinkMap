@@ -12,7 +12,24 @@
   <script src="account.js" defer></script>
 </head>
 <body>
-  <header class="site-header"><a class="brand" href="../">LinkMap</a><a href="../docs/">Documentation</a></header>
+  <!-- Shared header: edit components/header.html, then run scripts/build-headers.py -->
+<header class="site-header">
+
+  <a class="brand" href="../" aria-label="LinkMap home">
+    <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span>LinkMap</span>
+  </a>
+  <nav class="nav-links" aria-label="Main navigation">
+    <a href="../#approach">Approach</a>
+    <a href="../#storage">Your data</a>
+    <a href="../#about">About</a>
+    <a href="../docs/">Documentation</a>
+  </nav>
+  <a class="button button-small button-outline" href="../#sign-in" data-header-sign-in>Sign in</a>
+  <a class="button button-small button-outline" href="../account/" aria-current="page" data-account-link hidden>Account</a>
+</header>
+<script src="../header.js"></script>
+<!-- End shared header -->
   <main class="account-page">
     <p class="eyebrow">Your LinkMap account</p>
     <h1>Account</h1>

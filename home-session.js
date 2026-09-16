@@ -30,8 +30,6 @@
     const state = event.detail.state;
     if (state === 'loading') return;
     signedIn = state === 'signed-in';
-    accountLink.hidden = !signedIn;
-    headerSignIn.hidden = signedIn;
     signIn.hidden = signedIn;
     if (signedIn) {
       const wasOpen = dialog.open;

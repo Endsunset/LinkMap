@@ -2,6 +2,7 @@
 from pathlib import Path
 import html
 import json
+from site_header import render_header
 
 root = Path(__file__).resolve().parents[1]
 docs = root / 'docs'
@@ -32,14 +33,7 @@ def shell(title, description, content, active='index'):
 </head>
 <body class="docs-page">
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header docs-header">
-    <button class="docs-sidebar-button" type="button" aria-label="Hide documentation sidebar" aria-controls="docs-sidebar" aria-expanded="true" hidden>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 3v14M4 7h1M4 10h1M4 13h1" stroke="currentColor" stroke-width="1.5"/></svg>
-    </button>
-    <a class="brand" href="{site_prefix}">LinkMap</a>
-    <a href="{docs_prefix}">Documentation</a>
-    <a href="https://apps.apple.com/us/app/linkmap/id6745166200">Get the app</a>
-  </header>
+  {render_header(site_prefix, docs=True)}
   <button class="docs-backdrop" type="button" aria-label="Close documentation sidebar" tabindex="-1" aria-hidden="true"></button>
   <div class="docs-layout">
     <aside class="docs-sidebar" id="docs-sidebar" aria-label="Guide navigator">
