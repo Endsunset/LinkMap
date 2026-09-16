@@ -1,6 +1,6 @@
 # LinkMap Privacy Policy
 
-- **Last Updated:** August 20, 2026
+- **Last Updated:** September 16, 2026
 - **Effective Date:** May 31, 2025
 
 ## 1. Overview
