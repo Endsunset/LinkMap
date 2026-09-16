@@ -67,6 +67,23 @@
       if (!configured) {
         configured = true;
         window.CloudKit.configure({
+          services: {
+            authTokenStore: {
+              getToken(containerIdentifier) {
+                return window.localStorage.getItem(
+                  `linkmap.cloudkit.auth.${config.environment}.${containerIdentifier}`
+                );
+              },
+              putToken(containerIdentifier, token) {
+                const key = `linkmap.cloudkit.auth.${config.environment}.${containerIdentifier}`;
+                if (token === null) {
+                  window.localStorage.removeItem(key);
+                } else {
+                  window.localStorage.setItem(key, token);
+                }
+              }
+            }
+          },
           containers: [{
             containerIdentifier: config.containerIdentifier,
             environment: config.environment,
