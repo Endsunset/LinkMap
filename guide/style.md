@@ -79,3 +79,7 @@ The homepage Sign in action opens a white modal dialog with Apple’s SDK sign-i
 button. Keep a visible Close control, native Escape and focus handling, and backdrop
 dismissal. A successful session closes the dialog and changes the header to Account.
 Use `account/` for account information, connection status, and the SDK sign-out button.
+
+The documentation subheader is a compact white bar below the shared site header,
+with a borderless sidebar icon, a thin divider, and a prominent Documentation home
+link. Keep both bars sticky and offset the sidebar below their combined height.

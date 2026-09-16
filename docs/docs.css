@@ -2,8 +2,11 @@ body { font-family: system-ui, sans-serif; }
 .docs-page { --docs-subheader-height: 52px; --docs-top-offset: calc(var(--header-height) + var(--docs-subheader-height)); }
 html:has(.docs-page) { scroll-padding-top: calc(var(--header-height) + 52px + 16px); }
 .docs-subheader { position: sticky; top: var(--header-height); z-index: 5; display: flex; align-items: center; gap: 16px; height: var(--docs-subheader-height); padding: 0 24px; background: var(--surface); border-bottom: 1px solid var(--line); }
-.docs-subheader > a { color: var(--accent); font-weight: 600; }
-.docs-sidebar-button { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 36px; height: 36px; padding: 0; color: var(--accent); border: 1px solid var(--line); border-radius: 5px; background: var(--surface); cursor: pointer; }
+.docs-subheader > a { color: var(--ink); font-size: 1.25rem; font-weight: 600; letter-spacing: -.025em; line-height: 1.2; }
+.docs-subheader > a:hover { color: var(--accent); }
+.docs-sidebar-button:not([hidden]) + a { border-inline-start: 1px solid var(--line); padding-inline-start: 20px; }
+.docs-sidebar-button { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 36px; height: 36px; padding: 0; color: var(--muted); border: 0; border-radius: 5px; background: var(--surface); cursor: pointer; }
+.docs-sidebar-button:hover, .docs-sidebar-button[aria-expanded="true"] { color: var(--accent); }
 .docs-layout { --sidebar-width: 280px; display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); transition: grid-template-columns 240ms ease; min-height: calc(100dvh - var(--docs-top-offset)); }
 .docs-sidebar { width: var(--sidebar-width); box-sizing: border-box; transition: transform 240ms ease, visibility 240ms; position: sticky; top: var(--docs-top-offset); height: calc(100dvh - var(--docs-top-offset)); overflow-y: auto; min-width: 0; border-right: 1px solid var(--line); padding: 24px 16px; background: var(--surface); }
 .docs-sidebar-heading { font-size: .95rem; font-weight: 650; margin: 0 8px 20px; }
