@@ -143,7 +143,9 @@ all checked-in pages. Commit the template and generated HTML together. The docs 
 privacy renderers also use `scripts/site_header.py`, so regenerating either section
 preserves the shared header. Navigation is rendered as HTML and works without
 JavaScript; nested pages use relative links back to the homepage sections and sign-in
-dialog. The docs header includes its sidebar toggle. `header.js` reacts to verified
+dialog. The main header has Documentation and Sign in (Account when authenticated).
+Documentation pages have a separate sticky subheader with the sidebar toggle and
+a Documentation home link; the sidebar lists guides only. `header.js` reacts to verified
 CloudKit session events on the homepage and account page; other pages link to the
 homepage for sign-in without loading the authentication SDK.
 

@@ -12,7 +12,7 @@ e = html.escape
 def shell(title, description, content, active='index'):
     docs_prefix = './' if active == 'index' else '../'
     site_prefix = '../' if active == 'index' else '../../'
-    navigation = f'<a href="{docs_prefix}"' + (' aria-current="page"' if active == 'index' else '') + '>Documentation home</a>'
+    navigation = ''
     for group in dict.fromkeys(p['group'] for p in pages):
         navigation += f'<details class="docs-nav-group" open><summary>{e(group)}</summary><ul>'
         for page in pages:
@@ -34,6 +34,12 @@ def shell(title, description, content, active='index'):
 <body class="docs-page">
   <a class="skip-link" href="#main">Skip to content</a>
   {render_header(site_prefix, docs=True)}
+  <nav class="docs-subheader" aria-label="Documentation navigation">
+    <button class="docs-sidebar-button" type="button" aria-label="Hide documentation sidebar" aria-controls="docs-sidebar" aria-expanded="true" hidden>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 3v14M4 7h1M4 10h1M4 13h1" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+    <a href="{docs_prefix}"{' aria-current="page"' if active == 'index' else ''}>Documentation</a>
+  </nav>
   <button class="docs-backdrop" type="button" aria-label="Close documentation sidebar" tabindex="-1" aria-hidden="true"></button>
   <div class="docs-layout">
     <aside class="docs-sidebar" id="docs-sidebar" aria-label="Guide navigator">

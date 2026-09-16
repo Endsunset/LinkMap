@@ -9,7 +9,7 @@
   const status = sidebar.querySelector('.docs-filter-status');
   const smallScreen = window.matchMedia('(max-width: 700px)');
   const backdrop = document.querySelector('.docs-backdrop');
-  const background = [...document.querySelectorAll('.docs-main, .site-footer, .docs-header a, .skip-link')];
+  const background = [...document.querySelectorAll('.docs-main, .site-footer, .site-header, .docs-subheader > a, .skip-link')];
   let isOpen = true;
   let saved;
   try { saved = sessionStorage.getItem('linkmap-docs-sidebar'); } catch {}

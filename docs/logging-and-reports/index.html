@@ -12,25 +12,25 @@
 <body class="docs-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <!-- Shared header: edit components/header.html, then run scripts/build-headers.py -->
-<header draggable="false" class="site-header docs-header">
-<button class="docs-sidebar-button" type="button" aria-label="Hide documentation sidebar" aria-controls="docs-sidebar" aria-expanded="true" hidden>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 3v14M4 7h1M4 10h1M4 13h1" stroke="currentColor" stroke-width="1.5"/></svg>
-    </button>
+<header draggable="false" class="site-header">
   <a draggable="false" class="brand" href="../../" aria-label="LinkMap home">
     <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
     <span>LinkMap</span>
   </a>
   <nav class="nav-links" aria-label="Main navigation">
-    <a draggable="false" href="../../#approach">Approach</a>
-    <a draggable="false" href="../../#storage">Your data</a>
-    <a draggable="false" href="../../#about">About</a>
-    <a draggable="false" href="../../docs/" aria-current="true">Documentation</a>
-  </nav>
-  <a draggable="false" class="button button-small button-outline" href="../../#sign-in" data-header-sign-in>Sign in</a>
+    <a draggable="false" class="button button-small button-outline" href="../../docs/" aria-current="true">Documentation</a>
+    <a draggable="false" class="button button-small button-outline" href="../../#sign-in" data-header-sign-in>Sign in</a>
   <a draggable="false" class="button button-small button-outline" href="../../account/" data-account-link hidden>Account</a>
+  </nav>
 </header>
 <script src="../../header.js"></script>
 <!-- End shared header -->
+  <nav class="docs-subheader" aria-label="Documentation navigation">
+    <button class="docs-sidebar-button" type="button" aria-label="Hide documentation sidebar" aria-controls="docs-sidebar" aria-expanded="true" hidden>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 3v14M4 7h1M4 10h1M4 13h1" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+    <a href="../">Documentation</a>
+  </nav>
   <button class="docs-backdrop" type="button" aria-label="Close documentation sidebar" tabindex="-1" aria-hidden="true"></button>
   <div class="docs-layout">
     <aside class="docs-sidebar" id="docs-sidebar" aria-label="Guide navigator">
@@ -40,7 +40,7 @@
         <input id="guide-filter" type="search" placeholder="Filter guides" autocomplete="off" aria-controls="guide-navigation">
         <p class="docs-filter-status" role="status" hidden></p>
       </div>
-      <nav class="docs-navigation" id="guide-navigation" aria-label="Documentation"><a href="../">Documentation home</a><details class="docs-nav-group" open><summary>Start here</summary><ul><li><a href="../how-linkmap-works/">How LinkMap Works</a></li><li><a href="../basic-workflow/">Basic Workflow Example</a></li></ul></details><details class="docs-nav-group" open><summary>Project</summary><ul><li><a href="../project/">Project</a></li><li><a href="../items/">Items</a></li></ul></details><details class="docs-nav-group" open><summary>Map</summary><ul><li><a href="../map/">Map</a></li><li><a href="../regions-and-layers/">Regions and Layers</a></li><li><a href="../locations/">Locations</a></li></ul></details><details class="docs-nav-group" open><summary>Activities</summary><ul><li><a href="../activities/">Activities</a></li><li><a href="../routes-and-stops/">Routes and Stops</a></li><li><a href="../assignments-and-supplies/">Assignments and Supplies</a></li><li><a href="../logging-and-reports/" aria-current="page">Logging and Reports</a></li></ul></details><details class="docs-nav-group" open><summary>Collaboration</summary><ul><li><a href="../sharing/">Sharing</a></li></ul></details></nav>
+      <nav class="docs-navigation" id="guide-navigation" aria-label="Documentation"><details class="docs-nav-group" open><summary>Start here</summary><ul><li><a href="../how-linkmap-works/">How LinkMap Works</a></li><li><a href="../basic-workflow/">Basic Workflow Example</a></li></ul></details><details class="docs-nav-group" open><summary>Project</summary><ul><li><a href="../project/">Project</a></li><li><a href="../items/">Items</a></li></ul></details><details class="docs-nav-group" open><summary>Map</summary><ul><li><a href="../map/">Map</a></li><li><a href="../regions-and-layers/">Regions and Layers</a></li><li><a href="../locations/">Locations</a></li></ul></details><details class="docs-nav-group" open><summary>Activities</summary><ul><li><a href="../activities/">Activities</a></li><li><a href="../routes-and-stops/">Routes and Stops</a></li><li><a href="../assignments-and-supplies/">Assignments and Supplies</a></li><li><a href="../logging-and-reports/" aria-current="page">Logging and Reports</a></li></ul></details><details class="docs-nav-group" open><summary>Collaboration</summary><ul><li><a href="../sharing/">Sharing</a></li></ul></details></nav>
     </aside>
     <main id="main" class="docs-main" tabindex="-1"><p class="docs-breadcrumb"><a href="../">Documentation</a> / Activities</p><h1>Logging and Reports</h1><p class="docs-intro">Logging captures what happened during an Activity. Reports turn the plan and results into reviewable text.</p><p class="docs-note">This guide describes the LinkMap iOS app.</p><nav class="docs-toc" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#section-1">Where to Find It</a></li><li><a href="#section-2">Before Logging</a></li><li><a href="#section-3">Using the Activity Dashboard</a></li><li><a href="#section-4">Distributions</a></li><li><a href="#section-5">Reports After Work</a></li></ul></nav><article><section id="section-1"><h2>Where to Find It</h2><p>Open a Project, switch to the Map tab, select an Activity, then open the Activity Dashboard. Reports open from Assignment detail.</p></section><section id="section-2"><h2>Before Logging</h2><p>Logging works best after the Activity has Routes, Stops, Assignments, and Supplies. The dashboard uses that plan to understand which place and work context should receive the completed result.</p></section><section id="section-3"><h2>Using the Activity Dashboard</h2><ul><li>Open the Project map and select the Activity you are running.</li><li>Choose an Assignment when you want to focus on one team or work group.</li><li>Open the dashboard from the Map toolbar near the Stop where work is happening.</li><li>Use the Stop picker when you need to switch the logging context.</li><li>Leave the dashboard with Done when the current logging pass is finished.</li></ul></section><section id="section-4"><h2>Distributions</h2><p>A Distribution records the quantity of an Item completed at a Stop. Depending on the Project, that might mean delivered, installed, used, checked, handed out, collected, or otherwise completed.</p></section><section id="section-5"><h2>Reports After Work</h2><ul><li>Open an Assignment report to review planned routes, supplies, and logged results.</li><li>Copy a report preview when the summary needs to be pasted into another app.</li><li>Edit the generated report when human wording matters.</li><li>Archive the Activity after the work and reports are complete enough to preserve as history.</li></ul></section></article><nav class="docs-pagination" aria-label="Guide navigation"><a href="../assignments-and-supplies/">Previous: Assignments and Supplies</a><a href="../sharing/">Next: Sharing</a></nav></main>
   </div>
