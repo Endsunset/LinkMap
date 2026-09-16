@@ -1,6 +1,8 @@
 (() => {
   "use strict";
   const header = document.querySelector('.site-header');
+  // Suppress native link/selection dragging without blocking clicks or touch scrolling.
+  header.addEventListener('dragstart', event => event.preventDefault());
   const accountLink = header.querySelector('[data-account-link]');
   const signIn = header.querySelector('[data-header-sign-in]');
 

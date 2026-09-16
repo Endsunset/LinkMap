@@ -146,3 +146,7 @@ JavaScript; nested pages use relative links back to the homepage sections and si
 dialog. The docs header includes its sidebar toggle. `header.js` reacts to verified
 CloudKit session events on the homepage and account page; other pages link to the
 homepage for sign-in without loading the authentication SDK.
+
+The shared header stays at the top while scrolling, with a white blurred surface
+and native link dragging disabled. `--header-height` in `styles.css` also controls
+documentation sidebar offsets and anchor clearance.

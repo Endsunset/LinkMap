@@ -1,16 +1,16 @@
-<header class="site-header$header_class">
+<header draggable="false" class="site-header$header_class">
 $sidebar_toggle
-  <a class="brand" href="$site_prefix" aria-label="LinkMap home">
+  <a draggable="false" class="brand" href="$site_prefix" aria-label="LinkMap home">
     <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
     <span>LinkMap</span>
   </a>
   <nav class="nav-links" aria-label="Main navigation">
-    <a href="$home_prefix#approach">Approach</a>
-    <a href="$home_prefix#storage">Your data</a>
-    <a href="$home_prefix#about">About</a>
-    <a href="${site_prefix}docs/"$docs_current>Documentation</a>
+    <a draggable="false" href="$home_prefix#approach">Approach</a>
+    <a draggable="false" href="$home_prefix#storage">Your data</a>
+    <a draggable="false" href="$home_prefix#about">About</a>
+    <a draggable="false" href="${site_prefix}docs/"$docs_current>Documentation</a>
   </nav>
   $sign_in
-  <a class="button button-small button-outline" href="${site_prefix}account/"$account_current data-account-link hidden>Account</a>
+  <a draggable="false" class="button button-small button-outline" href="${site_prefix}account/"$account_current data-account-link hidden>Account</a>
 </header>
 <script src="${site_prefix}header.js"></script>
