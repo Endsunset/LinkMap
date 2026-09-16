@@ -29,7 +29,8 @@ there is no package installation, compilation, or generated output directory.
 | `header.js` | Shared header authentication state |
 | `styles.css` | Shared styles and responsive layouts |
 | `cloudkit-auth.js` | Shared CloudKit initialization, session state, and error recovery |
-| `account/account.js` | Auth panel UI and the account page’s public database check |
+| `account/account.js` | Account session UI and authentication retry |
+| `login/login.js` | Sign-in UI and redirect to the account page |
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
 | `privacy-policy.md` | Privacy policy source; rendered to `privacy-policy/index.html` |
 | `docs/` | Documentation home, individual user guides, and their content snapshot |
@@ -132,17 +133,16 @@ the homepage, user guides, and privacy policy.
 
 ## Authentication and account
 
-The homepage owns a native dialog for Apple sign-in. `home-session.js` manages
-opening and closing the dialog; `header.js` updates the shared account links; `cloudkit-auth.js` owns the
-shared CloudKit session lifecycle. `account/account.js` renders the account panel
-and the homepage dialog’s auth status without initializing authentication. Successful sign-in closes the dialog and updates
-the header to Account. The hero sign-in action is hidden for a confirmed session.
+`login/` provides Apple’s sign-in button. `login/login.js` observes the shared
+session and redirects restored or newly signed-in users to `../account/`.
+`header.js` updates the shared account links and hides the homepage hero sign-in
+action for a confirmed session. Signed-out links go directly to `login/`.
+`cloudkit-auth.js` owns the shared CloudKit session lifecycle and persistence.
 
-`account/` displays account status, Apple’s sign-out control, and the read-only public
-database probe. Signed-out users return to `../#sign-in` to open the homepage dialog.
-There is no `login/` route. All pages restore the same persisted SDK session and refresh
-it when restored from browser history. Public connectivity is separate from login
-and does not verify private/shared project access.
+`account/` displays authentication status, account identity, Apple’s sign-out
+control, and authentication retry. `account/account.js` renders this session UI
+without initializing authentication or probing the public database. All pages
+restore the same persisted session and refresh it when restored from browser history.
 
 The browser token uses CloudKit’s postMessage callback. The SDK owns popup messages;
 application code observes SDK-verified identity rather than window messages.
@@ -153,11 +153,10 @@ Edit `components/header.html` and run `python3 scripts/build-headers.py` to refr
 all checked-in pages. Commit the template and generated HTML together. The docs and
 privacy renderers also use `scripts/site_header.py`, so regenerating either section
 preserves the shared header. Navigation is rendered as HTML and works without
-JavaScript; nested pages use relative links back to the homepage sections and sign-in
-dialog. The main header has Documentation and Sign in (Account when authenticated).
+JavaScript; nested pages use relative links to the homepage, login, and account pages. The main header has Documentation and Sign in (Account when authenticated).
 Documentation pages have a separate sticky subheader with the sidebar toggle and
 a Documentation home link; the sidebar lists guides only. `header.js` reacts to verified
-CloudKit session events on every page; other pages link to the homepage for sign-in.
+CloudKit session events on every page; signed-out users follow links to `login/`.
 
 Load the SDK, `/LinkMap/cloudkit-config.js`, and `/LinkMap/cloudkit-auth.js` on each
 page, with the configuration and auth scripts deferred in that order. The shared
@@ -166,7 +165,7 @@ UI scripts listen for `linkmap-auth` and read `window.LinkMapAuth.current` after
 subscribing to catch an already published state. Its `{ state, identity }` snapshot
 uses `loading`, `signed-in`, `signed-out`, `error`, or `unavailable`; identity is
 cleared outside signed-in state. `LinkMapAuth.retry()` repeats session setup without
-reconfiguring CloudKit. `LinkMapAuth.container` supports the account connectivity probe.
+reconfiguring CloudKit.
 
 The shared header stays at the top while scrolling, with a white blurred surface
 and native link dragging disabled. `--header-height` in `styles.css` also controls

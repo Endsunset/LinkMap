@@ -7,13 +7,11 @@ START = '<!-- Shared header: edit components/header.html, then run scripts/build
 END = '<!-- End shared header -->'
 
 
-def render_header(site_prefix='./', *, home=False, docs=False, account=False):
-    sign_in = ('<button class="button button-small button-outline" type="button" data-header-sign-in aria-haspopup="dialog" aria-controls="sign-in">Sign in</button>' if home else
-               f'<a draggable="false" class="button button-small button-outline" href="{site_prefix}#sign-in" data-header-sign-in>Sign in</a>')
+def render_header(site_prefix='./', *, docs=False, account=False):
     markup = Template((ROOT / 'components/header.html').read_text()).substitute(
         site_prefix=site_prefix,
         docs_current=' aria-current="page"' if docs and site_prefix == '../' else (' aria-current="true"' if docs else ''),
-        account_current=' aria-current="page"' if account else '', sign_in=sign_in)
+        account_current=' aria-current="page"' if account else '')
     return START + '\n' + markup.rstrip() + '\n' + END
 
 

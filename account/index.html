@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Sign in to LinkMap, manage your iCloud session, and check the CloudKit connection.">
+  <meta name="description" content="Manage your LinkMap Apple Account and iCloud session.">
   <title>Account | LinkMap</title>
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="account.css">
@@ -21,7 +21,7 @@
   </a>
   <nav class="nav-links" aria-label="Main navigation">
     <a draggable="false" href="../docs/">Documentation</a>
-    <a draggable="false" class="button button-small button-outline" href="../#sign-in" data-header-sign-in>Sign in</a>
+    <a draggable="false" class="button button-small button-outline" href="../login/" data-header-sign-in>Sign in</a>
     <a draggable="false" class="button button-small button-outline" href="../account/" aria-current="page" data-account-link hidden>Account</a>
   </nav>
 </header>
@@ -30,23 +30,17 @@
   <main class="account-page">
     <p class="eyebrow">Your LinkMap account</p>
     <h1>Account</h1>
-    <p>Manage your Apple Account session and check the CloudKit connection.</p>
+    <p>Manage your Apple Account session.</p>
     <section class="account-card" aria-labelledby="login-title" data-auth aria-busy="true">
       <h2 id="login-title">Apple Account</h2>
       <strong data-account hidden></strong>
       <p role="status" aria-live="polite" data-status>Checking your sign-in status…</p>
       <div class="auth-controls" data-auth-controls hidden>
-        <a class="button button-small button-outline" href="../#sign-in" data-sign-in-link hidden>Sign in on the homepage</a>
+        <a class="button button-small button-outline" href="../login/" data-sign-in-link hidden>Sign in</a>
         <div id="apple-sign-out-button"></div>
       </div>
       <button class="button button-small button-outline" type="button" data-auth-retry hidden>Retry sign-in check</button>
-      <noscript>Enable JavaScript to sign in and check your connection.</noscript>
-    </section>
-    <section class="account-card" aria-labelledby="connection-title">
-      <h2 id="connection-title">Public CloudKit connection</h2>
-      <p role="status" aria-live="polite" data-public-status>Waiting to check the connection…</p>
-      <button class="button button-small button-outline" type="button" data-public-retry disabled>Check connection</button>
-      <p class="account-note">This read-only check contacts the public database. A successful connection does not mean you are signed in or confirm access to private or shared projects.</p>
+      <noscript>Enable JavaScript to manage your account session.</noscript>
     </section>
     <p class="account-note">Your projects are stored in personal iCloud storage and shared through project permissions. Viewing and editing projects is currently available in the iOS app.</p>
     <a class="text-link" href="../">Back to LinkMap</a>

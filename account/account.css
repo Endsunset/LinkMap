@@ -6,4 +6,3 @@
 .account-card > strong { display: block; margin-top: 16px; overflow-wrap: anywhere; }
 .account-note { color: var(--muted); }
 .account-card[data-state="error"] [data-status] { color: var(--accent); }
-.button:disabled { cursor: wait; opacity: .65; transform: none; }
