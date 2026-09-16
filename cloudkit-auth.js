@@ -81,9 +81,16 @@
       }
       container = window.CloudKit.getDefaultContainer();
       updateSession(await withTimeout(container.setUpAuth()), currentAttempt);
-    } catch {
+    } catch (error) {
+      console.error("CloudKit setUpAuth failed:", {
+          ckErrorCode: error?.ckErrorCode,
+          serverErrorCode: error?.serverErrorCode,
+          reason: error?.reason,
+          message: error?.message
+      });
+
       if (currentAttempt === attempt) {
-        publish("error");
+          publish("error");
       }
     }
   }
