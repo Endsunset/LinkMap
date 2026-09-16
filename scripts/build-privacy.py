@@ -2,7 +2,7 @@
 from pathlib import Path
 import html
 import re
-from site_header import render_header
+from site_header import render_header, render_auth_scripts
 
 root = Path(__file__).resolve().parents[1]
 
@@ -36,6 +36,7 @@ output.mkdir(exist_ok=True)
   <title>Privacy Policy | LinkMap</title>
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="../docs/docs.css">
+''' + render_auth_scripts() + '''
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>

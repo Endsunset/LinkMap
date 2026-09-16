@@ -15,3 +15,9 @@ def render_header(site_prefix='./', *, home=False, docs=False, account=False):
         docs_current=' aria-current="page"' if docs and site_prefix == '../' else (' aria-current="true"' if docs else ''),
         account_current=' aria-current="page"' if account else '', sign_in=sign_in)
     return START + '\n' + markup.rstrip() + '\n' + END
+
+
+def render_auth_scripts():
+    return '''  <script src="https://cdn.apple-cloudkit.com/ck/2/cloudkit.js" async></script>
+  <script src="/LinkMap/cloudkit-config.js" defer></script>
+  <script src="/LinkMap/cloudkit-auth.js" defer></script>'''

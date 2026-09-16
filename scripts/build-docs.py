@@ -2,7 +2,7 @@
 from pathlib import Path
 import html
 import json
-from site_header import render_header
+from site_header import render_header, render_auth_scripts
 
 root = Path(__file__).resolve().parents[1]
 docs = root / 'docs'
@@ -30,6 +30,7 @@ def shell(title, description, content, active='index'):
   <link rel="stylesheet" href="{site_prefix}styles.css">
   <link rel="stylesheet" href="{docs_prefix}docs.css">
   <script src="{docs_prefix}sidebar.js" defer></script>
+{render_auth_scripts()}
 </head>
 <body class="docs-page">
   <a class="skip-link" href="#main">Skip to content</a>

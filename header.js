@@ -6,10 +6,12 @@
   const accountLink = header.querySelector('[data-account-link]');
   const signIn = header.querySelector('[data-header-sign-in]');
 
-  window.addEventListener('linkmap-auth', event => {
-    if (event.detail.state === 'loading') return;
-    const signedIn = event.detail.state === 'signed-in';
+  function updateAuth(detail) {
+    if (detail.state === 'loading') return;
+    const signedIn = detail.state === 'signed-in';
     accountLink.hidden = !signedIn;
     signIn.hidden = signedIn;
-  });
+  }
+  window.addEventListener('linkmap-auth', event => updateAuth(event.detail));
+  if (window.LinkMapAuth) updateAuth(window.LinkMapAuth.current);
 })();

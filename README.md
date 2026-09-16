@@ -12,10 +12,11 @@ Clone this repository and serve its root over HTTP:
 ```sh
 git clone https://github.com/Endsunset/LinkMap.git
 cd LinkMap
+cd ..
 python3 -m http.server 8000
 ```
 
-Open `http://localhost:8000`. The site uses plain HTML, CSS, and JavaScript;
+Open `http://localhost:8000/LinkMap/`. The site uses plain HTML, CSS, and JavaScript;
 there is no package installation, compilation, or generated output directory.
 
 ## Repository map
@@ -27,7 +28,8 @@ there is no package installation, compilation, or generated output directory.
 | `scripts/site_header.py` | Header renderer used by page generators |
 | `header.js` | Shared header authentication state |
 | `styles.css` | Shared styles and responsive layouts |
-| `account/account.js` | CloudKit authentication, session state, and error recovery |
+| `cloudkit-auth.js` | Shared CloudKit initialization, session state, and error recovery |
+| `account/account.js` | Auth panel UI and the account page’s public database check |
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
 | `privacy-policy.md` | Privacy policy source; rendered to `privacy-policy/index.html` |
 | `docs/` | Documentation home, individual user guides, and their content snapshot |
@@ -57,7 +59,7 @@ model changes belong in LinkMap-core; coordinate changes that affect both reposi
 - Keep the site build-free unless a proposed feature justifies changing the stack.
 - Use semantic HTML, descriptive link labels, visible keyboard focus, and accessible
   status messages. Preserve the existing visual style across screen sizes.
-- Use relative asset paths and links: the deployed site lives under `/LinkMap/`.
+- Use relative page links. Shared authentication scripts use stable `/LinkMap/` paths.
 - Keep user-facing copy focused on what people can do and how their data is handled.
 - Render account information as text and let Apple’s SDK handle authentication.
   Do not store user credentials or session tokens in application code.
@@ -71,9 +73,17 @@ For content and layout changes, check navigation, local asset loading, keyboard 
 and narrow and wide layouts. Run `git diff --check` before submitting.
 
 For JavaScript changes, run `node --check account/account.js` and
-`node --check cloudkit-config.js` if Node.js is available. Authentication changes
+`node --check cloudkit-config.js` and `node --check cloudkit-auth.js` if Node.js is available. Authentication changes
 should cover signed-out startup, restored sessions, sign-in, sign-out, repeated
 transitions, and SDK or network failures. Confirm account information clears on sign-out.
+
+The dependency-free SDK simulation in `tests/cloudkit-auth.js` covers restoration,
+transitions, retries, delayed SDK loading, and pages without account controls. On
+macOS, run it from the repository root with:
+
+```sh
+/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc tests/cloudkit-auth.js
+```
 
 Local origins may not be authorized for live CloudKit authentication. A local sign-in
 failure alone does not indicate a UI regression. Coordinate live authentication checks
@@ -123,13 +133,14 @@ the homepage, user guides, and privacy policy.
 ## Authentication and account
 
 The homepage owns a native dialog for Apple sign-in. `home-session.js` manages
-opening and closing the dialog; `header.js` updates the shared account links; `account/account.js` owns the
-shared CloudKit session lifecycle. Successful sign-in closes the dialog and updates
+opening and closing the dialog; `header.js` updates the shared account links; `cloudkit-auth.js` owns the
+shared CloudKit session lifecycle. `account/account.js` renders the account panel
+and the homepage dialog’s auth status without initializing authentication. Successful sign-in closes the dialog and updates
 the header to Account. The hero sign-in action is hidden for a confirmed session.
 
 `account/` displays account status, Apple’s sign-out control, and the read-only public
 database probe. Signed-out users return to `../#sign-in` to open the homepage dialog.
-There is no `login/` route. Both pages use the same persisted SDK session and refresh
+There is no `login/` route. All pages restore the same persisted SDK session and refresh
 it when restored from browser history. Public connectivity is separate from login
 and does not verify private/shared project access.
 
@@ -146,8 +157,16 @@ JavaScript; nested pages use relative links back to the homepage sections and si
 dialog. The main header has Documentation and Sign in (Account when authenticated).
 Documentation pages have a separate sticky subheader with the sidebar toggle and
 a Documentation home link; the sidebar lists guides only. `header.js` reacts to verified
-CloudKit session events on the homepage and account page; other pages link to the
-homepage for sign-in without loading the authentication SDK.
+CloudKit session events on every page; other pages link to the homepage for sign-in.
+
+Load the SDK, `/LinkMap/cloudkit-config.js`, and `/LinkMap/cloudkit-auth.js` on each
+page, with the configuration and auth scripts deferred in that order. The shared
+script calls `setUpAuth()` at startup and on restoration from browser history.
+UI scripts listen for `linkmap-auth` and read `window.LinkMapAuth.current` after
+subscribing to catch an already published state. Its `{ state, identity }` snapshot
+uses `loading`, `signed-in`, `signed-out`, `error`, or `unavailable`; identity is
+cleared outside signed-in state. `LinkMapAuth.retry()` repeats session setup without
+reconfiguring CloudKit. `LinkMapAuth.container` supports the account connectivity probe.
 
 The shared header stays at the top while scrolling, with a white blurred surface
 and native link dragging disabled. `--header-height` in `styles.css` also controls

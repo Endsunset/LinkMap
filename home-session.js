@@ -26,8 +26,8 @@
     }
   });
 
-  window.addEventListener('linkmap-auth', event => {
-    const state = event.detail.state;
+  function updateAuth(detail) {
+    const state = detail.state;
     if (state === 'loading') return;
     signedIn = state === 'signed-in';
     signIn.hidden = signedIn;
@@ -39,7 +39,9 @@
     } else {
       announcement.textContent = '';
     }
-  });
+  }
+  window.addEventListener('linkmap-auth', event => updateAuth(event.detail));
+  if (window.LinkMapAuth) updateAuth(window.LinkMapAuth.current);
   window.addEventListener('hashchange', () => {
     if (window.location.hash === '#sign-in') openLogin();
   });
