@@ -4,6 +4,17 @@
   const sidebar = document.querySelector('#docs-sidebar');
   const filter = document.querySelector('#guide-filter');
   if (!button || !sidebar || !filter) return;
+  // Follow the part of the site header still visible as it scrolls away.
+  const header = document.querySelector('.site-header');
+  function updateHeaderOffset() {
+    const visibleHeight = Math.max(0, header.getBoundingClientRect().bottom);
+    document.body.style.setProperty('--docs-visible-header-height', `${visibleHeight}px`);
+  }
+  updateHeaderOffset();
+  window.addEventListener('scroll', updateHeaderOffset, { passive: true });
+  window.addEventListener('resize', updateHeaderOffset);
+  new ResizeObserver(updateHeaderOffset).observe(header);
+
   const groups = [...sidebar.querySelectorAll('.docs-nav-group')];
   const links = [...sidebar.querySelectorAll('nav a')];
   const status = sidebar.querySelector('.docs-filter-status');

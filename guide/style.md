@@ -82,4 +82,7 @@ Use `account/` for account information, connection status, and the SDK sign-out 
 
 The documentation subheader is a compact white bar below the shared site header,
 with a borderless sidebar icon, a thin divider, and a prominent Documentation home
-link. Keep both bars sticky and offset the sidebar below their combined height.
+link. Let the shared site header scroll away with the page; pin only the documentation
+subheader to the viewport top. Keep a visible bottom border and space around the
+control divider. Offset the sidebar and mobile backdrop below the subheader,
+including the visible portion of the site header while it scrolls out of view.
