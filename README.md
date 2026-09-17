@@ -2,8 +2,7 @@
 
 This repository contains LinkMap’s public website and browser authentication flow,
 served by GitHub Pages at [endsunset.github.io/LinkMap](https://endsunset.github.io/LinkMap/).
-For product information, see the website. The native iOS app and CloudKit data model
-live in [LinkMap-core](https://github.com/Endsunset/LinkMap-core).
+For product information, see the website.
 
 ## Working locally
 
