@@ -8,11 +8,6 @@
     "source_sha256": "8f22b5deb755f2ba3c121a0e0933988cde6cac5059c010b6aa4fa9005db17982",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open Settings, then Documentation. Start with this article when you want the big picture before choosing a specific Project workflow.",
-        "points": []
-      },
-      {
         "title": "The Main Loop",
         "body": "A Project is the place where the work lives. The Project holds the map, the reusable resources, and every Activity created from them. Start by shaping the Project, then create an Activity whenever there is a specific work cycle to prepare, run, review, and archive.",
         "points": []
@@ -54,11 +49,6 @@
     "source": "DocumentationExampleContent.swift",
     "source_sha256": "195dd1c739066bdd5349cc5e3f839d7be6f678c2a6e45e9346e36ef23e50c3db",
     "sections": [
-      {
-        "title": "Where to Find It",
-        "body": "Open Settings, then Documentation, then Basic Workflow Example. Use this page as a first walkthrough before setting up a real Project.",
-        "points": []
-      },
       {
         "title": "1. Create the Project",
         "body": "Create a Project for the site or operation. For example, a campus supply run, an event venue, a neighborhood service area, or a field response zone. Once the Project opens, the Map tab becomes available for that Project.",
@@ -112,8 +102,8 @@
     "source_sha256": "ed3380af3fa6eec82609c2fa09acd6c0acd93b1c98fef2730e059d1d546cb3af",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open the Home tab to create, browse, or reopen Projects. After you open a Project detail page, the first tab is labeled Project, and the Map tab follows that Project.",
+        "title": "Navigation Path",
+        "body": "Home → Project",
         "points": []
       },
       {
@@ -158,8 +148,8 @@
     "source_sha256": "7b0fb41d1dca3180d756509a83a470963d31df10da4a6c60a8ec0f63dac91524",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open a Project, then switch to the Map tab. Project map tools are available from the map toolbar while the Project is active.",
+        "title": "Navigation Path",
+        "body": "Home → Project → Map",
         "points": []
       },
       {
@@ -205,8 +195,8 @@
     "source_sha256": "c31ab64d2002d84087e88160f3bc3a715b724b7d3b67eea71cdc4a1ccd2453a8",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open a Project, switch to the Map tab, then use the Project map tools to open Region and Layer management.",
+        "title": "Navigation Path",
+        "body": "Home → Project → Map → More → Regions and Layers",
         "points": []
       },
       {
@@ -246,8 +236,8 @@
     "source_sha256": "c3d21a5a06243f0c63af59904e7b78e8d753b3c43a793c5acb05199c4e6998cb",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open a Project, then use the Map tab or Project Location list. Location detail can also open from a Location marker on the Map.",
+        "title": "Navigation Path",
+        "body": "Home → Project → Map → More → Location List",
         "points": []
       },
       {
@@ -292,8 +282,8 @@
     "source_sha256": "3495d4298f76a0e4bacc08038346a8036df32612ed25bfc571e9446bfc93e4bf",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open a Project detail page, then open Items. Items are managed at the Project level before they are used by Activities.",
+        "title": "Navigation Path",
+        "body": "Home → Project → Items",
         "points": []
       },
       {
@@ -336,8 +326,8 @@
     "source_sha256": "a4ea81ec71f9a5e7f5df6621a2564275055e5f0a38de3c4ddbafcd572004ce59",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open a Project detail page, then open Activities. Activity detail is where Routes, Assignments, Supplies, reports, and archive status come together.",
+        "title": "Navigation Path",
+        "body": "Home → Project → Activities",
         "points": []
       },
       {
@@ -382,8 +372,8 @@
     "source_sha256": "f0e982842d451c4db93cc7dd6e96b2461dac61a16cd99bdcf8f3f0eb341e6a0a",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open a Project, open Activities, choose an Activity, then open Routes. Stops are created and ordered as part of the Route workflow.",
+        "title": "Navigation Path",
+        "body": "Home → Project → Activities → Activity → Routes",
         "points": []
       },
       {
@@ -427,9 +417,12 @@
     "source_sha256": "5502c6cc9596f1d0de594f84aea472bcea5ba46212190139018451fbf0197a30",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open a Project, open Activities, choose an Activity, then open Assignments or Supplies. Assignment reports open from Assignment detail.",
-        "points": []
+        "title": "Navigation Path",
+        "body": null,
+        "points": [
+          "Home → Project → Activities → Activity → Assignments",
+          "Home → Project → Activities → Activity → Supplies"
+        ]
       },
       {
         "title": "Assignments",
@@ -472,11 +465,6 @@
     "source_sha256": "9b9b08e90f09a0044646d39a2bef5bf2c19753d1928907321eb53aea946c55cf",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open a Project, switch to the Map tab, select an Activity, then open the Activity Dashboard. Reports open from Assignment detail.",
-        "points": []
-      },
-      {
         "title": "Before Logging",
         "body": "Logging works best after the Activity has Routes, Stops, Assignments, and Supplies. The dashboard uses that plan to understand which place and work context should receive the completed result.",
         "points": []
@@ -518,9 +506,12 @@
     "source_sha256": "31878495bc8128a3adda482c1c4cabb4f02d468f4d4f32af1eef8bddcc75c4fb",
     "sections": [
       {
-        "title": "Where to Find It",
-        "body": "Open a Project detail page, then use the Project toolbar menu for collaboration links, QR codes, and sharing controls.",
-        "points": []
+        "title": "Navigation Path",
+        "body": null,
+        "points": [
+          "Home → Project → Toolbar menu (…) → Collaborators",
+          "Home → Project → Toolbar menu (…) → QR Code"
+        ]
       },
       {
         "title": "When to Share",
