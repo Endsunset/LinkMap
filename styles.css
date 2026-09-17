@@ -157,7 +157,6 @@ h1 em { color: var(--accent); font-style: normal; }
 }
 
 /* Download page and shared navigation. */
-.nav-links .button[aria-current="page"] { border-inline-end-width: 4px; }
 .download-page { max-width: 1152px; margin: 0 auto; padding: 64px 24px 80px; font-family: system-ui, sans-serif; --display: system-ui, sans-serif; }
 .download-intro { max-width: 740px; margin-bottom: 64px; }
 .download-intro h1 { font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.06; }
