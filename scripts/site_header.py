@@ -7,9 +7,10 @@ START = '<!-- Shared header: edit components/header.html, then run scripts/build
 END = '<!-- End shared header -->'
 
 
-def render_header(site_prefix='./', *, docs=False, account=False):
+def render_header(site_prefix='./', *, docs=False, account=False, download=False):
     markup = Template((ROOT / 'components/header.html').read_text()).substitute(
         site_prefix=site_prefix,
+        download_current=' aria-current="page"' if download else '',
         docs_current=' aria-current="page"' if docs and site_prefix == '../' else (' aria-current="true"' if docs else ''),
         account_current=' aria-current="page"' if account else '')
     return START + '\n' + markup.rstrip() + '\n' + END

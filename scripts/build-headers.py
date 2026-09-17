@@ -9,6 +9,7 @@ for page in sorted(ROOT.rglob('index.html')):
     source = page.read_text()
     header = render_header(prefix,
                            docs=relative.parts[0] == 'docs',
+                           download=relative.parts[0] == 'download',
                            account=relative.parts[0] == 'account')
     pattern = re.escape(START) + r'.*?' + re.escape(END) if START in source else r'<header\b.*?</header>'
     updated, count = re.subn(pattern, lambda _: header, source, count=1, flags=re.S)
