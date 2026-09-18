@@ -39,10 +39,23 @@
 <script src="../header.js"></script>
 <!-- End shared header -->
   <main class="map-workspace" aria-label="LinkMap map">
-    <div id="map" aria-label="Interactive Apple map"></div>
-    <div id="map-loading" class="map-notice" role="status">Loading Apple Maps…</div>
-    <noscript><p class="map-notice">Enable JavaScript to use the interactive map.</p></noscript>
+    <section class="project-toolbar" aria-label="Project selection">
+      <div class="project-field">
+        <label for="project-select">Project</label>
+        <select id="project-select" aria-describedby="project-status" disabled>
+          <option value="">Loading projects…</option>
+        </select>
+      </div>
+      <p id="project-status" role="status" aria-live="polite">Connecting to iCloud…</p>
+      <button id="project-retry" class="button button-small button-outline" type="button" hidden>Try again</button>
+      <a id="project-sign-in" class="button button-small button-outline" href="../login/" hidden>Sign in</a>
+    </section>
+    <div class="map-canvas">
+      <div id="map" aria-label="Interactive Apple map"></div>
+      <div id="map-loading" class="map-notice" role="status">Loading Apple Maps…</div>
+      <noscript><p class="map-notice">Enable JavaScript to use the interactive map.</p></noscript>
+    </div>
   </main>
-  <script src="app.js" defer></script>
+  <script src="app.js" type="module"></script>
 </body>
 </html>

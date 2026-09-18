@@ -1,50 +1,86 @@
-(() => {
-  "use strict";
+import { loadProjects } from "./project.js";
+import { loadLocations } from "./location.js";
+import { initializeMap } from "./map.js";
+import { createProjectSelector } from "./project-selector.js";
 
-  // Public MapKit JS token restricted to endsunset.github.io.
-  const token = "eyJraWQiOiI1WVgzNlk5M1U1IiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJYMzlBWFBSUkNRIiwiaWF0IjoxNzg5NjQzNzc2LCJvcmlnaW4iOiJlbmRzdW5zZXQuZ2l0aHViLmlvIiwic2NvcGUiOiJtYXBraXRfanMifQ.MOBNygJnZ0geEID4WOPFqLy1Ii_PP2F75MkrFbfs0uGt0b96HsofPygIKIqJgNc5GuFIj0tD98c0ZYDqU6zpPw";
-  const loading = document.getElementById("map-loading");
-  const timeout = window.setTimeout(() => showError({ status: "Timeout" }), 20000);
+// The only owner of project selection and loaded page data.
+const state = { projects: [], selectedProject: null, locations: [] };
+let requestVersion = 0;
+let errorNotice;
+const selector = createProjectSelector(id => {
+  const project = state.projects.find(project => project.id === id);
+  if (project) selectProject(project);
+}, () => {
+  if (window.LinkMapAuth.current.state !== "signed-in") window.LinkMapAuth.retry();
+  else if (state.selectedProject) selectProject(state.selectedProject);
+  else refreshProjects();
+});
+const map = initializeMap(() => map.setLocations(state.locations));
 
-  function showError(error) {
-    window.clearTimeout(timeout);
-    loading.hidden = true;
-    window.reportMapKitError(error);
+function render(message, options = {}) {
+  selector.render({ ...state, message, ...options });
+}
+
+function clearLocations() {
+  state.locations = [];
+  map.clearLocations();
+  errorNotice?.dismiss();
+}
+
+async function selectProject(project) {
+  const version = ++requestVersion;
+  state.selectedProject = project;
+  clearLocations();
+  render("Loading Locations…", { busy: true });
+  try {
+    const locations = await loadLocations(project);
+    if (version !== requestVersion) return;
+    state.locations = locations;
+    map.setLocations(locations);
+    const visible = locations.filter(location => location.coordinate).length;
+    const skipped = locations.length - visible;
+    render(locations.length
+      ? `${visible} Location${visible === 1 ? "" : "s"}${skipped ? ` · ${skipped} skipped: missing or invalid coordinates` : ""}`
+      : "This project has no Locations.");
+  } catch (error) {
+    if (version !== requestVersion) { console.error("Previous Location request failed:", error); return; }
+    errorNotice = window.reportCloudKitError(error);
+    render("Could not load Locations. Try again.", { retryable: true });
   }
+}
 
-  window.initMapKit = () => {
-    try {
-      const mapkit = window.mapkit;
-      mapkit.addEventListener("error", showError);
-      mapkit.addEventListener("load-error", showError);
-      const map = new mapkit.Map("map", {
-        colorScheme: "light",
-        tintColor: getComputedStyle(document.documentElement).getPropertyValue("--accent").trim(),
-        showsCompass: mapkit.FeatureVisibility.Visible,
-        showsScale: mapkit.FeatureVisibility.Visible,
-        showsMapTypeControl: true,
-        showsZoomControl: true,
-        showsUserLocationControl: true,
-        showsPointsOfInterest: true,
-        isZoomEnabled: true,
-        isScrollEnabled: true,
-        isRotationEnabled: true,
-      });
-      map.addEventListener("user-location-error", showError);
-      window.clearTimeout(timeout);
-      loading.hidden = true;
-    } catch (error) {
-      showError(error);
-    }
-  };
+async function refreshProjects() {
+  const version = ++requestVersion;
+  state.projects = [];
+  state.selectedProject = null;
+  clearLocations();
+  render("Loading projects…", { busy: true });
+  try {
+    const projects = await loadProjects();
+    if (version !== requestVersion) return;
+    state.projects = projects;
+    if (projects.length) await selectProject(projects[0]);
+    else render("No projects available. Create a project or accept a share in the LinkMap app.");
+  } catch (error) {
+    if (version !== requestVersion) { console.error("Previous Project request failed:", error); return; }
+    errorNotice = window.reportCloudKitError(error);
+    render("Could not load projects. Try again.", { retryable: true });
+  }
+}
 
-  const script = document.createElement("script");
-  script.src = "https://cdn.apple-mapkit.com/mk/6/mapkit.core.js";
-  script.crossOrigin = "anonymous";
-  script.async = true;
-  script.dataset.callback = "initMapKit";
-  script.dataset.libraries = "map";
-  script.dataset.token = token;
-  script.addEventListener("error", showError);
-  document.head.append(script);
-})();
+function updateAuth(auth) {
+  if (auth?.state === "signed-in") {
+    refreshProjects();
+    return;
+  }
+  ++requestVersion;
+  state.projects = [];
+  state.selectedProject = null;
+  clearLocations();
+  if (auth?.state === "signed-out") render("Sign in to see your projects.", { signedOut: true });
+  else if (!auth || auth.state === "loading") render("Connecting to iCloud…", { busy: true });
+  else render("Could not connect to iCloud. Try again.", { retryable: true });
+}
+
+window.addEventListener("linkmap-auth", event => updateAuth(event.detail));
+updateAuth(window.LinkMapAuth?.current);
