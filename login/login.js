@@ -8,8 +8,8 @@
   const messages = {
     loading: "Checking your sign-in status…",
     "signed-out": "",
-    error: "We couldn’t connect to iCloud. Check your connection and try again.",
-    unavailable: "Web sign-in is not available yet. You can continue using LinkMap in the iOS app."
+    error: "",
+    unavailable: ""
   };
 
   function updateUI({ state }) {

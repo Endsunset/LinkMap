@@ -30,7 +30,7 @@ def shell(title, description, content, active='index'):
   <link rel="stylesheet" href="{site_prefix}styles.css">
   <link rel="stylesheet" href="{docs_prefix}docs.css">
   <script src="{docs_prefix}sidebar.js" defer></script>
-{render_auth_scripts()}
+{render_auth_scripts(site_prefix)}
 </head>
 <body class="docs-page">
   <a class="skip-link" href="#main">Skip to content</a>

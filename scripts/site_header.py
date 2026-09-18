@@ -16,7 +16,10 @@ def render_header(site_prefix='./', *, docs=False, account=False, download=False
     return START + '\n' + markup.rstrip() + '\n' + END
 
 
-def render_auth_scripts():
-    return '''  <script src="https://cdn.apple-cloudkit.com/ck/2/cloudkit.js" async></script>
-  <script src="/LinkMap/cloudkit-config.js" defer></script>
-  <script src="/LinkMap/cloudkit-auth.js" defer></script>'''
+def render_auth_scripts(site_prefix='../'):
+    return f'''  <link rel="stylesheet" href="{site_prefix}components/notification/notification.css">
+  <script src="https://cdn.apple-cloudkit.com/ck/2/cloudkit.js" async></script>
+  <script src="{site_prefix}components/notification/notification.js" defer></script>
+  <script src="{site_prefix}shared/errors/cloudkit-errors.js" defer></script>
+  <script src="{site_prefix}cloudkit-config.js" defer></script>
+  <script src="{site_prefix}cloudkit-auth.js" defer></script>'''

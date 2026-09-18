@@ -26,6 +26,7 @@ function page(identity = null, controls = true, delayedSDK = false) {
     removeEventListener(type, fn) { listeners[type]?.delete(fn); },
     dispatchEvent(event) { for (const fn of listeners[event.type] || []) fn(event); }
   };
+  win.reportCloudKitError = error => { win.lastError = error; return { dismiss() {} }; };
   let signIn, signOut, failure = false, setups = 0, configurations = 0;
   const container = {
     setUpAuth() { setups++; return failure ? Promise.reject(new Error('offline')) : Promise.resolve(identity); },
@@ -62,6 +63,7 @@ function page(identity = null, controls = true, delayedSDK = false) {
   }
   p.fail(true); await p.win.LinkMapAuth.retry(); await flush();
   assert(p.win.LinkMapAuth.current.state === 'error' && !p.elements['[data-auth-retry]'].hidden, 'error retry UI');
+  assert(p.win.lastError.message === 'offline', 'original failure reaches notification adapter');
   p.fail(false); await p.win.LinkMapAuth.retry(); await flush();
   p.win.dispatchEvent({ type: 'pageshow', persisted: true }); await flush();
   eval(authSource); await flush();

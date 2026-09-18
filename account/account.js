@@ -27,8 +27,8 @@
     loading: "Connecting to iCloud…",
     "signed-in": "You’re signed in to iCloud. Use the LinkMap app to work with your projects; web project tools are still in development.",
     "signed-out": "Sign in with your Apple Account to connect to LinkMap.",
-    error: "We couldn’t connect to iCloud. Check your connection and try again. If this continues, please contact us using the Feedback link.",
-    unavailable: "Web sign-in is not available yet. You can continue using LinkMap in the iOS app."
+    error: "",
+    unavailable: ""
   };
 
   function updateUI({ state, identity }) {

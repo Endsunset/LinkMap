@@ -4,6 +4,7 @@
   // One lifecycle per document, even if this script is accidentally included twice.
   if (window.LinkMapAuth) return;
   let container;
+  let errorNotice;
   let configured = false;
   let attempt = 0;
   let snapshot = Object.freeze({ state: "loading", identity: null });
@@ -28,11 +29,19 @@
 
   function updateSession(identity, currentAttempt) {
     if (currentAttempt !== attempt) return;
+    errorNotice?.dismiss();
     publish(identity ? "signed-in" : "signed-out", identity || null);
     // SDK transition promises resolve once; re-arm after each transition.
     const next = identity ? container.whenUserSignsOut() : container.whenUserSignsIn();
     next.then(user => updateSession(identity ? null : user, currentAttempt))
-      .catch(() => { if (currentAttempt === attempt) publish("error"); });
+      .catch(error => {
+        if (currentAttempt !== attempt) {
+          console.error("CloudKit session transition failed:", error);
+          return;
+        }
+        errorNotice = window.reportCloudKitError(error);
+        publish("error");
+      });
   }
 
   function waitForCloudKit() {
@@ -57,6 +66,7 @@
     const config = window.LINKMAP_CLOUDKIT;
     if (!config?.apiToken?.trim() || !config.containerIdentifier?.startsWith("iCloud.") ||
         !["development", "production"].includes(config.environment)) {
+      errorNotice = window.reportCloudKitError({ ckErrorCode: "CONFIGURATION_ERROR" });
       publish("unavailable");
       return;
     }
@@ -99,16 +109,12 @@
       container = window.CloudKit.getDefaultContainer();
       updateSession(await withTimeout(container.setUpAuth()), currentAttempt);
     } catch (error) {
-      console.error("CloudKit setUpAuth failed:", {
-          ckErrorCode: error?.ckErrorCode,
-          serverErrorCode: error?.serverErrorCode,
-          reason: error?.reason,
-          message: error?.message
-      });
-
-      if (currentAttempt === attempt) {
-          publish("error");
+      if (currentAttempt !== attempt) {
+        console.error("CloudKit setUpAuth failed:", error);
+        return;
       }
+      errorNotice = window.reportCloudKitError(error);
+      publish("error");
     }
   }
 
