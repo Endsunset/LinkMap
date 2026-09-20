@@ -2,6 +2,7 @@
   "use strict";
   const button = document.querySelector('.docs-sidebar-button');
   const sidebar = document.querySelector('#docs-sidebar');
+  const closeButton = sidebar?.querySelector('.docs-sidebar-close');
   const filter = document.querySelector('#guide-filter');
   if (!button || !sidebar || !filter) return;
   // Follow the part of the site header still visible as it scrolls away.
@@ -20,7 +21,7 @@
   const status = sidebar.querySelector('.docs-filter-status');
   const smallScreen = window.matchMedia('(max-width: 700px)');
   const backdrop = document.querySelector('.docs-backdrop');
-  const background = [...document.querySelectorAll('.docs-main, .site-footer, .site-header, .docs-subheader > a, .skip-link')];
+  const background = [...document.querySelectorAll('.docs-main, .site-footer, .site-header, .docs-subheader, .skip-link')];
   let isOpen = true;
   let saved;
   try { saved = sessionStorage.getItem('linkmap-docs-sidebar'); } catch {}
@@ -42,19 +43,21 @@
   }
 
   button.hidden = false;
+  closeButton.hidden = false;
+  closeButton.addEventListener('click', () => { setOpen(false, true); button.focus(); });
   sidebar.querySelector('.docs-filter').hidden = false;
   document.body.classList.add('sidebar-ready');
   setOpen(!smallScreen.matches && saved !== 'closed');
   button.addEventListener('click', () => {
     setOpen(!isOpen, true);
-    if (isOpen && smallScreen.matches) filter.focus();
+    if (isOpen && smallScreen.matches) closeButton.focus();
   });
   backdrop.addEventListener('click', () => { setOpen(false, true); button.focus(); });
   document.addEventListener('keydown', event => {
     if (!isOpen) return;
     if (event.key === 'Escape') { setOpen(false, true); button.focus(); }
     if (event.key === 'Tab' && smallScreen.matches) {
-      const targets = [button, ...sidebar.querySelectorAll('input, summary, a[href]')]
+      const targets = [...sidebar.querySelectorAll('button, input, summary, a[href]')]
         .filter(element => element.getClientRects().length && !element.closest('[hidden]'));
       const first = targets[0], last = targets[targets.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }

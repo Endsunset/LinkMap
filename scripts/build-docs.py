@@ -8,6 +8,8 @@ root = Path(__file__).resolve().parents[1]
 docs = root / 'docs'
 pages = json.loads((docs / 'content.json').read_text())
 e = html.escape
+documentation_version = "LinkMap 3.0.0 Beta 8"
+version_line = f'<p class="docs-availability" aria-label="Documentation version">{e(documentation_version)}</p>'
 
 def shell(title, description, content, active='index'):
     docs_prefix = './' if active == 'index' else '../'
@@ -44,13 +46,21 @@ def shell(title, description, content, active='index'):
   <button class="docs-backdrop" type="button" aria-label="Close documentation sidebar" tabindex="-1" aria-hidden="true"></button>
   <div class="docs-layout">
     <aside class="docs-sidebar" id="docs-sidebar" aria-label="Documentation navigator">
-      <div class="docs-sidebar-heading">LinkMap documentation</div>
-      <div class="docs-filter" hidden>
-        <label for="guide-filter">Filter documentation</label>
-        <input id="guide-filter" type="search" placeholder="Filter documentation" autocomplete="off" aria-controls="guide-navigation">
-        <p class="docs-filter-status" role="status" hidden></p>
+      <div class="docs-sidebar-header">
+        <div class="docs-sidebar-heading">LinkMap documentation</div>
+        <button class="docs-sidebar-close" type="button" aria-label="Close documentation sidebar" hidden>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
       </div>
       <nav class="docs-navigation" id="guide-navigation" aria-label="Documentation">{navigation}</nav>
+      <div class="docs-filter" hidden>
+        <label for="guide-filter">Filter documentation</label>
+        <div class="docs-filter-field">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5h14M6 10h8M8 15h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <input id="guide-filter" type="search" placeholder="Filter" autocomplete="off" aria-controls="guide-navigation">
+        </div>
+        <p class="docs-filter-status" role="status" hidden></p>
+      </div>
     </aside>
     <main id="main" class="docs-main" tabindex="-1">{content}</main>
   </div>
@@ -66,9 +76,9 @@ for group in dict.fromkeys(p['group'] for p in pages):
         if page['group'] == group:
             cards += f'<a class="docs-card" href="{page["slug"]}/"><h3>{e(page["title"])}</h3><p>{e(page["summary"])}</p></a>'
     cards += '</div></section>'
-(docs / 'index.html').write_text(shell('Documentation', 'Learn how to set up a LinkMap project, plan activities, and collaborate with your team.', '<p class="eyebrow">LinkMap documentation</p><h1>Documentation</h1><p class="docs-intro">Start on the Map, choose your Project, Activity, and Assignment in Context, and use Project Detail to plan and manage your work.</p><p class="docs-note">This documentation describes the LinkMap iOS app. Screen names and navigation steps refer to the app; web project tools are still in development.</p>' + cards))
+(docs / 'index.html').write_text(shell('Documentation', 'Learn how to set up a LinkMap project, plan activities, and collaborate with your team.', '<p class="eyebrow">LinkMap documentation</p><h1>Documentation</h1><p class="docs-intro">Start on the Map, choose your Project, Activity, and Assignment in Context, and use Project Detail to plan and manage your work.</p>' + version_line + '<p class="docs-note">This documentation describes the LinkMap iOS app. Screen names and navigation steps refer to the app; web project tools are still in development.</p>' + cards))
 for index, page in enumerate(pages):
-    content = f'<p class="docs-breadcrumb"><a href="../">Documentation</a> / {e(page["group"])}</p><h1>{e(page["title"])}</h1><p class="docs-intro">{e(page["summary"])}</p><p class="docs-note">This documentation describes the LinkMap iOS app.</p>'
+    content = f'<p class="docs-breadcrumb"><a href="../">Documentation</a> / {e(page["group"])}</p><h1>{e(page["title"])}</h1><p class="docs-intro">{e(page["summary"])}</p>{version_line}<p class="docs-note">This documentation describes the LinkMap iOS app.</p>'
     content += '<nav class="docs-toc" aria-label="On this page"><strong>On this page</strong><ul>'
     for number, section in enumerate(page['sections'], 1):
         content += f'<li><a href="#section-{number}">{e(section["title"])}</a></li>'
