@@ -32,7 +32,7 @@ there is no package installation, compilation, or generated output directory.
 | `login/login.js` | Sign-in UI and redirect to the account page |
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
 | `privacy-policy.md` | Privacy policy source; rendered to `privacy-policy/index.html` |
-| `docs/` | Documentation home, individual user guides, and their content snapshot |
+| `docs/` | Documentation home, individual documentation articles, and their content snapshot |
 | `scripts/build-docs.py` | Optional renderer for updating documentation HTML |
 
 Apple’s CloudKit JS SDK provides the sign-in and sign-out buttons and manages the
@@ -102,15 +102,18 @@ Use [GitHub Issues](https://github.com/Endsunset/LinkMap/issues). Include the pa
 browser and device, steps to reproduce, expected behavior, and actual behavior.
 Remove personal account details and session tokens from screenshots or logs.
 
-## Updating the user guides
+## Updating the documentation
 
-The `docs/` section mirrors the 12 guides in the native app’s Settings → Documentation
-section. Its initial content was copied from `Documentation/Contents/Documentation*Content.swift`
-in LinkMap-core. The original app repository is not modified by this website.
+The `docs/` section contains 12 documentation articles for the iOS app. Settings →
+Documentation opens this hosted section. Initial content was copied from
+`Documentation/Contents/Documentation*Content.swift` in LinkMap-core; navigation
+now follows its Map-first interface. Check `ContentView.swift`, `MapToolbar.swift`,
+`MapContextSelectionView.swift`, and `ProjectDetailSections.swift` when updating
+these flows. The native app repository is read-only for website work.
 
 Edit `docs/content.json`, then run `python3 scripts/build-docs.py` and commit the
 updated HTML alongside the content. Each entry records its original source filename
-and SHA-256 checksum for comparison with future native documentation changes.
+and SHA-256 checksum as provenance for the initial import, not as a checksum of the edited website text.
 The renderer reads only the snapshot in this repository; it does not require or write
 to LinkMap-core. Keep instructions clear that they describe the iOS app.
 
@@ -128,7 +131,7 @@ Run `python3 scripts/build-privacy.py` after editing the policy source.
 
 Follow [the style guide](guide/style.md) for colors, typography, component accents,
 and accessibility. Shared CSS applies the white-surface and red-accent theme across
-the homepage, user guides, and privacy policy.
+the homepage, documentation, and privacy policy.
 
 ## Authentication and account
 
@@ -154,7 +157,7 @@ privacy renderers also use `scripts/site_header.py`, so regenerating either sect
 preserves the shared header. Navigation is rendered as HTML and works without
 JavaScript; nested pages use relative links to the homepage, login, and account pages. The main header has Documentation and Sign in (Account when authenticated).
 Documentation pages have a separate sticky subheader with the sidebar toggle and
-a Documentation home link; the sidebar lists guides only. `header.js` reacts to verified
+a Documentation home link; the sidebar lists documentation articles only. `header.js` reacts to verified
 CloudKit session events on every page; signed-out users follow links to `login/`.
 
 Load the SDK, `/LinkMap/cloudkit-config.js`, and `/LinkMap/cloudkit-auth.js` on each

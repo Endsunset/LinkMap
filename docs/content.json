@@ -3,20 +3,20 @@
     "slug": "how-linkmap-works",
     "group": "Start here",
     "title": "How LinkMap Works",
-    "summary": "LinkMap is organized around a simple idea: build a shared Project once, then use it to plan and record many rounds of work.",
+    "summary": "LinkMap opens on the Map. Choose a Project to see shared places, then select an Activity and Assignment for the work you are doing.",
     "source": "DocumentationArticleContent.swift",
     "source_sha256": "8f22b5deb755f2ba3c121a0e0933988cde6cac5059c010b6aa4fa9005db17982",
     "sections": [
       {
         "title": "The Main Loop",
-        "body": "A Project is the place where the work lives. The Project holds the map, the reusable resources, and every Activity created from them. Start by shaping the Project, then create an Activity whenever there is a specific work cycle to prepare, run, review, and archive.",
+        "body": "After launch, LinkMap opens on the Map, with Settings available in a separate tab. Use More (…) → Context to choose a Project, then an Activity and optional Assignment. Projects hold reusable places and resources; Activities organize specific rounds of work. Open Project Detail from the Map menu to manage that setup, then return to the Map to follow routes and log work.",
         "points": []
       },
       {
         "title": "What Comes First",
         "body": null,
         "points": [
-          "Create a Project for the real place, operation, event, site, or service area you want to manage.",
+          "From the Map, use More (…) → Add Project to create a Project, or Scan to join a shared one. Use Context to select the Project you want to work with.",
           "Build the Project map with Regions, Layers, and Locations so the team has a shared view of where work happens.",
           "Add Items for reusable resources such as supplies, equipment, materials, or packages.",
           "Create an Activity only when you are ready to plan a specific round of work.",
@@ -51,13 +51,14 @@
     "sections": [
       {
         "title": "1. Create the Project",
-        "body": "Create a Project for the site or operation. For example, a campus supply run, an event venue, a neighborhood service area, or a field response zone. Once the Project opens, the Map tab becomes available for that Project.",
+        "body": "LinkMap opens on the Map. Use More (…) → Add Project to create a Project for a campus supply run, event venue, neighborhood service area, or field response zone. Saving opens the new Project detail. Return to the Map and use More (…) → Context → Project to select it; creating or opening Project detail does not automatically change the Map context.",
         "points": []
       },
       {
         "title": "2. Build the Map",
         "body": null,
         "points": [
+          "With the Project selected in Context, open More (…) → Project Detail for Regions and Layers and the Location List. Use Edit on the Map to add or move Locations.",
           "Create Regions for broad areas, such as North Wing, Main Hall, Block A, or Service Zone 3.",
           "Create Layers when the same Region has levels or surfaces, such as Floor 1, Floor 2, Basement, Roof, or Indoor Map.",
           "Add Locations for entrances, rooms, supply points, delivery points, checkpoints, stations, or other places the team needs to visit.",
@@ -66,7 +67,7 @@
       },
       {
         "title": "3. Add Items",
-        "body": "Add reusable Items before activity planning. If your team repeatedly works with water, kits, medicine, tools, printed materials, or equipment, create each one as an Item once. Later, Activities can use those Items as planned Supplies or logged Distributions.",
+        "body": "Open Map → More (…) → Project Detail → Items. Add reusable Items before activity planning. If your team repeatedly works with water, kits, medicine, tools, printed materials, or equipment, create each one as an Item once. Later, Activities can use those Items as planned Supplies or logged Distributions.",
         "points": []
       },
       {
@@ -84,8 +85,8 @@
         "title": "5. Run and Review",
         "body": null,
         "points": [
-          "Open the Map while the Project is active and select the Activity you are running.",
-          "Use the Assignment picker when you want to focus on one team's route and locations.",
+          "On the Map, open More (…) → Context and select the Project and Activity you are running.",
+          "Choose an Assignment in the same Context sheet to focus on one team’s route and locations, then tap Done.",
           "Open the Activity Dashboard near the relevant Stop and log Distributions as work is completed.",
           "Review the Assignment report after the Activity to summarize routes, supplies, and completed work.",
           "Archive the Activity when it should become historical and no longer edited as active work."
@@ -103,8 +104,10 @@
     "sections": [
       {
         "title": "Navigation Path",
-        "body": "Home → Project",
-        "points": []
+        "body": "Map → More (…) → Project Detail",
+        "points": [
+          "First select a Project in Map → More (…) → Context, then tap Done."
+        ]
       },
       {
         "title": "What a Project Is For",
@@ -126,10 +129,11 @@
         "title": "How Project Navigation Works",
         "body": null,
         "points": [
-          "The Home tab shows your available Projects and recent Project access, then becomes the Project tab while a Project is open.",
-          "Opening a Project shows its detail page and makes the Map tab follow that Project.",
-          "Project detail is the starting place for Activities and Items.",
-          "Map-building tools are available from the Map tab while the Project is open."
+          "Map is the launch screen. Settings remains available in its own tab.",
+          "Use Map → More (…) → Context → Project to choose the Project displayed on the Map. Tap Done to return to the Map.",
+          "With a Project selected, open More (…) → Project Detail to manage Activities, Items, collaboration, Locations, Regions, and Layers.",
+          "Use Add Project or Scan in the Map menu to create or join a Project. Select it in Context when you want to show it on the Map.",
+          "Opening a detail page does not change the Map selection. Changing Project in Context clears the selected Activity and Assignment."
         ]
       },
       {
@@ -143,18 +147,18 @@
     "slug": "map",
     "group": "Map",
     "title": "Map",
-    "summary": "The Project map is where LinkMap connects places, routes, selections, and activity logging.",
+    "summary": "The Map is LinkMap’s launch screen and the main place to choose a work context, explore places, follow routes, and log activity.",
     "source": "DocumentationMapContent.swift",
     "source_sha256": "7b0fb41d1dca3180d756509a83a470963d31df10da4a6c60a8ec0f63dac91524",
     "sections": [
       {
         "title": "Navigation Path",
-        "body": "Home → Project → Map",
+        "body": "Map",
         "points": []
       },
       {
         "title": "When the Map Appears",
-        "body": "The Map tab is tied to the Project you currently have open. When no Project is open, Settings is shown instead. This keeps the map focused on one Project at a time.",
+        "body": "The Map appears after launch and stays available even when no Project is selected. Without a Project, it shows the normal map without project-specific data. Settings remains a separate tab. Choose a Project through More (…) → Context to load its Locations and map resources.",
         "points": []
       },
       {
@@ -170,18 +174,19 @@
       },
       {
         "title": "Activity and Assignment Pickers",
-        "body": "The Activity picker chooses which Activity's Routes, Stops, and logging context should appear. The Assignment picker narrows the view to one team or work group, making it easier to follow that Assignment's route and locations during active work.",
+        "body": "Open More (…) → Context for the Map Context sheet. Choose a Project first, an Activity within it, and optionally an Assignment, then tap Done. The Activity supplies Routes, Stops, and logging context; the Assignment focuses the visible routes and Locations on one team. Changing Project clears Activity and Assignment; changing Activity clears Assignment. Choose None to clear a selection.",
         "points": []
       },
       {
         "title": "Common Map Actions",
         "body": null,
         "points": [
-          "Tap a Location marker to center it and open its actions.",
-          "Open Location detail when you need names, layer membership, photos, or other details.",
-          "Use edit mode to create a Location, move a Location, or edit Location areas.",
-          "Use Project map tools to manage Regions, Layers, Location membership, and map style.",
-          "Open the Activity Dashboard from the map when you need to log work near a Stop."
+          "Tap a Location marker to center it and open its actions. Choose Detail for its name, Layer membership, photos, and other details.",
+          "With a Project selected, use More (…) → Edit to create or move Locations. Save applies changes; Cancel discards them.",
+          "Open More (…) → Project Detail for Location List, Regions and Layers, route display options, and Refresh Map Data.",
+          "Use the map’s side selector to switch Layers and More (…) → Map Style to change the basemap.",
+          "Choose Dashboard in the Map toolbar to log work near a Stop after selecting the Activity in Context.",
+          "Use More (…) → Add Project to create a Project or Scan to join one with a collaboration QR code. Project Detail, Edit, and Dashboard require a selected Project."
         ]
       }
     ]
@@ -196,8 +201,10 @@
     "sections": [
       {
         "title": "Navigation Path",
-        "body": "Home → Project → Map → More → Regions and Layers",
-        "points": []
+        "body": "Map → More (…) → Project Detail → Regions and Layers",
+        "points": [
+          "First select a Project in Map → More (…) → Context, then tap Done."
+        ]
       },
       {
         "title": "Regions",
@@ -237,8 +244,10 @@
     "sections": [
       {
         "title": "Navigation Path",
-        "body": "Home → Project → Map → More → Location List",
-        "points": []
+        "body": "Map → More (…) → Project Detail → Location List",
+        "points": [
+          "First select a Project in Map → More (…) → Context, then tap Done."
+        ]
       },
       {
         "title": "What Counts as a Location",
@@ -283,8 +292,10 @@
     "sections": [
       {
         "title": "Navigation Path",
-        "body": "Home → Project → Items",
-        "points": []
+        "body": "Map → More (…) → Project Detail → Items",
+        "points": [
+          "First select a Project in Map → More (…) → Context, then tap Done."
+        ]
       },
       {
         "title": "What Items Are For",
@@ -327,8 +338,10 @@
     "sections": [
       {
         "title": "Navigation Path",
-        "body": "Home → Project → Activities",
-        "points": []
+        "body": "Map → More (…) → Project Detail → Activities",
+        "points": [
+          "First select a Project in Map → More (…) → Context, then tap Done."
+        ]
       },
       {
         "title": "When to Create an Activity",
@@ -373,8 +386,10 @@
     "sections": [
       {
         "title": "Navigation Path",
-        "body": "Home → Project → Activities → Activity → Routes",
-        "points": []
+        "body": "Map → More (…) → Project Detail → Activities → Activity → Routes",
+        "points": [
+          "First select a Project in Map → More (…) → Context, then tap Done."
+        ]
       },
       {
         "title": "Building a Route",
@@ -420,8 +435,9 @@
         "title": "Navigation Path",
         "body": null,
         "points": [
-          "Home → Project → Activities → Activity → Assignments",
-          "Home → Project → Activities → Activity → Supplies"
+          "Map → More (…) → Project Detail → Activities → Activity → Assignments",
+          "Map → More (…) → Project Detail → Activities → Activity → Supplies",
+          "First select a Project in Map → More (…) → Context, then tap Done."
         ]
       },
       {
@@ -436,7 +452,7 @@
           "Create the Route that describes where the work should happen.",
           "Create or open the Assignment responsible for that route.",
           "Link the Route to the Assignment when the route belongs to that person or team.",
-          "Use the Assignment picker on the Map to focus on that Assignment's route and locations."
+          "Use Map → More (…) → Context → Assignment to focus on that Assignment’s route and Locations."
         ]
       },
       {
@@ -473,8 +489,8 @@
         "title": "Using the Activity Dashboard",
         "body": null,
         "points": [
-          "Open the Project map and select the Activity you are running.",
-          "Choose an Assignment when you want to focus on one team or work group.",
+          "On the Map, open More (…) → Context and select the Project and Activity you are running.",
+          "Choose an Assignment in Context when you want to focus on one team or work group, then tap Done.",
           "Open the dashboard from the Map toolbar near the Stop where work is happening.",
           "Use the Stop picker when you need to switch the logging context.",
           "Leave the dashboard with Done when the current logging pass is finished."
@@ -509,8 +525,9 @@
         "title": "Navigation Path",
         "body": null,
         "points": [
-          "Home → Project → Toolbar menu (…) → Collaborators",
-          "Home → Project → Toolbar menu (…) → QR Code"
+          "Map → More (…) → Project Detail → Toolbar menu (…) → Collaborators",
+          "Map → More (…) → Project Detail → Toolbar menu (…) → QR Code",
+          "First select a Project in Map → More (…) → Context, then tap Done."
         ]
       },
       {
@@ -525,7 +542,7 @@
           "Start collaboration from the Project tools.",
           "Use a LinkMap collaboration link when the invite should be sent through another app.",
           "Use the QR code when collaborators are nearby and can scan from their device.",
-          "After accepting, collaborators see the shared Project in their Project list."
+          "On the Map, use More (…) → Scan to scan a collaboration QR code. After joining, use Context → Project to select the shared Project."
         ]
       },
       {

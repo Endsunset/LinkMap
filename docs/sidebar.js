@@ -82,6 +82,6 @@
     });
     if (!query) previousGroups = null;
     status.hidden = !query;
-    status.textContent = count ? `${count} guide${count === 1 ? '' : 's'} found` : 'No guides found.';
+    status.textContent = count ? `${count} documentation article${count === 1 ? '' : 's'} found` : 'No documentation found.';
   });
 })();

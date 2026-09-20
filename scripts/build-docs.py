@@ -43,11 +43,11 @@ def shell(title, description, content, active='index'):
   </nav>
   <button class="docs-backdrop" type="button" aria-label="Close documentation sidebar" tabindex="-1" aria-hidden="true"></button>
   <div class="docs-layout">
-    <aside class="docs-sidebar" id="docs-sidebar" aria-label="Guide navigator">
+    <aside class="docs-sidebar" id="docs-sidebar" aria-label="Documentation navigator">
       <div class="docs-sidebar-heading">LinkMap documentation</div>
       <div class="docs-filter" hidden>
-        <label for="guide-filter">Filter guides</label>
-        <input id="guide-filter" type="search" placeholder="Filter guides" autocomplete="off" aria-controls="guide-navigation">
+        <label for="guide-filter">Filter documentation</label>
+        <input id="guide-filter" type="search" placeholder="Filter documentation" autocomplete="off" aria-controls="guide-navigation">
         <p class="docs-filter-status" role="status" hidden></p>
       </div>
       <nav class="docs-navigation" id="guide-navigation" aria-label="Documentation">{navigation}</nav>
@@ -66,9 +66,9 @@ for group in dict.fromkeys(p['group'] for p in pages):
         if page['group'] == group:
             cards += f'<a class="docs-card" href="{page["slug"]}/"><h3>{e(page["title"])}</h3><p>{e(page["summary"])}</p></a>'
     cards += '</div></section>'
-(docs / 'index.html').write_text(shell('Documentation', 'Learn how to set up a LinkMap project, plan activities, and collaborate with your team.', '<p class="eyebrow">LinkMap user guide</p><h1>Documentation</h1><p class="docs-intro">Learn how to build your project map, plan a round of work, and coordinate with your team.</p><p class="docs-note">These guides describe the LinkMap iOS app. Screen names and navigation steps refer to the app; web project tools are still in development.</p>' + cards))
+(docs / 'index.html').write_text(shell('Documentation', 'Learn how to set up a LinkMap project, plan activities, and collaborate with your team.', '<p class="eyebrow">LinkMap documentation</p><h1>Documentation</h1><p class="docs-intro">Start on the Map, choose your Project, Activity, and Assignment in Context, and use Project Detail to plan and manage your work.</p><p class="docs-note">This documentation describes the LinkMap iOS app. Screen names and navigation steps refer to the app; web project tools are still in development.</p>' + cards))
 for index, page in enumerate(pages):
-    content = f'<p class="docs-breadcrumb"><a href="../">Documentation</a> / {e(page["group"])}</p><h1>{e(page["title"])}</h1><p class="docs-intro">{e(page["summary"])}</p><p class="docs-note">This guide describes the LinkMap iOS app.</p>'
+    content = f'<p class="docs-breadcrumb"><a href="../">Documentation</a> / {e(page["group"])}</p><h1>{e(page["title"])}</h1><p class="docs-intro">{e(page["summary"])}</p><p class="docs-note">This documentation describes the LinkMap iOS app.</p>'
     content += '<nav class="docs-toc" aria-label="On this page"><strong>On this page</strong><ul>'
     for number, section in enumerate(page['sections'], 1):
         content += f'<li><a href="#section-{number}">{e(section["title"])}</a></li>'
@@ -80,7 +80,7 @@ for index, page in enumerate(pages):
         if section['points']:
             content += '<ul>' + ''.join(f'<li>{e(point)}</li>' for point in section['points']) + '</ul>'
         content += '</section>'
-    content += '</article><nav class="docs-pagination" aria-label="Guide navigation">'
+    content += '</article><nav class="docs-pagination" aria-label="Documentation pagination">'
     if index > 0:
         previous = pages[index - 1]
         content += f'<a href="../{previous["slug"]}/">Previous: {e(previous["title"])}</a>'
@@ -91,4 +91,4 @@ for index, page in enumerate(pages):
     destination = docs / page['slug']
     destination.mkdir(exist_ok=True)
     (destination / 'index.html').write_text(shell(page['title'], page['summary'], content, page['slug']))
-print(f'Rendered documentation home and {len(pages)} guides.')
+print(f'Rendered documentation home and {len(pages)} articles.')
