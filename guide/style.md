@@ -66,11 +66,12 @@ Keep the filter in a separate bottom panel outside the scrolling navigation.
 Start with a Platforms view containing Web and iOS. Selecting a platform opens
 its overview and sidebar view; a Platforms back link returns to the platform list.
 Filter only the current sidebar view, and clear the filter when switching views.
-Group iOS topics into Introduction, Features, and Sharing in expandable sections.
+Group iOS topics into Introduction, Features, and Sharing under static section dividers.
 Keep separate documentation, Web, and iOS overview pages.
 Use parent relationships in `docs/content.json` for expandable topic rows.
 Topic titles open their pages; disclosure arrows expand nested child pages.
-Expand the active page’s ancestor path and retain matching ancestors while filtering. Highlight the current guide with red text
+Keep every topic collapsed on initial page load, including ancestors of the active page.
+During filtering, expand matching ancestor paths and restore the prior state when cleared. Highlight the current guide with red text
 and a trailing red edge. Include a labeled filter with result feedback.
 
 Keep the sidebar icon toggle in the documentation subheader even when the pane is hidden. Collapsing

@@ -22,7 +22,7 @@ for (const mobile of [false, true]) {
   child.closest = () => childRow;
   const topic = element({ open: false, classList: { contains() { return true; } },
     closest() { return parentRow; }, querySelectorAll() { return [childRow]; } });
-  const group = element({ open: false, querySelectorAll() { return [parentRow, childRow]; } });
+  const group = element({ querySelectorAll() { return [parentRow, childRow]; } });
   const platforms = element({ hidden: true, dataset: { slide: 'platforms' },
     querySelectorAll(s) { return s === '[data-filter-item]' ? platformRows : []; }, querySelector() { return platformRows[0]; } });
   const ios = element({ dataset: { slide: 'ios' },
@@ -45,7 +45,7 @@ for (const mobile of [false, true]) {
   if (mobile) { button.handlers.click(); assert.equal(background[0].inert, true); }
   filter.value = 'map'; filter.handlers.input();
   assert.equal(article.hidden, false); assert.equal(overview.hidden, true);
-  assert.equal(group.open, true); assert.equal(status.textContent, '1 page found');
+  assert.equal(group.open, undefined, 'section dividers never expand'); assert.equal(status.textContent, '1 page found');
   assert.equal(platformRows[0].hidden, false, 'inactive slide is unaffected');
   filter.value = 'locations'; filter.handlers.input();
   assert.equal(childRow.hidden, false);
@@ -60,7 +60,7 @@ for (const mobile of [false, true]) {
   let prevented = false;
   back.handlers.click({ preventDefault() { prevented = true; } });
   assert.equal(prevented, true); assert.equal(ios.hidden, true); assert.equal(platforms.hidden, false);
-  assert.equal(group.open, false, 'clearing restores disclosure state');
+  assert.equal(group.open, undefined, 'section dividers have no disclosure state');
   assert.equal(filter.value, ''); assert.equal(status.hidden, true);
   assert.equal(document.activeElement, platformRows[0]); assert.equal(navigation.scrollTop, 0);
   filter.value = 'web'; filter.handlers.input();

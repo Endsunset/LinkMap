@@ -33,8 +33,7 @@ def topic_navigation(page, prefix, active):
     if not children:
         return f'<li>{link}</li>'
     descendants = ''.join(topic_navigation(child, prefix, active) for child in children)
-    expanded = ' open' if current or 'aria-current="page"' in descendants else ''
-    return f'<li><details class="docs-nav-topic"{expanded}><summary>{link}</summary><ul>{descendants}</ul></details></li>'
+    return f'<li><details class="docs-nav-topic"><summary>{link}</summary><ul>{descendants}</ul></details></li>'
 
 def shell(title, description, content, active='index', platform=None):
     docs_prefix = './' if active == 'index' else '../'
@@ -48,11 +47,11 @@ def shell(title, description, content, active='index', platform=None):
         navigation += f'<section class="docs-slide" data-slide="{platform["slug"]}"><a class="docs-platform-back" href="{docs_prefix}" data-platform-back><span aria-hidden="true">‹</span> Platforms</a><a class="docs-platform-overview" href="{docs_prefix}{platform["slug"]}/"{current} data-filter-item>{e(platform["title"])} overview</a>'
         platform_pages = [p for p in pages if p['platform'] == platform['slug']]
         for group in dict.fromkeys(p['group'] for p in platform_pages):
-            navigation += f'<details class="docs-nav-group" open><summary>{e(group)}</summary><ul>'
+            navigation += f'<section class="docs-nav-group"><h2>{e(group)}</h2><ul>'
             for page in platform_pages:
                 if page['group'] == group and not page.get('parent'):
                     navigation += topic_navigation(page, docs_prefix, active)
-            navigation += '</ul></details>'
+            navigation += '</ul></section>'
         if not platform_pages:
             navigation += '<p class="docs-nav-note">Get started with the platform overview. More web guides are on the way.</p>'
         navigation += '</section>'

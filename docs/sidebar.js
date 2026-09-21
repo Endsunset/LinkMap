@@ -97,8 +97,10 @@
     groups.forEach((group, index) => {
       const ownRow = group.classList.contains('docs-nav-topic') ? group.closest('li') : null;
       group.hidden = ownRow ? ownRow.hidden : ![...group.querySelectorAll('li')].some(item => !item.hidden);
-      if (query) group.open = true;
-      else if (previousGroups) group.open = previousGroups[index];
+      if (ownRow) {
+        if (query) group.open = true;
+        else if (previousGroups) group.open = previousGroups[index];
+      }
     });
     if (!query) filterStates.delete(activeSlide);
     status.hidden = !query;
