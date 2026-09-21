@@ -63,7 +63,11 @@ shared stylesheets, so regeneration must preserve this theme.
 Use a dedicated left navigation pane below the documentation subheader on desktop,
 at 320px wide, with independently scrolling links, a thin vertical divider, and compact indented links.
 Keep the filter in a separate bottom panel outside the scrolling navigation.
-Group topics in expandable sections. Highlight the current guide with red text
+Start with a Platforms view containing Web and iOS. Selecting a platform opens
+its overview and sidebar view; a Platforms back link returns to the platform list.
+Filter only the current sidebar view, and clear the filter when switching views.
+Group iOS topics into Introduction, Features, and Sharing in expandable sections.
+Keep separate documentation, Web, and iOS overview pages. Highlight the current guide with red text
 and a trailing red edge. Include a labeled filter with result feedback.
 
 Keep the sidebar icon toggle in the documentation subheader even when the pane is hidden. Collapsing

@@ -6,22 +6,34 @@ from site_header import render_header, render_auth_scripts
 
 root = Path(__file__).resolve().parents[1]
 docs = root / 'docs'
-pages = json.loads((docs / 'content.json').read_text())
+catalog = json.loads((docs / 'content.json').read_text())
+pages = catalog['pages']
+platforms = catalog['platforms']
 e = html.escape
 documentation_version = "LinkMap 3.0.0 Beta 8"
 version_line = f'<p class="docs-availability" aria-label="Documentation version">{e(documentation_version)}</p>'
 
-def shell(title, description, content, active='index'):
+def shell(title, description, content, active='index', platform=None):
     docs_prefix = './' if active == 'index' else '../'
     site_prefix = '../' if active == 'index' else '../../'
-    navigation = ''
-    for group in dict.fromkeys(p['group'] for p in pages):
-        navigation += f'<details class="docs-nav-group" open><summary>{e(group)}</summary><ul>'
-        for page in pages:
-            if page['group'] == group:
-                current = ' aria-current="page"' if active == page['slug'] else ''
-                navigation += f'<li><a href="{docs_prefix}{page["slug"]}/"{current}>{e(page["title"])}</a></li>'
-        navigation += '</ul></details>'
+    navigation = '<section class="docs-slide" data-slide="platforms"' + (' hidden' if platform else '') + '><h2 class="docs-slide-title">Platforms</h2><ul class="docs-platform-list">'
+    for item in platforms:
+        navigation += f'<li><a class="docs-platform-row" href="{docs_prefix}{item["slug"]}/" data-filter-item><span>{e(item["title"])}</span><span aria-hidden="true">›</span></a></li>'
+    navigation += '</ul></section>'
+    if platform:
+        current = ' aria-current="page"' if active == platform['slug'] else ''
+        navigation += f'<section class="docs-slide" data-slide="{platform["slug"]}"><a class="docs-platform-back" href="{docs_prefix}" data-platform-back><span aria-hidden="true">‹</span> Platforms</a><a class="docs-platform-overview" href="{docs_prefix}{platform["slug"]}/"{current} data-filter-item>{e(platform["title"])} overview</a>'
+        platform_pages = [p for p in pages if p['platform'] == platform['slug']]
+        for group in dict.fromkeys(p['group'] for p in platform_pages):
+            navigation += f'<details class="docs-nav-group" open><summary>{e(group)}</summary><ul>'
+            for page in platform_pages:
+                if page['group'] == group:
+                    current = ' aria-current="page"' if active == page['slug'] else ''
+                    navigation += f'<li><a href="{docs_prefix}{page["slug"]}/"{current} data-filter-item>{e(page["title"])}</a></li>'
+            navigation += '</ul></details>'
+        if not platform_pages:
+            navigation += '<p class="docs-nav-note">Get started with the platform overview. More web guides are on the way.</p>'
+        navigation += '</section>'
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -54,7 +66,7 @@ def shell(title, description, content, active='index'):
       </div>
       <nav class="docs-navigation" id="guide-navigation" aria-label="Documentation">{navigation}</nav>
       <div class="docs-filter" hidden>
-        <label for="guide-filter">Filter documentation</label>
+        <label for="guide-filter">Filter current view</label>
         <div class="docs-filter-field">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5h14M6 10h8M8 15h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           <input id="guide-filter" type="search" placeholder="Filter" autocomplete="off" aria-controls="guide-navigation">
@@ -69,16 +81,40 @@ def shell(title, description, content, active='index'):
 </html>
 '''
 
-cards = ''
-for group in dict.fromkeys(p['group'] for p in pages):
-    cards += f'<section class="docs-group"><h2>{e(group)}</h2><div class="docs-cards">'
-    for page in pages:
-        if page['group'] == group:
-            cards += f'<a class="docs-card" href="{page["slug"]}/"><h3>{e(page["title"])}</h3><p>{e(page["summary"])}</p></a>'
-    cards += '</div></section>'
-(docs / 'index.html').write_text(shell('Documentation', 'Learn how to set up a LinkMap project, plan activities, and collaborate with your team.', '<p class="eyebrow">LinkMap documentation</p><h1>Documentation</h1><p class="docs-intro">Start on the Map, choose your Project, Activity, and Assignment in Context, and use Project Detail to plan and manage your work.</p>' + version_line + '<p class="docs-note">This documentation describes the LinkMap iOS app. Screen names and navigation steps refer to the app; web project tools are still in development.</p>' + cards))
+def platform_cards(platform, prefix):
+    cards = ''
+    platform_pages = [p for p in pages if p['platform'] == platform['slug']]
+    for group in dict.fromkeys(p['group'] for p in platform_pages):
+        cards += f'<section class="docs-group"><h2>{e(group)}</h2><div class="docs-cards">'
+        for page in platform_pages:
+            if page['group'] == group:
+                cards += f'<a class="docs-card" href="{prefix}{page["slug"]}/"><h3>{e(page["title"])}</h3><p>{e(page["summary"])}</p></a>'
+        cards += '</div></section>'
+    return cards
+
+home = catalog['home']
+content = f'<p class="eyebrow">LinkMap documentation</p><h1>{e(home["title"])}</h1><p class="docs-intro">{e(home["summary"])}</p><section class="docs-group"><h2>Platforms</h2><div class="docs-cards">'
+for platform in platforms:
+    content += f'<a class="docs-card" href="{platform["slug"]}/"><h3>{e(platform["title"])}</h3><p>{e(platform["summary"])}</p></a>'
+content += '</div></section>'
+(docs / 'index.html').write_text(shell(home['title'], home['summary'], content))
+for platform in platforms:
+    content = f'<p class="docs-breadcrumb"><a href="../">Documentation</a> / {e(platform["title"])}</p><h1>LinkMap for {e(platform["title"])}</h1><p class="docs-intro">{e(platform["summary"])}</p>'
+    if platform['slug'] == 'ios':
+        content += version_line
+    for section in platform['sections']:
+        content += f'<section class="docs-group"><h2>{e(section["title"])}</h2><p>{e(section["body"])}</p></section>'
+    if platform['slug'] == 'web':
+        content += '<p><a class="button button-primary" href="../../app/">Open the web map</a></p>'
+    else:
+        content += '<p><a href="../../download/">Download LinkMap for iOS</a></p>'
+    content += platform_cards(platform, '../')
+    destination = docs / platform['slug']
+    destination.mkdir(exist_ok=True)
+    (destination / 'index.html').write_text(shell(platform['title'], platform['summary'], content, platform['slug'], platform))
 for index, page in enumerate(pages):
-    content = f'<p class="docs-breadcrumb"><a href="../">Documentation</a> / {e(page["group"])}</p><h1>{e(page["title"])}</h1><p class="docs-intro">{e(page["summary"])}</p>{version_line}<p class="docs-note">This documentation describes the LinkMap iOS app.</p>'
+    platform = next(p for p in platforms if p['slug'] == page['platform'])
+    content = f'<p class="docs-breadcrumb"><a href="../">Documentation</a> / <a href="../{platform["slug"]}/">{e(platform["title"])}</a> / {e(page["group"])}</p><h1>{e(page["title"])}</h1><p class="docs-intro">{e(page["summary"])}</p>{version_line}<p class="docs-note">This documentation describes the LinkMap iOS app.</p>'
     content += '<nav class="docs-toc" aria-label="On this page"><strong>On this page</strong><ul>'
     for number, section in enumerate(page['sections'], 1):
         content += f'<li><a href="#section-{number}">{e(section["title"])}</a></li>'
@@ -100,5 +136,5 @@ for index, page in enumerate(pages):
     content += '</nav>'
     destination = docs / page['slug']
     destination.mkdir(exist_ok=True)
-    (destination / 'index.html').write_text(shell(page['title'], page['summary'], content, page['slug']))
-print(f'Rendered documentation home and {len(pages)} articles.')
+    (destination / 'index.html').write_text(shell(page['title'], page['summary'], content, page['slug'], platform))
+print(f'Rendered documentation home, {len(platforms)} platform overviews, and {len(pages)} articles.')

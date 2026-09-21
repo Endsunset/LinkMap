@@ -16,8 +16,9 @@
   window.addEventListener('resize', updateHeaderOffset);
   new ResizeObserver(updateHeaderOffset).observe(header);
 
-  const groups = [...sidebar.querySelectorAll('.docs-nav-group')];
-  const links = [...sidebar.querySelectorAll('nav a')];
+  const slides = [...sidebar.querySelectorAll('[data-slide]')];
+  let activeSlide = slides.find(slide => !slide.hidden);
+  const filterStates = new Map();
   const status = sidebar.querySelector('.docs-filter-status');
   const smallScreen = window.matchMedia('(max-width: 700px)');
   const backdrop = document.querySelector('.docs-backdrop');
@@ -68,10 +69,15 @@
     setOpen(!smallScreen.matches && saved !== 'closed');
   });
 
-  let previousGroups;
-  filter.addEventListener('input', () => {
+  function filterSlide() {
+    const groups = [...activeSlide.querySelectorAll('.docs-nav-group')];
+    const links = [...activeSlide.querySelectorAll('[data-filter-item]')];
     const query = filter.value.trim().toLowerCase();
-    if (query && !previousGroups) previousGroups = groups.map(group => group.open);
+    let previousGroups = filterStates.get(activeSlide);
+    if (query && !previousGroups) {
+      previousGroups = groups.map(group => group.open);
+      filterStates.set(activeSlide, previousGroups);
+    }
     let count = 0;
     links.forEach(link => {
       const matches = link.textContent.toLowerCase().includes(query);
@@ -83,8 +89,30 @@
       if (query) group.open = true;
       else if (previousGroups) group.open = previousGroups[index];
     });
-    if (!query) previousGroups = null;
+    if (!query) filterStates.delete(activeSlide);
     status.hidden = !query;
-    status.textContent = count ? `${count} documentation article${count === 1 ? '' : 's'} found` : 'No documentation found.';
+    const noun = activeSlide.dataset.slide === 'platforms' ? 'platform' : 'page';
+    status.textContent = count ? `${count} ${noun}${count === 1 ? '' : 's'} found` : `No ${noun}s found.`;
+  }
+  function updateFilterLabel() {
+    const name = activeSlide.dataset.slide === 'platforms' ? 'platforms' : `${activeSlide.dataset.slide === 'ios' ? 'iOS' : 'Web'} documentation`;
+    filter.placeholder = `Filter ${name}`;
+    sidebar.querySelector('label[for="guide-filter"]').textContent = `Filter ${name}`;
+  }
+  sidebar.querySelector('[data-platform-back]')?.addEventListener('click', event => {
+    // Modified clicks retain normal navigation to the documentation homepage.
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    filter.value = '';
+    filterSlide();
+    activeSlide.hidden = true;
+    activeSlide = slides.find(slide => slide.dataset.slide === 'platforms');
+    activeSlide.hidden = false;
+    updateFilterLabel();
+    filterSlide();
+    sidebar.querySelector('.docs-navigation').scrollTop = 0;
+    activeSlide.querySelector('a').focus();
   });
+  updateFilterLabel();
+  filter.addEventListener('input', filterSlide);
 })();

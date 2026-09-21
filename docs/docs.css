@@ -77,3 +77,16 @@ html:has(.docs-page) { scroll-padding-top: calc(52px + 16px); }
 @media (prefers-reduced-motion: reduce) {
   .docs-layout, .docs-sidebar, .docs-backdrop { transition: none; }
 }
+
+/* Each navigator view owns its rows; the filter stays anchored below it. */
+.docs-slide[hidden] { display: none; }
+.docs-slide { animation: docs-slide-in 240ms ease; }
+.docs-slide-title { margin: 22px 10px 12px; font-size: .8rem; font-weight: 650; color: var(--muted); }
+.docs-navigation .docs-platform-list { padding: 0; }
+.docs-navigation .docs-platform-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 10px; font-size: .95rem; }
+.docs-platform-row > span:last-child { color: var(--muted); font-size: 1.3rem; line-height: 1; }
+.docs-navigation .docs-platform-back { display: flex; gap: 8px; align-items: center; margin: 12px 0; color: var(--accent); }
+.docs-platform-overview { font-weight: 650; font-size: .95rem; }
+.docs-nav-note { margin: 16px 10px; color: var(--muted); line-height: 1.6; }
+@keyframes docs-slide-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .docs-slide { animation: none; } }
