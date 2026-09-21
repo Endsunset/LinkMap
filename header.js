@@ -8,6 +8,22 @@
   const menuToggle = header.querySelector('.mobile-menu-toggle');
   const mobile = window.matchMedia('(max-width: 760px)');
 
+  // Include every sign-in action, including those below this header.
+  function updateSignInLinks() {
+    const login = new URL(accountLink.getAttribute('href').replace(/account\/$/, 'login/'), window.location.href);
+    if (window.location.pathname === login.pathname) return;
+    const redirect = window.location.pathname + window.location.search + window.location.hash;
+    document.querySelectorAll('a[href]').forEach(link => {
+      const target = new URL(link.getAttribute('href'), window.location.href);
+      if (target.origin !== login.origin || target.pathname !== login.pathname) return;
+      target.searchParams.set('redirect', redirect);
+      link.setAttribute('href', link.getAttribute('href').split(/[?#]/)[0] + target.search + target.hash);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', updateSignInLinks);
+  window.addEventListener('hashchange', updateSignInLinks);
+  document.addEventListener('click', updateSignInLinks, true);
+
   function positionMenu() {
     menu.style.setProperty('--menu-top', `${header.getBoundingClientRect().bottom}px`);
   }

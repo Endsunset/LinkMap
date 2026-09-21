@@ -77,7 +77,9 @@ Use 240ms transitions and disable them for reduced-motion preferences. Without J
 and group disclosures functional through native `details` elements.
 
 Sign in actions link to `login/`, which uses the existing white account-page layout
-and Apple’s SDK sign-in button. Signed-in sessions redirect to `account/`.
+and Apple’s SDK sign-in button. Sign-in links carry the originating page in a
+`redirect` query parameter. Signed-in sessions return there, or to the homepage
+when no valid return page is provided.
 Use `account/` for authentication status, account identity, retry, and the SDK
 sign-out button.
 
