@@ -198,7 +198,7 @@
         },
         {
           "title": "When the Map Appears",
-          "body": "The Map appears after launch and stays available even when no Project is selected. Without a Project, it shows the normal map without project-specific data. Settings remains a separate tab. Choose a Project through More (…) → Context to load its Locations and map resources.",
+          "body": "The Map appears after launch and stays available even when no Project is selected. Without a Project, it shows the normal map without project-specific data. Settings remains a separate tab. Choose a Project through More (…) → Context to load its Locations and map resources. Regions, Layers, and Locations require a selected Project. Open More (…) → Context → Project, choose a Project, and tap Done before using these features.",
           "points": []
         },
         {
@@ -230,14 +230,13 @@
           ]
         }
       ],
-      "platform": "ios",
-      "parent": "project"
+      "platform": "ios"
     },
     {
       "slug": "regions-and-layers",
       "group": "Features",
       "title": "Regions and Layers",
-      "summary": "Regions and Layers make large or vertical maps understandable before you add Activity plans.",
+      "summary": "Regions and Layers organize large or vertical maps within a selected Project. Select a Project before viewing or managing its Regions and Layers.",
       "source": "DocumentationRegionsAndLayersContent.swift",
       "source_sha256": "c31ab64d2002d84087e88160f3bc3a715b724b7d3b67eea71cdc4a1ccd2453a8",
       "sections": [
@@ -282,7 +281,7 @@
       "slug": "locations",
       "group": "Features",
       "title": "Locations",
-      "summary": "Locations are reusable places on the Project map. Activities use them later as route stops and logging points.",
+      "summary": "Locations are reusable places on the Project map. Select a Project before viewing or managing its Locations. Activities use them later as route stops and logging points.",
       "source": "DocumentationLocationsContent.swift",
       "source_sha256": "c3d21a5a06243f0c63af59904e7b78e8d753b3c43a793c5acb05199c4e6998cb",
       "sections": [
