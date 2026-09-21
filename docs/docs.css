@@ -90,3 +90,14 @@ html:has(.docs-page) { scroll-padding-top: calc(52px + 16px); }
 .docs-nav-note { margin: 16px 10px; color: var(--muted); line-height: 1.6; }
 @keyframes docs-slide-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .docs-slide { animation: none; } }
+
+/* Topic titles navigate; their native disclosure markers expand child pages. */
+.docs-nav-topic > summary { display: flex; align-items: center; list-style: none; cursor: pointer; }
+.docs-nav-topic > summary::-webkit-details-marker { display: none; }
+.docs-nav-topic > summary::before { content: "›"; flex: 0 0 20px; text-align: center; color: var(--muted); font-size: 1.15rem; transform: rotate(0deg); }
+.docs-nav-topic[open] > summary::before { transform: rotate(90deg); }
+.docs-nav-topic > summary > a { flex: 1; min-width: 0; font-weight: 400; }
+.docs-nav-topic > summary > a[aria-current="page"] { font-weight: 650; }
+.docs-nav-group .docs-nav-topic > summary { padding: 0; }
+.docs-nav-topic > ul { margin: 0; padding-inline-start: 20px; }
+.docs-nav-topic > ul > li > a { margin-inline-start: 20px; }

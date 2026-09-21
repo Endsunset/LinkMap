@@ -13,6 +13,29 @@ e = html.escape
 documentation_version = "LinkMap 3.0.0 Beta 8"
 version_line = f'<p class="docs-availability" aria-label="Documentation version">{e(documentation_version)}</p>'
 
+# Parent relationships drive the navigator without changing public article URLs.
+page_by_slug = {page['slug']: page for page in pages}
+for page in pages:
+    seen = {page['slug']}
+    ancestor = page
+    while ancestor.get('parent'):
+        ancestor = page_by_slug[ancestor['parent']]
+        if ancestor['slug'] in seen:
+            raise ValueError(f"Cyclic documentation hierarchy: {page['slug']}")
+        if (ancestor['platform'], ancestor['group']) != (page['platform'], page['group']):
+            raise ValueError(f"Parent must belong to the same platform and section: {page['slug']}")
+        seen.add(ancestor['slug'])
+
+def topic_navigation(page, prefix, active):
+    current = ' aria-current="page"' if active == page['slug'] else ''
+    link = f'<a href="{prefix}{page["slug"]}/"{current} data-filter-item>{e(page["title"])}</a>'
+    children = [child for child in pages if child.get('parent') == page['slug']]
+    if not children:
+        return f'<li>{link}</li>'
+    descendants = ''.join(topic_navigation(child, prefix, active) for child in children)
+    expanded = ' open' if current or 'aria-current="page"' in descendants else ''
+    return f'<li><details class="docs-nav-topic"{expanded}><summary>{link}</summary><ul>{descendants}</ul></details></li>'
+
 def shell(title, description, content, active='index', platform=None):
     docs_prefix = './' if active == 'index' else '../'
     site_prefix = '../' if active == 'index' else '../../'
@@ -27,9 +50,8 @@ def shell(title, description, content, active='index', platform=None):
         for group in dict.fromkeys(p['group'] for p in platform_pages):
             navigation += f'<details class="docs-nav-group" open><summary>{e(group)}</summary><ul>'
             for page in platform_pages:
-                if page['group'] == group:
-                    current = ' aria-current="page"' if active == page['slug'] else ''
-                    navigation += f'<li><a href="{docs_prefix}{page["slug"]}/"{current} data-filter-item>{e(page["title"])}</a></li>'
+                if page['group'] == group and not page.get('parent'):
+                    navigation += topic_navigation(page, docs_prefix, active)
             navigation += '</ul></details>'
         if not platform_pages:
             navigation += '<p class="docs-nav-note">Get started with the platform overview. More web guides are on the way.</p>'

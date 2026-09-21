@@ -70,7 +70,7 @@
   });
 
   function filterSlide() {
-    const groups = [...activeSlide.querySelectorAll('.docs-nav-group')];
+    const groups = [...activeSlide.querySelectorAll('.docs-nav-group, .docs-nav-topic')];
     const links = [...activeSlide.querySelectorAll('[data-filter-item]')];
     const query = filter.value.trim().toLowerCase();
     let previousGroups = filterStates.get(activeSlide);
@@ -84,8 +84,19 @@
       (link.closest('li') || link).hidden = !matches;
       if (matches) count++;
     });
+    // A matching descendant keeps its complete parent path visible.
+    links.forEach(link => {
+      const row = link.closest('li');
+      if (!row || row.hidden) return;
+      let ancestor = row.parentElement?.closest('li');
+      while (ancestor) {
+        ancestor.hidden = false;
+        ancestor = ancestor.parentElement?.closest('li');
+      }
+    });
     groups.forEach((group, index) => {
-      group.hidden = ![...group.querySelectorAll('li')].some(item => !item.hidden);
+      const ownRow = group.classList.contains('docs-nav-topic') ? group.closest('li') : null;
+      group.hidden = ownRow ? ownRow.hidden : ![...group.querySelectorAll('li')].some(item => !item.hidden);
       if (query) group.open = true;
       else if (previousGroups) group.open = previousGroups[index];
     });
