@@ -3,6 +3,7 @@ from pathlib import Path
 import html
 import json
 from site_header import render_header, render_auth_scripts
+from site_footer import render_footer
 
 root = Path(__file__).resolve().parents[1]
 docs = root / 'docs'
@@ -97,7 +98,7 @@ def shell(title, description, content, active='index', platform=None):
     </aside>
     <main id="main" class="docs-main" tabindex="-1">{content}</main>
   </div>
-  <footer class="site-footer"><a href="{site_prefix}">LinkMap home</a><a href="{site_prefix}privacy-policy/">Privacy policy</a></footer>
+  {render_footer(site_prefix)}
 </body>
 </html>
 '''

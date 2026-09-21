@@ -58,6 +58,11 @@ Update shared styles instead of adding conflicting page-specific color values.
 Follow `AGENTS.md` for clean folder links. Documentation renderers keep using the
 shared stylesheets, so regeneration must preserve this theme.
 
+All pages use `components/footer.html`, matching the documentation footer with
+LinkMap home and Privacy policy links. Refresh checked-in pages with
+`python3 scripts/build-footers.py`; documentation and privacy generators use
+the same renderer automatically.
+
 ## Documentation sidebar
 
 Use a dedicated left navigation pane below the documentation subheader on desktop,

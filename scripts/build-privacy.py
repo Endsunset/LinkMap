@@ -3,6 +3,7 @@ from pathlib import Path
 import html
 import re
 from site_header import render_header, render_auth_scripts
+from site_footer import render_footer
 
 root = Path(__file__).resolve().parents[1]
 
@@ -44,7 +45,7 @@ output.mkdir(exist_ok=True)
   <main id="main" class="docs-main policy-main" tabindex="-1">
 ''' + '\n'.join(blocks) + '''
   </main>
-  <footer class="site-footer"><a href="../">LinkMap home</a><a href="../docs/">Documentation</a></footer>
+  ''' + render_footer('../') + '''
 </body>
 </html>
 ''')
