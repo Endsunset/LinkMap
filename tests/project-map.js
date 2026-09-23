@@ -65,11 +65,12 @@ const locationsModule = new Function('queryRecords', moduleSource('app/location.
   window.addEventListener = (_, callback) => { authListener = callback; };
   window.reportCloudKitError = () => { notices++; return { dismiss() {} }; };
   const map = { clearLocations() { clears++; mapLocations = []; }, setLocations(locations) { mapLocations = locations; } };
-  new Function('loadProjects', 'loadLocations', 'initializeMap', 'createProjectSelector', moduleSource('app/app.js'))(
+  new Function('loadProjects', 'loadLocations', 'initializeMap', 'createProjectSelector', 'createPlaceSearch', 'createPlaceDetails', 'createCoordinates', moduleSource('app/app.js'))(
     () => { const request = defer(); projectLoads.push(request); return request.promise; },
     project => { const request = defer(); pending.push({ project, ...request }); return request.promise; },
     ready => { onReady = ready; return map; },
-    select => { onSelect = select; return { render(value) { view = value; } }; }
+    select => { onSelect = select; return { render(value) { view = value; } }; },
+    () => ({ ready() {} }), () => ({ show() {} }), () => ({ ready() {}, show() {} })
   );
   assert(view.busy, 'project loading visible');
   projectLoads[0].resolve(projects); await flush();
@@ -109,18 +110,23 @@ const locationsModule = new Function('queryRecords', moduleSource('app/location.
   globalThis.document = { documentElement: {}, getElementById(id) { return nodes[id] ||= element(); },
     createElement: element, head: { append() {} } };
   globalThis.getComputedStyle = () => ({ getPropertyValue: () => '#b4232c' });
-  let instances = 0, displayed = [], errors = 0;
-  const mapWindow = { setTimeout, clearTimeout, reportMapKitError() { errors++; }, mapkit: {
+  let instances = 0, displayed = [], errors = 0, centered;
+  const mapWindow = { setTimeout, clearTimeout, matchMedia: () => ({ matches: true }), reportMapKitError() { errors++; }, mapkit: {
     addEventListener() {}, FeatureVisibility: { Visible: 1 },
     Map: class {
       constructor() { instances++; }
       addEventListener() {}
       removeAnnotations(items) { displayed = displayed.filter(item => !items.includes(item)); }
       showItems(items) { displayed.push(...items); }
+      addAnnotation(item) { displayed.push(item); }
+      addAnnotations(items) { displayed.push(...items); }
+      setRegionAnimated(region) { centered = region.center; }
     },
     Coordinate: class { constructor(latitude, longitude) { Object.assign(this, { latitude, longitude }); } },
     MarkerAnnotation: class { constructor(coordinate, options) { Object.assign(this, { coordinate }, options); } },
     Padding: class {},
+    CoordinateRegion: class { constructor(center) { this.center = center; } },
+    CoordinateSpan: class {},
   } };
   const initialize = new Function('window', moduleSource('app/map.js') + '\nreturn initializeMap;')(mapWindow);
   const map = initialize(() => {});
@@ -131,6 +137,14 @@ const locationsModule = new Function('queryRecords', moduleSource('app/location.
   assert(displayed.length === 1 && displayed[0].title === 'B' && instances === 1, 'replacement removes old annotations without rebuilding map');
   map.clearLocations();
   assert(displayed.length === 0 && errors === 0, 'explicit map clear');
+  map.showSelection({ latitude: 0, longitude: 0 }, { name: 'Place', formattedAddress: 'Address' });
+  assert(displayed.length === 1 && centered.latitude === 0 && displayed[0].title === 'Place', 'selected place marked and centered');
+  map.setLocations([{ coordinate: { latitude: 3, longitude: 4 }, name: 'Project location' }]);
+  assert(displayed.length === 2 && centered.latitude === 0, 'project response preserves selected place and viewport');
+  map.showSelection({ latitude: 5, longitude: 6 });
+  assert(displayed.length === 2 && centered.latitude === 5, 'coordinate replaces only selection marker');
+  map.clearLocations();
+  assert(displayed.length === 1 && displayed[0].title === 'Selected coordinate', 'project clearing retains independent selection');
   let selected;
   const selector = new Function(moduleSource('app/project-selector.js') + '\nreturn createProjectSelector;')()(id => { selected = id; }, () => {});
   const project = { id: 'a', name: '<b>Project</b>', databaseScope: 'shared' };

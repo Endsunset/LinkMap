@@ -23,7 +23,14 @@ LocationMarker, MapUtility+Geometry and RecordNameFallback).
 - `map.js` owns one MapKit instance and its Location annotations. It removes old
   annotations before replacements, fits valid Locations, and retains the existing
   SDK/load/user-location error reporting. Late SDK initialization uses current
-  page state. MapKit's annotations and user-location libraries are loaded explicitly.
+  page state. The `full-map` and `services` libraries supply map controls, annotations, search and place cards.
+  Search/coordinate selections use a separate marker; project refreshes preserve its viewport.
+- `place-search.js` owns debounced autocomplete, full search, cancellation and keyboard-accessible results.
+- `place-details.js` replaces and destroys Apple's native PlaceDetail card on selection changes.
+- `coordinates.js` validates decimal latitude/longitude pairs, displays them and copies them
+  with a manual fallback when clipboard access is unavailable. Comma or whitespace separators
+  are accepted; latitude comes first. Custom coordinates clear the previous place card.
+- Search and coordinate inspection work independently of iCloud sign-in.
 - `app.css` styles the persistent white/red toolbar above the map canvas.
 - `../cloudkit-config.js` selects `development` for the existing shared authentication
   setup, without changing the container, public API token or auth behavior.
@@ -58,6 +65,7 @@ Run with JavaScriptCore (`jsc`, or the macOS framework helper at
 `/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc`):
 
 ```sh
+jsc tests/place-search.js
 jsc tests/project-map.js
 jsc tests/cloudkit-auth.js
 jsc tests/error-notifications.js
@@ -73,3 +81,9 @@ Live acceptance requires an authenticated Development account with private and
 accepted shared projects on the token's allowed web origin. Verify both project
 types, switch quickly while loading, and sign out during a query. Confirm the
 correct Location titles/details appear and previous annotations disappear.
+
+Search API references: [Search](https://developer.apple.com/documentation/mapkitjs/search),
+[PlaceDetail](https://developer.apple.com/documentation/mapkitjs/placedetail).
+Live search acceptance: type a place name, choose a suggestion and result, verify the
+marker, center, place card and coordinate pair. Copy and paste that pair, try `0, 0`
+and an invalid latitude, and check keyboard navigation and a narrow viewport.

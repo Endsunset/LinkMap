@@ -1,6 +1,9 @@
 import { loadProjects } from "./project.js";
 import { loadLocations } from "./location.js";
 import { initializeMap } from "./map.js";
+import { createPlaceSearch } from "./place-search.js";
+import { createPlaceDetails } from "./place-details.js";
+import { createCoordinates } from "./coordinates.js";
 import { createProjectSelector } from "./project-selector.js";
 
 // The only owner of project selection and loaded page data.
@@ -15,7 +18,22 @@ const selector = createProjectSelector(id => {
   else if (state.selectedProject) selectProject(state.selectedProject);
   else refreshProjects();
 });
-const map = initializeMap(() => map.setLocations(state.locations));
+const details = createPlaceDetails();
+const coordinates = createCoordinates(coordinate => {
+  search.cancel();
+  map.showSelection(coordinate);
+  details.show(null);
+});
+const search = createPlaceSearch(place => {
+  map.showSelection(place.coordinate, place);
+  coordinates.show(place.coordinate);
+  details.show(place);
+}, () => map.region);
+const map = initializeMap(() => {
+  map.setLocations(state.locations);
+  search.ready();
+  coordinates.ready();
+});
 
 function render(message, options = {}) {
   selector.render({ ...state, message, ...options });
