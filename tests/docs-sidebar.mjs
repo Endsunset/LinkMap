@@ -39,7 +39,7 @@ for (const mobile of [false, true]) {
   document = element({ body: element(), querySelector(s) { return elements[s]; }, querySelectorAll() { return background; } });
   const media = element({ matches: mobile });
   const window = element({ matchMedia() { return media; } });
-  runInNewContext(readFileSync('docs/sidebar.js', 'utf8'), { document, window,
+  runInNewContext(readFileSync('documentation/sidebar.js', 'utf8'), { document, window,
     sessionStorage: { getItem() { return null; }, setItem() {} }, ResizeObserver: class { observe() {} } });
   assert.equal(button.attrs['aria-expanded'], String(!mobile));
   if (mobile) { button.handlers.click(); assert.equal(background[0].inert, true); }

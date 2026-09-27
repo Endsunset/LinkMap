@@ -11,19 +11,23 @@
   const escape = value => String(value).replace(/[&<>"']/g, character => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   })[character]);
-  const pageURL = slug => `${sitePrefix}${Object.hasOwn(documentationPages, slug) ? `documentation/${documentationPages[slug].path}` : `docs/${slug}/`}`;
+  const pageURL = slug => `${sitePrefix}documentation/${documentationPages[slug].path}`;
   const link = (item, active = false) => `<a href="${pageURL(item.slug)}"${active ? ' aria-current="page"' : ''} data-filter-item>${escape(item.title)}</a>`;
-  const groups = [...new Set(documentationNavigation.map(item => item.group))];
+  const platform = page?.platform ? documentationPages[page.platform] : null;
+  const topics = documentationNavigation.map(slug => ({ slug, ...documentationPages[slug] }))
+    .filter(item => item.platform === page?.platform);
+  const groups = [...new Set(topics.map(item => item.group))];
 
   function renderTopic(item) {
-    const children = documentationNavigation.filter(child => child.parent === item.slug);
+    const children = topics.filter(child => child.parent === item.slug);
     const title = link(item, item.slug === pageKey);
     return `<li>${children.length ? `<details class="docs-nav-topic"><summary>${title}</summary><ul>${children.map(renderTopic).join('')}</ul></details>` : title}</li>`;
   }
 
   function renderNavigation() {
-    return `<section class="docs-slide" data-slide="platforms" hidden><h2 class="docs-slide-title">Platforms</h2><ul class="docs-platform-list">${documentationPlatforms.map(item => `<li><a class="docs-platform-row" href="${pageURL(item.slug)}" data-filter-item><span>${item.title}</span><span aria-hidden="true">›</span></a></li>`).join('')}</ul></section>
-      <section class="docs-slide" data-slide="ios"><a class="docs-platform-back" href="${sitePrefix}docs/" data-platform-back><span aria-hidden="true">‹</span> Platforms</a><a class="docs-platform-overview" href="${pageURL('ios')}"${pageKey === 'ios' ? ' aria-current="page"' : ''} data-filter-item>iOS overview</a>${groups.map(group => `<section class="docs-nav-group"><h2>${escape(group)}</h2><ul>${documentationNavigation.filter(item => item.group === group && !item.parent).map(renderTopic).join('')}</ul></section>`).join('')}</section>`;
+    const platforms = `<section class="docs-slide" data-slide="platforms"${platform ? ' hidden' : ''}><h2 class="docs-slide-title">Platforms</h2><ul class="docs-platform-list">${documentationPlatforms.map(slug => `<li><a class="docs-platform-row" href="${pageURL(slug)}" data-filter-item><span>${escape(documentationPages[slug].shortTitle)}</span><span aria-hidden="true">›</span></a></li>`).join('')}</ul></section>`;
+    if (!platform) return platforms;
+    return platforms + `<section class="docs-slide" data-slide="${page.platform}"><a class="docs-platform-back" href="${pageURL('index')}" data-platform-back><span aria-hidden="true">‹</span> Platforms</a><a class="docs-platform-overview" href="${pageURL(page.platform)}"${pageKey === page.platform ? ' aria-current="page"' : ''} data-filter-item>${escape(platform.shortTitle)} overview</a>${groups.map(group => `<section class="docs-nav-group"><h2>${escape(group)}</h2><ul>${topics.filter(item => item.group === group && !item.parent).map(renderTopic).join('')}</ul></section>`).join('')}${!topics.length ? `<p class="docs-nav-note">${escape(platform.navigationNote)}</p>` : ''}</section>`;
   }
 
   function renderSidebar() {
@@ -47,8 +51,9 @@
   }
 
   function renderPageHeader() {
-    const breadcrumb = page.kind === 'overview' ? 'iOS' : `<a href="${pageURL('ios')}">iOS</a> / ${escape(page.group)}`;
-    return `<p class="docs-breadcrumb"><a href="${sitePrefix}docs/">Documentation</a> / ${breadcrumb}</p><h1>${escape(page.title)}</h1><p class="docs-intro">${escape(page.summary)}</p><p class="docs-availability" aria-label="Documentation version">${escape(documentationVersion)}</p>${page.kind === 'article' ? '<p class="docs-note">This documentation describes the LinkMap iOS app.</p>' : ''}`;
+    if (page.kind === 'home') return `<p class="eyebrow">LinkMap documentation</p><h1>${escape(page.title)}</h1><p class="docs-intro">${escape(page.summary)}</p>`;
+    const breadcrumb = page.kind === 'overview' ? escape(platform.shortTitle) : `<a href="${pageURL(page.platform)}">${escape(platform.shortTitle)}</a> / ${escape(page.group)}`;
+    return `<p class="docs-breadcrumb"><a href="${pageURL('index')}">Documentation</a> / ${breadcrumb}</p><h1>${escape(page.title)}</h1><p class="docs-intro">${escape(page.summary)}</p>${page.platform === 'ios' ? `<p class="docs-availability" aria-label="Documentation version">${escape(documentationVersion)}</p>` : ''}${page.kind === 'article' ? `<p class="docs-note">${escape(platform.articleNote)}</p>` : ''}`;
   }
 
   function renderOnThisPage() {
@@ -60,18 +65,23 @@
   }
 
   function renderCards() {
-    return groups.map(group => `<section class="docs-group"><h2>${escape(group)}</h2><div class="docs-cards">${documentationNavigation.filter(item => item.group === group).map(item => `<a class="docs-card" href="${pageURL(item.slug)}"><h3>${escape(item.title)}</h3><p>${escape(item.summary)}</p></a>`).join('')}</div></section>`).join('');
+    if (page.kind === 'home') return `<section class="docs-group"><h2>Platforms</h2><div class="docs-cards">${documentationPlatforms.map(slug => {
+      const item = documentationPages[slug];
+      return `<a class="docs-card" href="${pageURL(slug)}"><h3>${escape(item.shortTitle)}</h3><p>${escape(item.summary)}</p></a>`;
+    }).join('')}</div></section>`;
+    return groups.map(group => `<section class="docs-group"><h2>${escape(group)}</h2><div class="docs-cards">${topics.filter(item => item.group === group).map(item => `<a class="docs-card" href="${pageURL(item.slug)}"><h3>${escape(item.title)}</h3><p>${escape(item.summary)}</p></a>`).join('')}</div></section>`).join('');
   }
 
   function renderPagination() {
-    return `<nav class="docs-pagination" aria-label="Documentation pagination">${['previous', 'next'].map(direction => page[direction] ? `<a href="${pageURL(page[direction].slug)}">${direction === 'previous' ? 'Previous' : 'Next'}: ${escape(page[direction].title)}</a>` : '').join('')}</nav>`;
+    const index = topics.findIndex(item => item.slug === pageKey);
+    return `<nav class="docs-pagination" aria-label="Documentation pagination">${[[topics[index - 1], 'Previous'], [topics[index + 1], 'Next']].map(([item, label]) => item ? `<a href="${pageURL(item.slug)}">${label}: ${escape(item.title)}</a>` : '').join('')}</nav>`;
   }
 
   async function renderComponent(name) {
     const response = await fetch(`${sitePrefix}components/${name}.html`);
     if (!response.ok) throw new Error(`Unable to load ${name}`);
     return (await response.text()).replace(/\$\{site_prefix\}|\$site_prefix/g, sitePrefix)
-      .replace(/\$docs_current/g, ' aria-current="true"')
+      .replace(/\$docs_current/g, page.kind === 'home' ? ' aria-current="page"' : ' aria-current="true"')
       .replace(/\$(?:download|account)_current/g, '')
       .replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
   }
@@ -91,23 +101,23 @@
   async function render() {
     if (!page) throw new Error('Unknown documentation page');
     const [header, footer] = await Promise.all([renderHeader(), renderFooter()]);
-    const content = renderPageHeader() + (page.kind === 'article'
+    const content = renderPageHeader() + (page.kind === 'home' ? renderCards() : page.kind === 'article'
       ? renderOnThisPage() + `<article>${renderSections()}</article>` + renderPagination()
-      : renderSections() + `<p><a href="${sitePrefix}${escape(page.action.href)}">${escape(page.action.title)}</a></p>` + renderCards());
+      : renderSections() + `<p><a${page.action.primary ? ' class="button button-primary"' : ''} href="${sitePrefix}${escape(page.action.href)}">${escape(page.action.title)}</a></p>` + renderCards());
     const template = document.createElement('template');
     template.innerHTML = `<a class="skip-link" href="#main">Skip to content</a>${header}
   <nav class="docs-subheader" aria-label="Documentation navigation">
     <button class="docs-sidebar-button" type="button" aria-label="Hide documentation sidebar" aria-controls="docs-sidebar" aria-expanded="true" hidden>
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 3v14M4 7h1M4 10h1M4 13h1" stroke="currentColor" stroke-width="1.5"/></svg>
     </button>
-    <a href="${sitePrefix}docs/">Documentation</a>
+    <a href="${pageURL('index')}"${page.kind === 'home' ? ' aria-current="page"' : ''}>Documentation</a>
   </nav>
   <button class="docs-backdrop" type="button" aria-label="Close documentation sidebar" tabindex="-1" aria-hidden="true"></button>
 
       <div class="docs-layout">${renderSidebar()}<main id="main" class="docs-main" tabindex="-1">${content}</main></div>${footer}`;
     root.replaceWith(template.content);
     // Existing behavior must initialize after the shared DOM is in place.
-    await Promise.all([loadScript('header.js'), loadScript('docs/sidebar.js')]);
+    await Promise.all([loadScript('header.js'), loadScript('documentation/sidebar.js')]);
     if (location.hash) {
       let fragment = location.hash.slice(1);
       try { fragment = decodeURIComponent(fragment); } catch {}

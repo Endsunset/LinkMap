@@ -9,6 +9,7 @@ for (const base of ['/', '/LinkMap/']) {
   for (const [redirect, expected] of [
     [null, home], ['', home],
     [`${base}docs/project/?view=all#sharing`, `${home}docs/project/?view=all#sharing`],
+    [`${base}documentation/ios/project/?view=all#section-1`, `${home}documentation/ios/project/?view=all#section-1`],
     ['../app/', `${home}app/`],
     [`${base}account/`, `${home}account/`],
     ['https://other.example/', home], ['//other.example/', home],
@@ -34,27 +35,32 @@ for (const base of ['/', '/LinkMap/']) {
       assert.equal(result, expected, `return from ${href}`);
     }
   }
-  const listeners = {};
-  const element = { addEventListener() {}, getAttribute() { return '../../account/'; } };
-  const header = { ...element, querySelector() { return element; } };
-  const links = ['../../login/', '../../login/', '../../docs/'].map(href => ({
-    href, getAttribute() { return this.href; }, setAttribute(key, value) { this.href = value; }
-  }));
-  const location = new URL(`${home}docs/project/?view=all#sharing`);
-  const window = { location, matchMedia() { return element; }, addEventListener(name, fn) { listeners[name] = fn; } };
-  const document = {
-    querySelector() { return header; }, querySelectorAll() { return links; },
-    addEventListener(name, fn) { listeners[name] = fn; }
-  };
-  runInNewContext(headerSource, { window, document, URL });
-  listeners.DOMContentLoaded();
-  for (const link of links.slice(0, 2)) {
-    assert.ok(link.href.startsWith('../../login/?redirect='));
-    assert.equal(new URL(link.href, location).searchParams.get('redirect'), `${base}docs/project/?view=all#sharing`);
+  for (const [route, prefix] of [['docs/project/', '../../'], ['documentation/ios/project/', '../../../']]) {
+    for (const readyState of ['loading', 'complete']) {
+      const listeners = {};
+      const element = { addEventListener() {}, getAttribute() { return `${prefix}account/`; } };
+      const header = { ...element, querySelector() { return element; } };
+      const links = [`${prefix}login/`, `${prefix}login/`, `${prefix}documentation/`].map(href => ({
+        href, getAttribute() { return this.href; }, setAttribute(key, value) { this.href = value; }
+      }));
+      const location = new URL(`${home}${route}?view=all#sharing`);
+      const window = { location, matchMedia() { return element; }, addEventListener(name, fn) { listeners[name] = fn; } };
+      const document = {
+        readyState,
+        querySelector() { return header; }, querySelectorAll() { return links; },
+        addEventListener(name, fn) { listeners[name] = fn; }
+      };
+      runInNewContext(headerSource, { window, document, URL });
+      if (readyState === 'loading') listeners.DOMContentLoaded();
+      for (const link of links.slice(0, 2)) {
+        assert.ok(link.href.startsWith(`${prefix}login/?redirect=`));
+        assert.equal(new URL(link.href, location).searchParams.get('redirect'), `${base}${route}?view=all#sharing`);
+      }
+      assert.equal(links[2].href, `${prefix}documentation/`);
+      location.hash = '#updated';
+      listeners.hashchange();
+      assert.equal(new URL(links[0].href, location).searchParams.get('redirect'), `${base}${route}?view=all#updated`);
+    }
   }
-  assert.equal(links[2].href, '../../docs/');
-  location.hash = '#updated';
-  listeners.hashchange();
-  assert.equal(new URL(links[0].href, location).searchParams.get('redirect'), `${base}docs/project/?view=all#updated`);
 }
 console.log('Sign-in return links and redirects passed for root and /LinkMap/ hosting.');

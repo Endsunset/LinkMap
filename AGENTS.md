@@ -3,9 +3,9 @@
 ## HTML links
 
 Use clean URLs for internal page links in HTML. Do not end page hyperlinks with
-`.html` or `.md`: link to `docs/`, `docs/project/`, and `privacy-policy/` instead.
+`.html` or `.md`: link to `documentation/`, `documentation/ios/project/`, and `privacy-policy/` instead.
 Omit `index.html` from hyperlinks too: use the folder URL (`./`, `../`, or
-`docs/`), which automatically serves its index page.
+`documentation/`), which automatically serves its index page.
 Use relative paths so the site works under the GitHub Pages `/LinkMap/` base path.
 Keep fragments when linking to a section.
 
@@ -19,8 +19,11 @@ changing links, verify local destinations and fragment IDs, and run `git diff --
 
 ## Documentation
 
-User guides live in `docs/content.json`; regenerate their HTML with
-`python3 scripts/build-docs.py`. The privacy policy source remains in
+Documentation content and metadata live in `documentation/pages.js`; the shared
+`documentation/documentation.js` renders minimal page loaders directly. Keep iOS
+guides under `documentation/ios/<slug>/`. No documentation build step is needed.
+Keep loader titles/descriptions synchronized with page metadata and preserve legacy
+`docs/` loaders for existing links. The privacy policy source remains in
 `privacy-policy.md`; regenerate its public page with `python3 scripts/build-privacy.py`.
 Commit generated pages with their source changes. No deployment build is required.
 

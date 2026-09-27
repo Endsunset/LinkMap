@@ -32,8 +32,8 @@ there is no package installation, compilation, or generated output directory.
 | `login/login.js` | Sign-in UI and redirect to the account page |
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
 | `privacy-policy.md` | Privacy policy source; rendered to `privacy-policy/index.html` |
-| `docs/` | Documentation home, individual documentation articles, and their content snapshot |
-| `scripts/build-docs.py` | Optional renderer for updating documentation HTML |
+| `documentation/` | Shared documentation renderer, content, styles, and platform pages |
+| `docs/` | Compatibility loaders for the original documentation URLs |
 
 Apple’s CloudKit JS SDK provides the sign-in and sign-out buttons and manages the
 persisted session. The web app currently supports authentication; project viewing
@@ -104,26 +104,31 @@ Remove personal account details and session tokens from screenshots or logs.
 
 ## Updating the documentation
 
-The `docs/` section contains 12 documentation articles for the iOS app. Settings →
+The `documentation/ios/` section contains 12 documentation articles for the iOS app. Settings →
 Documentation opens this hosted section. Initial content was copied from
 `Documentation/Contents/Documentation*Content.swift` in LinkMap-core; navigation
 now follows its Map-first interface. Check `ContentView.swift`, `MapToolbar.swift`,
 `MapContextSelectionView.swift`, and `ProjectDetailSections.swift` when updating
 these flows. The native app repository is read-only for website work.
 
-Edit `docs/content.json`, then run `python3 scripts/build-docs.py` and commit the
-updated HTML alongside the content. Each entry records its original source filename
-and SHA-256 checksum as provenance for the initial import, not as a checksum of the edited website text.
-The renderer reads only the snapshot in this repository; it does not require or write
-to LinkMap-core. Keep instructions clear that they describe the iOS app.
+Edit `documentation/pages.js` directly. It contains all page content and metadata;
+its ordered navigation list drives the sidebar, overview cards, and previous/next links.
+Article source filenames and SHA-256 checksums record the initial native import,
+not a checksum of the edited website text. The native repository remains read-only.
 
-GitHub Pages serves the checked-in HTML directly. Documentation works without
-JavaScript and adds no deployment build step.
+All pages use minimal HTML loaders and the shared `documentation.js` renderer.
+Keep loader titles and descriptions in sync with content changes. iOS articles live
+under `documentation/ios/<slug>/`; Web has its own `documentation/web/` overview.
+Legacy `docs/` loaders preserve bookmarks and section fragments using the same data.
+See [documentation maintenance](documentation/README.md) for details.
+
+GitHub Pages serves the checked-in files directly. Documentation requires JavaScript
+and HTTP access for shared components; no build step or framework is needed.
 
 ## Internal page URLs
 
-Follow `AGENTS.md`: page hyperlinks use directory URLs such as `docs/`,
-`docs/project/`, and `privacy-policy/`, backed by `index.html` files. Asset URLs
+Follow `AGENTS.md`: page hyperlinks use directory URLs such as `documentation/`,
+`documentation/ios/project/`, and `privacy-policy/`, backed by `index.html` files. Asset URLs
 keep their extensions. Update the rendering scripts alongside generated pages.
 Run `python3 scripts/build-privacy.py` after editing the policy source.
 

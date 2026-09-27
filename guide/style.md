@@ -73,7 +73,7 @@ its overview and sidebar view; a Platforms back link returns to the platform lis
 Filter only the current sidebar view, and clear the filter when switching views.
 Group iOS topics into Introduction, Features, and Sharing under static section dividers.
 Keep separate documentation, Web, and iOS overview pages.
-Use parent relationships in `docs/content.json` for expandable topic rows.
+Use parent relationships in `documentation/pages.js` for expandable topic rows.
 Topic titles open their pages; disclosure arrows expand nested child pages.
 Keep every topic collapsed on initial page load, including ancestors of the active page.
 During filtering, expand matching ancestor paths and restore the prior state when cleared. Highlight the current guide with red text
@@ -86,8 +86,8 @@ Remember the visibility choice for the browsing session. On narrow screens, star
 collapsed and open a full-viewport navigation overlay with its own close button.
 Keep background content inert and contain keyboard focus while open. Desktop
 uses an animated grid column to push the article; mobile never shifts it.
-Use 240ms transitions and disable them for reduced-motion preferences. Without JavaScript, keep the links available
-and group disclosures functional through native `details` elements.
+Use 240ms transitions and disable them for reduced-motion preferences. Use native `details` elements for topic disclosures. Documentation requires
+JavaScript to render; keep an explicit noscript message and a LinkMap home link.
 
 Sign in actions link to `login/`, which uses the existing white account-page layout
 and Apple’s SDK sign-in button. Sign-in links carry the originating page in a
@@ -105,5 +105,4 @@ the site header while it scrolls out of view. On mobile, the open sidebar covers
 the entire viewport, including both headers, and respects device safe areas.
 
 Show a quiet version line beneath each documentation introduction. The current
-documented release is LinkMap 3.0.0 Beta 8; maintain it in `scripts/build-docs.py`
-and in `documentation/pages.js` during the incremental migration.
+documented release is LinkMap 3.0.0 Beta 8; maintain it in `documentation/pages.js`.
