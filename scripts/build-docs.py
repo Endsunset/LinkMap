@@ -121,6 +121,8 @@ for platform in platforms:
 content += '</div></section>'
 (docs / 'index.html').write_text(shell(home['title'], home['summary'], content))
 for platform in platforms:
+    if platform.get('client_rendered'):
+        continue
     content = f'<p class="docs-breadcrumb"><a href="../">Documentation</a> / {e(platform["title"])}</p><h1>LinkMap for {e(platform["title"])}</h1><p class="docs-intro">{e(platform["summary"])}</p>'
     if platform['slug'] == 'ios':
         content += version_line
@@ -135,6 +137,8 @@ for platform in platforms:
     destination.mkdir(exist_ok=True)
     (destination / 'index.html').write_text(shell(platform['title'], platform['summary'], content, platform['slug'], platform))
 for index, page in enumerate(pages):
+    if page.get('client_rendered'):
+        continue
     platform = next(p for p in platforms if p['slug'] == page['platform'])
     content = f'<p class="docs-breadcrumb"><a href="../">Documentation</a> / <a href="../{platform["slug"]}/">{e(platform["title"])}</a> / {e(page["group"])}</p><h1>{e(page["title"])}</h1><p class="docs-intro">{e(page["summary"])}</p>{version_line}<p class="docs-note">This documentation describes the LinkMap iOS app.</p>'
     content += '<nav class="docs-toc" aria-label="On this page"><strong>On this page</strong><ul>'

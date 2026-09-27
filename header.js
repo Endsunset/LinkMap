@@ -20,7 +20,8 @@
       link.setAttribute('href', link.getAttribute('href').split(/[?#]/)[0] + target.search + target.hash);
     });
   }
-  document.addEventListener('DOMContentLoaded', updateSignInLinks);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', updateSignInLinks);
+  else updateSignInLinks();
   window.addEventListener('hashchange', updateSignInLinks);
   document.addEventListener('click', updateSignInLinks, true);
 

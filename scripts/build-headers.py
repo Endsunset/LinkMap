@@ -3,6 +3,9 @@ import re
 from site_header import ROOT, START, END, render_header
 
 for page in sorted(ROOT.rglob('index.html')):
+    # Client-rendered documentation reads the shared components at runtime.
+    if 'data-documentation-page=' in page.read_text():
+        continue
     relative = page.relative_to(ROOT)
     depth = len(relative.parts) - 1
     prefix = '../' * depth if depth else './'

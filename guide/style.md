@@ -6,7 +6,7 @@ badges. Keep long-form reading text neutral and surfaces quiet.
 
 ## Color tokens
 
-Define shared colors in `styles.css`; use the same tokens in `docs/docs.css`.
+Define shared colors in `styles.css`; use the same tokens in `documentation/documentation.css`.
 
 | Token | Value | Use |
 | --- | --- | --- |
@@ -105,4 +105,5 @@ the site header while it scrolls out of view. On mobile, the open sidebar covers
 the entire viewport, including both headers, and respects device safe areas.
 
 Show a quiet version line beneath each documentation introduction. The current
-documented release is LinkMap 3.0.0 Beta 8; maintain it in `scripts/build-docs.py`.
+documented release is LinkMap 3.0.0 Beta 8; maintain it in `scripts/build-docs.py`
+and in `documentation/pages.js` during the incremental migration.

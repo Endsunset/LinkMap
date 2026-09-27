@@ -25,13 +25,7 @@
       "slug": "ios",
       "title": "iOS",
       "summary": "Plan places, activities, and team assignments with the LinkMap iOS app.",
-      "sections": [
-        {
-          "title": "Start with your project",
-          "body": "Start on the Map, choose your Project, Activity, and Assignment in Context, and use Project Detail to plan and manage your work.",
-          "points": []
-        }
-      ]
+      "client_rendered": true
     }
   ],
   "pages": [
@@ -42,41 +36,8 @@
       "summary": "LinkMap opens on the Map. Choose a Project to see shared places, then select an Activity and Assignment for the work you are doing.",
       "source": "DocumentationArticleContent.swift",
       "source_sha256": "8f22b5deb755f2ba3c121a0e0933988cde6cac5059c010b6aa4fa9005db17982",
-      "sections": [
-        {
-          "title": "The Main Loop",
-          "body": "After launch, LinkMap opens on the Map, with Settings available in a separate tab. Use More (…) → Context to choose a Project, then an Activity and optional Assignment. Projects hold reusable places and resources; Activities organize specific rounds of work. Open Project Detail from the Map menu to manage that setup, then return to the Map to follow routes and log work.",
-          "points": []
-        },
-        {
-          "title": "What Comes First",
-          "body": null,
-          "points": [
-            "From the Map, use More (…) → Add Project to create a Project, or Scan to join a shared one. Use Context to select the Project you want to work with.",
-            "Build the Project map with Regions, Layers, and Locations so the team has a shared view of where work happens.",
-            "Add Items for reusable resources such as supplies, equipment, materials, or packages.",
-            "Create an Activity only when you are ready to plan a specific round of work.",
-            "Inside the Activity, create Routes, Stops, Assignments, and Supplies to turn the Project setup into a plan.",
-            "During the Activity, use the Map and dashboard to log what happened, then review reports before archiving."
-          ]
-        },
-        {
-          "title": "Why Projects and Activities Are Separate",
-          "body": "Project setup should last longer than one day of work. A Location or Item may be useful across many Activities, while a Route, Assignment, Supply list, or Distribution usually belongs to one Activity. Keeping these parts separate lets each new Activity reuse the same map and resources without rewriting the Project from scratch.",
-          "points": []
-        },
-        {
-          "title": "A Practical Way to Think About It",
-          "body": null,
-          "points": [
-            "Project answers: where are we working, what places matter, and what resources exist?",
-            "Activity answers: what are we doing this time, who is doing it, where do they go, and what should they carry?",
-            "Logging answers: what actually happened, at which stop, and with which items?",
-            "Reports answer: what should be shared or reviewed after the work is done?"
-          ]
-        }
-      ],
-      "platform": "ios"
+      "platform": "ios",
+      "client_rendered": true
     },
     {
       "slug": "basic-workflow",

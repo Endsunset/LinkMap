@@ -3,6 +3,9 @@ import re
 from site_footer import ROOT, START, END, render_footer
 
 for page in sorted(ROOT.rglob('index.html')):
+    # Client-rendered documentation reads the shared components at runtime.
+    if 'data-documentation-page=' in page.read_text():
+        continue
     relative = page.relative_to(ROOT)
     depth = len(relative.parts) - 1
     footer = render_footer('../' * depth if depth else './')
