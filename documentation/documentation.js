@@ -3,12 +3,15 @@
   const root = document.getElementById('documentation-root');
   const pageKey = document.body.dataset.documentationPage;
   const page = documentationPages[pageKey];
-  // Both the original docs/ URLs and new documentation/ URLs are two levels deep.
-  const sitePrefix = '../../';
+  // Resolve site-relative links from any platform depth or legacy loader.
+  const siteRoot = new URL('../', document.currentScript.src);
+  const pageDirectory = new URL('.', location.href);
+  const depth = pageDirectory.pathname.slice(siteRoot.pathname.length).split('/').filter(Boolean).length;
+  const sitePrefix = '../'.repeat(depth);
   const escape = value => String(value).replace(/[&<>"']/g, character => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   })[character]);
-  const pageURL = slug => `${sitePrefix}${Object.hasOwn(documentationPages, slug) ? 'documentation' : 'docs'}/${slug}/`;
+  const pageURL = slug => `${sitePrefix}${Object.hasOwn(documentationPages, slug) ? `documentation/${documentationPages[slug].path}` : `docs/${slug}/`}`;
   const link = (item, active = false) => `<a href="${pageURL(item.slug)}"${active ? ' aria-current="page"' : ''} data-filter-item>${escape(item.title)}</a>`;
   const groups = [...new Set(documentationNavigation.map(item => item.group))];
 
@@ -20,7 +23,7 @@
 
   function renderNavigation() {
     return `<section class="docs-slide" data-slide="platforms" hidden><h2 class="docs-slide-title">Platforms</h2><ul class="docs-platform-list">${documentationPlatforms.map(item => `<li><a class="docs-platform-row" href="${pageURL(item.slug)}" data-filter-item><span>${item.title}</span><span aria-hidden="true">›</span></a></li>`).join('')}</ul></section>
-      <section class="docs-slide" data-slide="ios"><a class="docs-platform-back" href="../../docs/" data-platform-back><span aria-hidden="true">‹</span> Platforms</a><a class="docs-platform-overview" href="${pageURL('ios')}"${pageKey === 'ios' ? ' aria-current="page"' : ''} data-filter-item>iOS overview</a>${groups.map(group => `<section class="docs-nav-group"><h2>${escape(group)}</h2><ul>${documentationNavigation.filter(item => item.group === group && !item.parent).map(renderTopic).join('')}</ul></section>`).join('')}</section>`;
+      <section class="docs-slide" data-slide="ios"><a class="docs-platform-back" href="${sitePrefix}docs/" data-platform-back><span aria-hidden="true">‹</span> Platforms</a><a class="docs-platform-overview" href="${pageURL('ios')}"${pageKey === 'ios' ? ' aria-current="page"' : ''} data-filter-item>iOS overview</a>${groups.map(group => `<section class="docs-nav-group"><h2>${escape(group)}</h2><ul>${documentationNavigation.filter(item => item.group === group && !item.parent).map(renderTopic).join('')}</ul></section>`).join('')}</section>`;
   }
 
   function renderSidebar() {
@@ -45,7 +48,7 @@
 
   function renderPageHeader() {
     const breadcrumb = page.kind === 'overview' ? 'iOS' : `<a href="${pageURL('ios')}">iOS</a> / ${escape(page.group)}`;
-    return `<p class="docs-breadcrumb"><a href="../../docs/">Documentation</a> / ${breadcrumb}</p><h1>${escape(page.title)}</h1><p class="docs-intro">${escape(page.summary)}</p><p class="docs-availability" aria-label="Documentation version">${escape(documentationVersion)}</p>${page.kind === 'article' ? '<p class="docs-note">This documentation describes the LinkMap iOS app.</p>' : ''}`;
+    return `<p class="docs-breadcrumb"><a href="${sitePrefix}docs/">Documentation</a> / ${breadcrumb}</p><h1>${escape(page.title)}</h1><p class="docs-intro">${escape(page.summary)}</p><p class="docs-availability" aria-label="Documentation version">${escape(documentationVersion)}</p>${page.kind === 'article' ? '<p class="docs-note">This documentation describes the LinkMap iOS app.</p>' : ''}`;
   }
 
   function renderOnThisPage() {
@@ -90,14 +93,14 @@
     const [header, footer] = await Promise.all([renderHeader(), renderFooter()]);
     const content = renderPageHeader() + (page.kind === 'article'
       ? renderOnThisPage() + `<article>${renderSections()}</article>` + renderPagination()
-      : renderSections() + `<p><a href="${escape(page.action.href)}">${escape(page.action.title)}</a></p>` + renderCards());
+      : renderSections() + `<p><a href="${sitePrefix}${escape(page.action.href)}">${escape(page.action.title)}</a></p>` + renderCards());
     const template = document.createElement('template');
     template.innerHTML = `<a class="skip-link" href="#main">Skip to content</a>${header}
   <nav class="docs-subheader" aria-label="Documentation navigation">
     <button class="docs-sidebar-button" type="button" aria-label="Hide documentation sidebar" aria-controls="docs-sidebar" aria-expanded="true" hidden>
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 3v14M4 7h1M4 10h1M4 13h1" stroke="currentColor" stroke-width="1.5"/></svg>
     </button>
-    <a href="../../docs/">Documentation</a>
+    <a href="${sitePrefix}docs/">Documentation</a>
   </nav>
   <button class="docs-backdrop" type="button" aria-label="Close documentation sidebar" tabindex="-1" aria-hidden="true"></button>
 

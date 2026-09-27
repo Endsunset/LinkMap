@@ -1,10 +1,11 @@
 # Shared documentation pilot
 
-Only `ios/` and `how-linkmap-works/` use the client renderer. Their original
-`docs/` URLs load the same renderer and content, preserving existing bookmarks
+Only `ios/` and `ios/how-linkmap-works/` use the client renderer. Their original
+`docs/` URLs and the first pilot `/documentation/how-linkmap-works/` URL load the same renderer and content, preserving existing bookmarks
 and section fragments. Other guides remain generated under `docs/`.
 
-- `pages.js`: page content, version, and navigation/card metadata. Edit directly.
+- `pages.js`: page content, platform-relative paths, version, and navigation/card metadata. Edit directly.
+  Keep iOS articles under `ios/<slug>/`, alongside the `ios/` overview.
 - `documentation.js`: shared layout and component rendering. Uses the existing
   `components/header.html`, `components/footer.html`, `header.js`, and
   `docs/sidebar.js`; no router or build step.

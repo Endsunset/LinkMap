@@ -1,6 +1,7 @@
 // Hand-maintained content for the two migrated pages. No generation step.
 const documentationPages = {
   "ios": {
+    "path": "ios/",
     "title": "LinkMap for iOS",
     "summary": "Plan places, activities, and team assignments with the LinkMap iOS app.",
     "kind": "overview",
@@ -13,10 +14,11 @@ const documentationPages = {
     ],
     "action": {
       "title": "Download LinkMap for iOS",
-      "href": "../../download/"
+      "href": "download/"
     }
   },
   "how-linkmap-works": {
+    "path": "ios/how-linkmap-works/",
     "title": "How LinkMap Works",
     "summary": "LinkMap opens on the Map. Choose a Project to see shared places, then select an Activity and Assignment for the work you are doing.",
     "kind": "article",
