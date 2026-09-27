@@ -11,7 +11,7 @@ for page in sorted(ROOT.rglob('index.html')):
     prefix = '../' * depth if depth else './'
     source = page.read_text()
     header = render_header(prefix,
-                           docs=relative.parts[0] == 'docs',
+                           docs=relative.parts[0] == 'documentation',
                            download=relative.parts[0] == 'download',
                            account=relative.parts[0] == 'account')
     pattern = re.escape(START) + r'.*?' + re.escape(END) if START in source else r'<header\b.*?</header>'

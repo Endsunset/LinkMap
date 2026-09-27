@@ -22,8 +22,9 @@ changing links, verify local destinations and fragment IDs, and run `git diff --
 Documentation content and metadata live in `documentation/pages.js`; the shared
 `documentation/documentation.js` renders minimal page loaders directly. Keep iOS
 guides under `documentation/ios/<slug>/`. No documentation build step is needed.
-Keep loader titles/descriptions synchronized with page metadata and preserve legacy
-`docs/` loaders for existing links. The privacy policy source remains in
+Keep loader titles/descriptions synchronized with page metadata. Use only the
+canonical `documentation/` routes; retired compatibility loaders have been removed.
+The privacy policy source remains in
 `privacy-policy.md`; regenerate its public page with `python3 scripts/build-privacy.py`.
 Commit generated pages with their source changes. No deployment build is required.
 

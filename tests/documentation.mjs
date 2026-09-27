@@ -68,9 +68,8 @@ for (const [key, page] of Object.entries(pages)) {
       }
     }
   }
-  const routes = [`documentation/${page.path}`, `docs/${key === 'index' ? '' : key + '/'}`];
-  if (key === 'how-linkmap-works') routes.push('documentation/how-linkmap-works/');
-  for (const base of ['/', '/LinkMap/']) for (const route of routes) {
+  const route = `documentation/${page.path}`;
+  for (const base of ['/', '/LinkMap/']) {
     const result = await render(key, route, base);
     assert.deepEqual(result.errors, []);
     assert.ok(result.html.includes('<h1>'));
@@ -113,4 +112,4 @@ for (const [key, failFetch] of [['unknown', false], ['ios', true]]) {
   assert.ok(result.fallback.includes('Unable to load'));
   assert.equal(result.html, '');
 }
-console.log('Documentation: 15 pages, 31 canonical/legacy routes at both base paths, fragments, pagination, script order, and error fallbacks passed.');
+console.log('Documentation: 15 canonical pages at both base paths, fragments, pagination, script order, and error fallbacks passed.');

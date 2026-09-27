@@ -33,7 +33,6 @@ there is no package installation, compilation, or generated output directory.
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
 | `privacy-policy.md` | Privacy policy source; rendered to `privacy-policy/index.html` |
 | `documentation/` | Shared documentation renderer, content, styles, and platform pages |
-| `docs/` | Compatibility loaders for the original documentation URLs |
 
 Apple’s CloudKit JS SDK provides the sign-in and sign-out buttons and manages the
 persisted session. The web app currently supports authentication; project viewing
@@ -119,7 +118,8 @@ not a checksum of the edited website text. The native repository remains read-on
 All pages use minimal HTML loaders and the shared `documentation.js` renderer.
 Keep loader titles and descriptions in sync with content changes. iOS articles live
 under `documentation/ios/<slug>/`; Web has its own `documentation/web/` overview.
-Legacy `docs/` loaders preserve bookmarks and section fragments using the same data.
+Only canonical documentation routes are maintained; the old compatibility loaders
+have been removed.
 See [documentation maintenance](documentation/README.md) for details.
 
 GitHub Pages serves the checked-in files directly. Documentation requires JavaScript

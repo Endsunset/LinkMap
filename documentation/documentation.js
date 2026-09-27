@@ -3,7 +3,7 @@
   const root = document.getElementById('documentation-root');
   const pageKey = document.body.dataset.documentationPage;
   const page = documentationPages[pageKey];
-  // Resolve site-relative links from any platform depth or legacy loader.
+  // Resolve site-relative links from any platform depth.
   const siteRoot = new URL('../', document.currentScript.src);
   const pageDirectory = new URL('.', location.href);
   const depth = pageDirectory.pathname.slice(siteRoot.pathname.length).split('/').filter(Boolean).length;

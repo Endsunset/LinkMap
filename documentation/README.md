@@ -20,10 +20,10 @@ key, then a minimal loader under its platform folder. No build step is required.
 Keep section ordering stable when possible: `section-1`, `section-2`, etc. are
 public fragment identifiers. Article provenance records the initial native import.
 
-The original `docs/` URLs and `/documentation/how-linkmap-works/` remain small
-compatibility loaders using the same renderer and page keys. Do not restore
-article content or shared layout inside them. Header/footer refresh scripts skip
-all documentation loaders because shared site components are fetched at runtime.
+Only the canonical routes above are maintained. The old `docs/` loaders and the
+duplicate `/documentation/how-linkmap-works/` loader have been removed; How LinkMap
+Works lives only at `/documentation/ios/how-linkmap-works/`. Header/footer refresh
+scripts skip documentation loaders because shared site components are fetched at runtime.
 
 Serve over HTTP, as on GitHub Pages. JavaScript is required. A noscript message
 links to LinkMap home; failed component requests show a reload message.
