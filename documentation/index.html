@@ -3,9 +3,56 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=documentation/linkmap/">
-  <link rel="canonical" href="documentation/linkmap/">
-  <title>LinkMap Documentation</title>
+  <meta name="description" content="Choose the LinkMap guide for iOS or web.">
+  <title>Documentation | LinkMap</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="entry.css">
+  <link rel="stylesheet" href="../components/notification/notification.css">
+  <script src="https://cdn.apple-cloudkit.com/ck/2/cloudkit.js" async></script>
+  <script src="../components/notification/notification.js" defer></script>
+  <script src="../shared/errors/cloudkit-errors.js" defer></script>
+  <script src="../cloudkit-config.js" defer></script>
+  <script src="../cloudkit-auth.js" defer></script>
+  <script src="../header.js" defer></script>
 </head>
-<body><p><a href="documentation/linkmap/">Open LinkMap documentation</a></p></body>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<!-- Shared header: edit components/header.html, then run scripts/build-headers.py -->
+<header draggable="false" class="site-header">
+  <a draggable="false" class="brand" href="../" aria-label="LinkMap home">
+    <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span>LinkMap</span>
+  </a>
+  <nav class="nav-links" aria-label="Main navigation">
+    <a draggable="false" class="desktop-nav-link" href="../documentation/" aria-current="page">Documentation</a>
+    <a draggable="false" class="desktop-nav-link" href="../download/">Download</a>
+    <a draggable="false" class="button button-small button-outline" href="../login/" data-header-sign-in>Sign in</a>
+    <a draggable="false" class="button button-small button-outline" href="../account/" data-account-link hidden>Account</a>
+    <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-navigation" popovertarget="mobile-navigation">
+      <span></span><span></span>
+    </button>
+  </nav>
+  <nav id="mobile-navigation" class="mobile-navigation" popover aria-label="Mobile navigation">
+    <a draggable="false" href="../documentation/" aria-current="page">Documentation</a>
+    <a draggable="false" href="../download/">Download</a>
+  </nav>
+</header>
+<script src="../header.js"></script>
+<!-- End shared header -->
+  <main id="main" class="documentation-entry" tabindex="-1">
+    <p class="eyebrow">LinkMap documentation</p>
+    <h1>Choose a guide</h1>
+    <p>Learn how to use LinkMap on your device or in a browser.</p>
+    <div class="documentation-choices">
+      <a href="ios/"><h2>iOS</h2><p>Set up Projects, organize places, plan Activities, and share work.</p></a>
+      <a href="web/"><h2>Web</h2><p>Sign in, explore Projects, search places, and use coordinates.</p></a>
+    </div>
+  </main>
+<!-- Shared footer: edit components/footer.html, then run scripts/build-footers.py -->
+<footer class="site-footer">
+  <a href="../">LinkMap home</a>
+  <a href="../privacy-policy/">Privacy policy</a>
+</footer>
+<!-- End shared footer -->
+</body>
 </html>
