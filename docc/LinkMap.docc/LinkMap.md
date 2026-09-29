@@ -1,23 +1,23 @@
 # LinkMap Documentation
 
-Learn how LinkMap organizes shared places and work, use the iOS and web apps, and understand the implementation behind them.
+Learn how to organize places and work in LinkMap on iOS and the web.
 
-Start with Essentials for the common model. The handbooks contain platform-specific guidance. Shared Concepts explains the data and collaboration boundaries used by both platforms. Reference contains a small, curated set of Swift model declarations.
+Start with Platforms to see how the two apps differ, then open the Handbook for step-by-step help. Essentials gives a short introduction, and Shared Concepts covers Projects, places, routes, and sharing.
 
 ## Topics
 
-### Begin
+### Platforms
 
-- <doc:Essentials>
+- <doc:Platforms>
 
-### Build and Use
+### Handbook
 
 - <doc:Handbook>
 
-### Common Model
+### Essentials
+
+- <doc:Essentials>
+
+### Shared Concepts
 
 - <doc:Shared-Concepts>
-
-### Selected API
-
-- <doc:Reference>

@@ -1,5 +1,5 @@
 # Places and Routes
 
-Locations are reusable places in a Project. Regions group broad areas, while Layers describe levels or surfaces within them. A Route belongs to one Activity and orders Stops; each Stop points to a Project Location.
+Locations are places you can reuse across Activities in a Project. Regions group broad areas, while Layers help describe levels or surfaces within them. A Route puts those places in the order you want to visit them.
 
-The native Map can display Activity routes and filter them by Assignment. The web map displays Project Locations and supports independent search and coordinate inspection. Both views use the same underlying Project place identities.
+In the iOS app, choose an Activity or Assignment to focus the Map on its route. On the web, choose a Project to explore its Locations, or search for another place.

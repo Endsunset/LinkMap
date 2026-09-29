@@ -33,7 +33,7 @@ Documentation is generated from one checked-in DocC catalog.
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
 | `privacy-policy.md` | Privacy policy source; rendered to `privacy-policy/index.html` |
 | `docc/LinkMap.docc/` | Authored LinkMap documentation library |
-| `documentation/` | Checked-in DocC site and entry redirect |
+| `documentation/` | Checked-in DocC site and landing page |
 
 Apple’s CloudKit JS SDK provides the sign-in and sign-out buttons and manages the
 persisted session. The web map supports authenticated Project and Location viewing;

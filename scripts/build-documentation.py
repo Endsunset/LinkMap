@@ -14,6 +14,21 @@ OUTPUT = ROOT / "documentation"
 ASSET_DIRECTORIES = ("css", "js", "data", "index", "img", "images", "videos", "downloads")
 ASSET_FILES = ("metadata.json", "theme-settings.json")
 DOC_IMAGE_FILES = ("favicon.ico", "favicon.svg", "developer-og.jpg", "developer-og-twitter.jpg")
+DOCC_ROUTE = "/documentation/linkmap"
+PUBLIC_ROUTE = "/documentation"
+
+
+def public_route(value):
+    """Remove DocC's module segment from navigable paths in render JSON."""
+    if isinstance(value, str):
+        if value == DOCC_ROUTE or value.startswith(DOCC_ROUTE + "/"):
+            return PUBLIC_ROUTE + value[len(DOCC_ROUTE):]
+        return value
+    if isinstance(value, list):
+        return [public_route(item) for item in value]
+    if isinstance(value, dict):
+        return {key: public_route(item) for key, item in value.items()}
+    return value
 
 
 def redirect(directory: Path, target: Path):
@@ -54,7 +69,7 @@ def main():
         staged = temporary / "staged"
         documentation = staged / "documentation"
         documentation.mkdir(parents=True)
-        shutil.copytree(landing, documentation / "linkmap")
+        shutil.copytree(landing, documentation, dirs_exist_ok=True)
         for directory in ASSET_DIRECTORIES:
             source = archive / directory
             if source.exists():
@@ -64,25 +79,38 @@ def main():
             if source.exists():
                 shutil.copyfile(source, staged / name)
 
+        # The renderer maps a public route to a JSON file in /data. Move the
+        # module's data to match /documentation/ and its child routes.
+        data = staged / "data" / "documentation"
+        shutil.move(data / "linkmap.json", staged / "data" / "documentation.json")
+        for item in (data / "linkmap").iterdir():
+            shutil.move(item, data / item.name)
+        (data / "linkmap").rmdir()
+
+        # Keep render references and the navigator on the same public routes.
         # DocC's key order varies between builds; stable JSON avoids churn.
         for data_file in staged.rglob("*.json"):
             data_file.write_text(json.dumps(
-                json.loads(data_file.read_text()), ensure_ascii=False,
+                public_route(json.loads(data_file.read_text())), ensure_ascii=False,
                 sort_keys=True, separators=(",", ":"),
             ))
 
         shutil.copyfile(ROOT / "docc" / "doc-theme.css", documentation / "doc-theme.css")
         for name in DOC_IMAGE_FILES:
             shutil.copyfile(archive / name, documentation / name)
-        redirect(documentation, documentation / "linkmap")
+        redirect(documentation / "linkmap", documentation)
         # Former platform roots lead into the two branches of this one library.
-        redirect(documentation / "ios", documentation / "linkmap" / "ios-handbook")
-        redirect(documentation / "web", documentation / "linkmap" / "web-handbook")
+        redirect(documentation / "ios", documentation / "ios-handbook")
+        redirect(documentation / "web", documentation / "web-handbook")
 
-        for page in (documentation / "linkmap").rglob("*.html"):
+        for page in documentation.rglob("*.html"):
             html = page.read_text()
+            if 'var baseUrl = "/LinkMap/"' not in html:
+                continue
             html = html.replace('data-color-scheme="auto"', 'data-color-scheme="light"')
             html = html.replace('/LinkMap/favicon.', '/LinkMap/documentation/favicon.')
+            html = html.replace('/documentation/linkmap/', '/documentation/')
+            html = html.replace('<p>API Collection</p>', '<p>LinkMap Guide</p>')
             html = html.replace(
                 "</head>",
                 '<link rel="stylesheet" href="/LinkMap/documentation/doc-theme.css"></head>',

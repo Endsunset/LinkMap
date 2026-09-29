@@ -1,10 +1,10 @@
 # Shared Concepts
 
-Both platforms refer to the same Project and Location data. The iOS app manages the full workflow; the web map reads the Project and places available to the signed-in account.
+Projects and Locations appear in both the iOS app and the web map. Use the iOS app to manage them, then open the web map to explore the places available to your account.
 
 ## Topics
 
-### Data and Access
+### Organize and Share
 
 - <doc:Projects-and-Activities>
 - <doc:Places-and-Routes>

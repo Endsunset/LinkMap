@@ -1,10 +1,9 @@
 # Handbook
 
-Use the iOS handbook to create and manage work in the native app. Use the web handbook to explore Projects and Locations in a browser and to understand the website implementation.
+Follow the existing iOS guides for setting up Projects, organizing places, planning work, and sharing. For differences between the iOS app and web map, see <doc:Platforms>.
 
 ## Topics
 
-### Platforms
+### iOS Guides
 
 - <doc:iOS-Handbook>
-- <doc:Web-Handbook>
