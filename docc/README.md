@@ -1,27 +1,28 @@
-# LinkMap user guides
+# LinkMap documentation library
 
-`iOS.docc` and `Web.docc` are separate Swift-DocC catalogs. Their generated
-landing pages are served directly at `/documentation/ios/` and
-`/documentation/web/`. The `/documentation/` page helps readers choose between
-them. iOS articles are checked against the read-only native repository at
-`/Library/Developer/Projects/LinkMap-core`; web articles are checked against
-the `app/` and account pages in this website repository.
+`LinkMap.docc` is the single authored Swift-DocC catalog. Its root page curates
+Essentials, Handbook, Shared Concepts, and Reference. The Handbook page curates
+iOS and Web branches. Keep each child in a parent's `## Topics` section; folders
+and filenames alone do not define the visible navigator hierarchy.
 
-Keep the guides focused on user tasks. Transaction, inventory, architecture,
-and internal model reference content is intentionally absent for now. Put a
-child article in its parent's `## Topics` list to maintain the DocC navigation
-tree. Do not put iOS subjects in the web catalog or web subjects in the iOS
-catalog.
+Use the read-only native repository at `/Library/Developer/Projects/LinkMap-core`
+for iOS architecture, SwiftUI, CloudKit, MapKit, resource workflow, and Swift model
+reference content. Use this website repository's `app/`, shared authentication
+modules, and scripts for web and deployment content. Keep common concepts in
+Shared Concepts and platform-specific instructions in the matching handbook.
+Select reference types intentionally rather than publishing every internal
+symbol discovered from the app target.
 
-Run `python3 scripts/build-documentation.py` from the website checkout. The
-script builds both catalogs with warnings treated as errors and the GitHub Pages
-base path `/LinkMap`. It places DocC article routes under `documentation/ios/`
-and `documentation/web/`, merges the two navigator trees, and places DocC's
-shared runtime assets at the repository root. The main site pages remain
-separate. Commit the authored catalogs and generated output together. The
-`/docs/` redirect preserves the current native app Documentation link.
+Run `python3 scripts/build-documentation.py` from the website checkout. It
+builds the catalog with warnings treated as errors and the `/LinkMap` hosting
+base path, then checks in the static output. DocC's generated landing article
+is at `/documentation/linkmap/`; `/documentation/` is the stable entry URL and
+redirects there. This avoids a duplicated `/documentation/documentation/` path.
+Former `/documentation/ios/` and `/documentation/web/` roots redirect to their
+handbook branches, and `/docs/` still leads to the library for the native app.
+DocC's shared static assets live at the repository root because DocC's route
+base is `/LinkMap`.
 
-Run `python3 tests/documentation.py` to check public routes, navigator hierarchy,
-and local asset paths. For a visual check, serve the repository from its parent
-directory and open `http://localhost:8000/LinkMap/documentation/`, then visit
-both platform guides at desktop and mobile widths.
+Run `python3 tests/documentation.py` to validate the hierarchy, article output,
+and local links. For visual verification, serve the repository from its parent
+directory and open `http://localhost:8000/LinkMap/documentation/`.

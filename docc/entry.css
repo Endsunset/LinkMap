@@ -1,9 +1,0 @@
-.documentation-entry { max-width: 980px; margin: 0 auto; min-height: 65vh; padding: 76px 5vw 100px; }
-.documentation-entry h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
-.documentation-entry > p:not(.eyebrow) { color: var(--muted); font-size: 1.1rem; }
-.documentation-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 40px; }
-.documentation-choices a { display: block; padding: 28px; border: 1px solid var(--line); border-inline-end: 4px solid var(--accent); background: var(--surface); }
-.documentation-choices a:hover, .documentation-choices a:focus-visible { border-color: var(--accent); outline-color: var(--accent); }
-.documentation-choices h2 { color: var(--accent); font-size: 1.5rem; }
-.documentation-choices p { color: var(--muted); margin-bottom: 0; }
-@media (max-width: 700px) { .documentation-entry { padding-block: 50px 70px; } .documentation-choices { grid-template-columns: 1fr; } }

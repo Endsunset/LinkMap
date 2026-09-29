@@ -62,10 +62,10 @@ Website pages use `components/footer.html`. Refresh checked-in website pages wit
 
 ## Documentation
 
-Swift-DocC provides navigation, search, and article layout within the separate
-iOS and web guides. Author user-facing topics in `docc/iOS.docc` and
-`docc/Web.docc`; do not recreate the former website sidebar or article renderer.
-Keep each guide focused on what readers can do on that platform.
+Swift-DocC provides navigation, search, and article layout for the single
+LinkMap documentation library. Author topics in `docc/LinkMap.docc`; do not
+recreate the former website sidebar or article renderer. Curate Essentials,
+the platform handbook branches, Shared Concepts, and Reference with `## Topics`.
 
 Sign in actions link to `login/`, which uses the existing white account-page layout
 and Apple’s SDK sign-in button. Sign-in links carry the originating page in a

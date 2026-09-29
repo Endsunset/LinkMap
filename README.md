@@ -16,7 +16,7 @@ python3 -m http.server 8000
 ```
 
 Open `http://localhost:8000/LinkMap/`. The website uses plain HTML, CSS, and JavaScript without package installation.
-Documentation is generated from two checked-in DocC catalogs.
+Documentation is generated from one checked-in DocC catalog.
 
 ## Repository map
 
@@ -32,8 +32,8 @@ Documentation is generated from two checked-in DocC catalogs.
 | `login/login.js` | Sign-in UI and redirect to the account page |
 | `cloudkit-config.js` | Public configuration for LinkMap’s existing CloudKit integration |
 | `privacy-policy.md` | Privacy policy source; rendered to `privacy-policy/index.html` |
-| `docc/iOS.docc/`, `docc/Web.docc/` | Separate user guides for iOS and web |
-| `documentation/` | Platform chooser and checked-in DocC guides |
+| `docc/LinkMap.docc/` | Authored LinkMap documentation library |
+| `documentation/` | Checked-in DocC site and entry redirect |
 
 Apple’s CloudKit JS SDK provides the sign-in and sign-out buttons and manages the
 persisted session. The web map supports authenticated Project and Location viewing;
@@ -104,14 +104,14 @@ Remove personal account details and session tokens from screenshots or logs.
 
 ## Updating the documentation
 
-The iOS and web guides are generated separately by Swift-DocC from
-`docc/iOS.docc` and `docc/Web.docc`. The `/documentation/` page lets readers
-choose a guide. The native LinkMap-core repository is the read-only source of
-truth for iOS behavior; the website app is the source for web behavior. Follow
+The single `docc/LinkMap.docc` catalog builds Essentials, iOS and Web Handbook
+branches, Shared Concepts, and a curated Reference section. The native
+LinkMap-core repository is the read-only source of truth for iOS behavior; the
+website app is the source for web behavior. Follow
 [documentation maintenance](docc/README.md), run
 `python3 scripts/build-documentation.py`, and commit source and generated output
-together. The public guide roots are `/documentation/ios/` and
-`/documentation/web/`.
+together. `/documentation/` enters the generated LinkMap library; former
+platform roots redirect into its handbook branches.
 
 ## Internal page URLs
 

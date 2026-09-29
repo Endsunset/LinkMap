@@ -20,12 +20,13 @@ and fragments, and run `git diff --check`.
 
 ## Documentation
 
-Documentation source lives in `docc/iOS.docc` and `docc/Web.docc`. Run
+Documentation source lives in the single `docc/LinkMap.docc` catalog. Run
 `python3 scripts/build-documentation.py` to regenerate the checked-in
-`documentation/ios/` and `documentation/web/` static guides. The
-`/documentation/` page lets readers choose a platform. The two DocC catalogs
-contain separate, user-facing guidance; do not edit generated files directly.
-The build leaves a redirect at `/docs/` for the native app's current link.
+`documentation/` static site. Curate its visible hierarchy with `## Topics`:
+Essentials, Handbook (iOS and Web), Shared Concepts, and Reference. The
+`/documentation/` URL enters DocC's generated LinkMap landing article.
+Do not edit generated files directly. The build leaves redirects at the former
+platform roots and at `/docs/` for the native app's current link.
 The privacy policy source remains in
 `privacy-policy.md`; regenerate its public page with `python3 scripts/build-privacy.py`.
 Commit generated pages with their source changes. No deployment build is required.
