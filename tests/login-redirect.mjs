@@ -8,8 +8,8 @@ for (const base of ['/', '/LinkMap/']) {
   const home = `https://example.com${base}`;
   for (const [redirect, expected] of [
     [null, home], ['', home],
-    [`${base}documentation/ios/?view=all`, `${home}documentation/ios/?view=all`],
-    [`${base}documentation/ios/project/?view=all#section-1`, `${home}documentation/ios/project/?view=all#section-1`],
+    [`${base}documentation/documentation/linkmap/ios/?view=all`, `${home}documentation/documentation/linkmap/ios/?view=all`],
+    [`${base}documentation/documentation/linkmap/project/?view=all#overview`, `${home}documentation/documentation/linkmap/project/?view=all#overview`],
     ['../app/', `${home}app/`],
     [`${base}account/`, `${home}account/`],
     ['https://other.example/', home], ['//other.example/', home],
@@ -35,7 +35,7 @@ for (const base of ['/', '/LinkMap/']) {
       assert.equal(result, expected, `return from ${href}`);
     }
   }
-  for (const [route, prefix] of [['documentation/ios/', '../../'], ['documentation/ios/project/', '../../../']]) {
+  for (const [route, prefix] of [['documentation/documentation/linkmap/ios/', '../../../../'], ['documentation/documentation/linkmap/project/', '../../../../']]) {
     for (const readyState of ['loading', 'complete']) {
       const listeners = {};
       const element = { addEventListener() {}, getAttribute() { return `${prefix}account/`; } };

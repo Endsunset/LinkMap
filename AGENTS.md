@@ -2,8 +2,8 @@
 
 ## HTML links
 
-Use clean URLs for internal page links in HTML. Do not end page hyperlinks with
-`.html` or `.md`: link to `documentation/`, `documentation/ios/project/`, and `privacy-policy/` instead.
+Use clean URLs for internal page links in authored HTML. Do not end page hyperlinks with
+`.html` or `.md`: link to `documentation/` and `privacy-policy/` instead.
 Omit `index.html` from hyperlinks too: use the folder URL (`./`, `../`, or
 `documentation/`), which automatically serves its index page.
 Use relative paths so the site works under the GitHub Pages `/LinkMap/` base path.
@@ -14,16 +14,20 @@ an extension without providing a working destination. Asset references such as
 CSS and JavaScript retain their extensions. Preserve external URLs as provided by
 their owners.
 
-Apply this convention to generated HTML and the scripts that produce it. After
-changing links, verify local destinations and fragment IDs, and run `git diff --check`.
+Apply this convention to website generators. DocC owns its generated internal
+links and static-hosting URLs. After changing links, verify local destinations
+and fragments, and run `git diff --check`.
 
 ## Documentation
 
-Documentation content and metadata live in `documentation/pages.js`; the shared
-`documentation/documentation.js` renders minimal page loaders directly. Keep iOS
-guides under `documentation/ios/<slug>/`. No documentation build step is needed.
-Keep loader titles/descriptions synchronized with page metadata. Use only the
-canonical `documentation/` routes; retired compatibility loaders have been removed.
+Documentation source lives in `docc/LinkMap.docc`. Run
+`python3 scripts/build-documentation.py` to regenerate the checked-in
+`documentation/` static site. DocC owns the whole documentation section; iOS,
+web, conceptual guides, architecture, and selected model reference are topics
+of the same catalog. The `/documentation/` entry redirects to the generated
+DocC landing article. Do not edit generated files directly.
+The build leaves small redirects at the former platform and article routes,
+and at `/docs/` for the native app's current Documentation link.
 The privacy policy source remains in
 `privacy-policy.md`; regenerate its public page with `python3 scripts/build-privacy.py`.
 Commit generated pages with their source changes. No deployment build is required.

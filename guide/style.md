@@ -6,7 +6,7 @@ badges. Keep long-form reading text neutral and surfaces quiet.
 
 ## Color tokens
 
-Define shared colors in `styles.css`; use the same tokens in `documentation/documentation.css`.
+Define shared website colors in `styles.css`; the privacy page uses `policy.css`. DocC owns its generated documentation styles.
 
 | Token | Value | Use |
 | --- | --- | --- |
@@ -53,41 +53,19 @@ motion support. Do not use red alone to distinguish errors from ordinary emphasi
 
 ## Maintenance
 
-Apply these rules to the homepage, guides, privacy policy, and future web pages.
+Apply these rules to the homepage, privacy policy, and future website pages.
 Update shared styles instead of adding conflicting page-specific color values.
-Follow `AGENTS.md` for clean folder links. Documentation renderers keep using the
-shared stylesheets, so regeneration must preserve this theme.
+Follow `AGENTS.md` for clean folder links. DocC owns its documentation styles.
 
-All pages use `components/footer.html`, matching the documentation footer with
-LinkMap home and Privacy policy links. Refresh checked-in pages with
-`python3 scripts/build-footers.py`; documentation and privacy generators use
-the same renderer automatically.
+Website pages use `components/footer.html`. Refresh checked-in website pages with
+`python3 scripts/build-footers.py`; DocC renders documentation separately.
 
-## Documentation sidebar
+## Documentation
 
-Use a dedicated left navigation pane below the documentation subheader on desktop,
-at 320px wide, with independently scrolling links, a thin vertical divider, and compact indented links.
-Keep the filter in a separate bottom panel outside the scrolling navigation.
-Start with a Platforms view containing Web and iOS. Selecting a platform opens
-its overview and sidebar view; a Platforms back link returns to the platform list.
-Filter only the current sidebar view, and clear the filter when switching views.
-Group iOS topics into Introduction, Features, and Sharing under static section dividers.
-Keep separate documentation, Web, and iOS overview pages.
-Use parent relationships in `documentation/pages.js` for expandable topic rows.
-Topic titles open their pages; disclosure arrows expand nested child pages.
-Keep every topic collapsed on initial page load, including ancestors of the active page.
-During filtering, expand matching ancestor paths and restore the prior state when cleared. Highlight the current guide with red text
-and a trailing red edge. Include a labeled filter with result feedback.
-
-Keep the sidebar icon toggle in the documentation subheader even when the pane is hidden. Collapsing
-it releases the full column for reading. Expose the toggle state through
-`aria-expanded` and `aria-controls`, and support Escape from inside the pane.
-Remember the visibility choice for the browsing session. On narrow screens, start
-collapsed and open a full-viewport navigation overlay with its own close button.
-Keep background content inert and contain keyboard focus while open. Desktop
-uses an animated grid column to push the article; mobile never shifts it.
-Use 240ms transitions and disable them for reduced-motion preferences. Use native `details` elements for topic disclosures. Documentation requires
-JavaScript to render; keep an explicit noscript message and a LinkMap home link.
+Swift-DocC provides navigation, search, and article layout for the entire
+`/documentation/` section. Author topics in `docc/LinkMap.docc`; do not recreate
+the former website sidebar or article renderer. Keep the conceptual topic groups
+and selected reference entries concise and grounded in LinkMap-core.
 
 Sign in actions link to `login/`, which uses the existing white account-page layout
 and Apple’s SDK sign-in button. Sign-in links carry the originating page in a
@@ -95,14 +73,3 @@ and Apple’s SDK sign-in button. Sign-in links carry the originating page in a
 when no valid return page is provided.
 Use `account/` for authentication status, account identity, retry, and the SDK
 sign-out button.
-
-The documentation subheader is a compact white bar below the shared site header,
-with a borderless sidebar icon, a thin divider, and a prominent Documentation home
-link. Let the shared site header scroll away with the page; pin only the documentation
-subheader to the viewport top. Keep a visible bottom border and space around the
-control divider. Offset the desktop sidebar below the subheader, including the visible portion of
-the site header while it scrolls out of view. On mobile, the open sidebar covers
-the entire viewport, including both headers, and respects device safe areas.
-
-Show a quiet version line beneath each documentation introduction. The current
-documented release is LinkMap 3.0.0 Beta 8; maintain it in `documentation/pages.js`.

@@ -36,7 +36,7 @@ output.mkdir(exist_ok=True)
   <meta name="description" content="How LinkMap stores, shares, and handles your data.">
   <title>Privacy Policy | LinkMap</title>
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="../documentation/documentation.css">
+  <link rel="stylesheet" href="../policy.css">
 ''' + render_auth_scripts() + '''
 </head>
 <body>
