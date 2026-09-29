@@ -31,16 +31,19 @@ def check_navigation():
     assert index["includedArchiveIdentifiers"] == ["io.github.endsunset.LinkMap"]
     [library] = index["interfaceLanguages"]["swift"]
     assert library["path"] == "/documentation"
-    sections = children(library)
-    assert list(sections) == ["Platforms", "Handbook", "Essentials", "Shared Concepts"]
-    platform_pages = children(sections["Platforms"])
-    assert set(platform_pages) == {"LinkMap on iOS", "LinkMap on the Web"}
-    assert "Web Handbook" in children(platform_pages["LinkMap on the Web"])
-    handbook = children(sections["Handbook"])
-    assert set(handbook) == {"iOS Handbook"}
-    assert "LinkMap for iOS" in children(handbook["iOS Handbook"])
-    assert "LinkMap for Web" in children(children(platform_pages["LinkMap on the Web"])["Web Handbook"])
-    assert "Projects and Activities" in children(sections["Shared Concepts"])
+    entries = library["children"]
+    assert [entry["title"] for entry in entries if entry["type"] == "groupMarker"] == [
+        "Platforms", "Start Here", "Project and Map", "Plan Work", "Collaborate", "Essentials"
+    ]
+    pages = children(library)
+    assert list(pages) == [
+        "LinkMap for Web", "LinkMap for iOS", "Get Started on iOS", "Basic Workflow Example",
+        "Project", "Map", "Activities", "Sharing", "Essentials"
+    ]
+    assert "Use the Web Map" in children(pages["LinkMap for Web"])
+    assert "Regions and Layers" in children(pages["Project"])
+    assert "Locations" in children(pages["Map"])
+    assert "Routes and Stops" in children(pages["Activities"])
 
 
 def main():
@@ -55,9 +58,13 @@ def main():
     assert (ROOT / "data" / "documentation.json").is_file()
     assert not (ROOT / "data" / "documentation" / "linkmap.json").exists()
     assert not (SITE / "linkmap" / "essentials").exists()
+    assert 'url=../ios-platform/' in (SITE / "ios" / "index.html").read_text()
+    assert 'url=../web-platform/' in (SITE / "web" / "index.html").read_text()
     assert not (ROOT / "data" / "documentation" / "ios.json").exists()
     assert not (ROOT / "data" / "documentation" / "web.json").exists()
-    assert not any(path.stem in {"reference", "resource-workflows", "ios-cloudkit", "mapkit-js"}
+    assert not any(path.stem in {"reference", "resource-workflows", "ios-cloudkit", "mapkit-js",
+                                  "shared-concepts", "projects-and-activities", "places-and-routes",
+                                  "collaboration", "platforms", "handbook", "ios-handbook", "web-handbook"}
                    for path in (ROOT / "data" / "documentation").glob("*.json"))
     assert len(list((ROOT / "data" / "documentation").glob("*.json"))) + 1 == len(list(CATALOG.glob("*.md")))
     for article in CATALOG.glob("*.md"):

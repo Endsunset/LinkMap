@@ -23,17 +23,18 @@ and fragments, and run `git diff --check`.
 Documentation source lives in the single `docc/LinkMap.docc` catalog. Run
 `python3 scripts/build-documentation.py` to regenerate the checked-in
 `documentation/` static site. Curate its visible hierarchy with `## Topics`:
-Platforms (iOS and Web), Handbook (existing iOS task guides), Essentials, and Shared Concepts,
-in that order. Platform pages explain account access and available actions;
-the web guide belongs under the Web platform page. Handbook retains the existing
-iOS app task pages without adding implementation material. The DocC landing
+Platforms (Web and iOS), Start Here, Project and Map, Plan Work, Collaborate,
+and Essentials, in that order. Platform pages explain account access and
+available actions; the web guide belongs under the Web platform page. Curate
+the existing iOS task pages directly under the landing page's task sections.
+Project and Map are separate curated pages with their own children. The DocC landing
 article is served directly at `/documentation/`.
 Write the public documentation as a user booklet: explain what readers can do
 in LinkMap and how to do it. Keep implementation details, developer reference,
 Swift symbols, CloudKit and MapKit internals, and `projectZone` out of the
 published library. Leave Inventory and Transaction guidance out for now.
-Preserve useful user instructions and keep iOS and web tasks in their respective
-handbook branches. Shared concepts belong in one common section.
+Preserve useful user instructions. Keep Shared Concepts and its former articles
+out of the published library.
 Do not edit generated files directly. The build leaves redirects at the former
 platform roots and at `/docs/` for the native app's current link.
 The privacy policy source remains in

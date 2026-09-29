@@ -104,14 +104,14 @@ Remove personal account details and session tokens from screenshots or logs.
 
 ## Updating the documentation
 
-The single `docc/LinkMap.docc` catalog builds Essentials, iOS and Web Handbook
-branches, Shared Concepts, and a curated Reference section. The native
+The single `docc/LinkMap.docc` catalog builds a platform overview and curated
+task sections for getting started, Projects and the Map, planning, and sharing. The native
 LinkMap-core repository is the read-only source of truth for iOS behavior; the
 website app is the source for web behavior. Follow
 [documentation maintenance](docc/README.md), run
 `python3 scripts/build-documentation.py`, and commit source and generated output
 together. `/documentation/` enters the generated LinkMap library; former
-platform roots redirect into its handbook branches.
+platform roots redirect to their platform pages.
 
 ## Internal page URLs
 

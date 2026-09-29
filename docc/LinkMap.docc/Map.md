@@ -10,5 +10,4 @@ Tap a Location marker to open its actions, then choose Detail. Use the Map toolb
 
 ### Organize Places
 
-- <doc:Regions-and-Layers>
 - <doc:Locations>

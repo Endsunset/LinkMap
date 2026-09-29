@@ -1,25 +1,26 @@
 # LinkMap documentation library
 
 `LinkMap.docc` is the single authored Swift-DocC catalog. Its root page curates
-Platforms, Handbook, Essentials, and Shared Concepts, in that order. Platforms
-explains the differences between iOS and web, including account access. The
-Handbook page curates the existing iOS task branch. The Web platform page curates
-the existing web guide. Keep each child in a parent's `## Topics` section; folders
+Platforms, Start Here, Project and Map, Plan Work, Collaborate, and Essentials,
+in that order. Platform pages explain the differences between web and iOS,
+including account access. The task sections directly curate the existing iOS
+guides; Project and Map are separate pages. The Web platform page curates the
+existing web guide. Keep each child in a parent's `## Topics` section; folders
 and filenames alone do not define the visible navigator hierarchy.
 
 Write for people using LinkMap. Use the read-only native repository at
 `/Library/Developer/Projects/LinkMap-core` to check iOS behavior and this
-website repository to check web behavior. Explain common tasks in Shared
-Concepts and platform-specific steps in the matching handbook. Do not publish
-implementation details, developer reference, or Inventory and Transaction
-guidance in this booklet.
+website repository to check web behavior. Keep platform distinctions on the
+platform pages and task instructions in their curated sections. Do not publish
+implementation details, developer reference, Shared Concepts, or Inventory and
+Transaction guidance in this booklet.
 
 Run `python3 scripts/build-documentation.py` from the website checkout. It
 builds the catalog with warnings treated as errors and the `/LinkMap` hosting
 base path, then checks in the static output. The landing article is served
 directly at `/documentation/`, with topics beneath it.
 Former `/documentation/ios/` and `/documentation/web/` roots redirect to their
-handbook branches, and `/docs/` still leads to the library for the native app.
+platform pages, and `/docs/` still leads to the library for the native app.
 DocC's shared static assets live at the repository root because DocC's route
 base is `/LinkMap`.
 

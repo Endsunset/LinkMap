@@ -6,6 +6,6 @@ Select a Project in Dashboard → Context, then open Dashboard → Current Proje
 
 ## Topics
 
-### Explore the Project
+### Organize the Project
 
-- <doc:Map>
+- <doc:Regions-and-Layers>

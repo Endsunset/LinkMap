@@ -1,4 +1,4 @@
-# LinkMap on the Web
+# LinkMap for Web
 
 The web map asks you to sign in with your Apple Account to view your Projects and their Locations. Sign-in is a separate step in the browser, even if you already use LinkMap on iOS.
 
@@ -6,6 +6,6 @@ You can search for places and inspect coordinates without signing in. Create Pro
 
 ## Topics
 
-### Use the Web Map
+### Web Guide
 
-- <doc:Web-Handbook>
+- <doc:Using-LinkMap-on-Web>

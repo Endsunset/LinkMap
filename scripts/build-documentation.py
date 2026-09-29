@@ -99,9 +99,9 @@ def main():
         for name in DOC_IMAGE_FILES:
             shutil.copyfile(archive / name, documentation / name)
         redirect(documentation / "linkmap", documentation)
-        # Former platform roots lead into the two branches of this one library.
-        redirect(documentation / "ios", documentation / "ios-handbook")
-        redirect(documentation / "web", documentation / "web-handbook")
+        # Former platform roots lead to their pages in this one library.
+        redirect(documentation / "ios", documentation / "ios-platform")
+        redirect(documentation / "web", documentation / "web-platform")
 
         for page in documentation.rglob("*.html"):
             html = page.read_text()

@@ -8,7 +8,7 @@ for (const base of ['/', '/LinkMap/']) {
   const home = `https://example.com${base}`;
   for (const [redirect, expected] of [
     [null, home], ['', home],
-    [`${base}documentation/ios-handbook/?view=all`, `${home}documentation/ios-handbook/?view=all`],
+    [`${base}documentation/ios-platform/?view=all`, `${home}documentation/ios-platform/?view=all`],
     [`${base}documentation/search-and-coordinates/?view=all#overview`, `${home}documentation/search-and-coordinates/?view=all#overview`],
     ['../app/', `${home}app/`],
     [`${base}account/`, `${home}account/`],

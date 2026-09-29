@@ -1,4 +1,4 @@
-# LinkMap for Web
+# Use the Web Map
 
 Explore your Projects and places in a browser.
 
