@@ -1,3 +1,5 @@
+@import url("components/header-appearance.css");
+
 :root {
   --ink: #202124;
   --muted: #5f6368;

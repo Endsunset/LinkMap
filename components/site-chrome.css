@@ -1,3 +1,5 @@
+@import url("header-appearance.css");
+
 /* Shared website chrome on DocC pages, without the website's article styles. */
 .site-header, .site-footer {
   --ink: #202124;
