@@ -7,6 +7,9 @@ import shutil
 import subprocess
 import tempfile
 
+from site_header import render_auth_scripts, render_header
+from site_footer import render_footer
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "docc" / "LinkMap.docc"
@@ -107,14 +110,20 @@ def main():
             html = page.read_text()
             if 'var baseUrl = "/LinkMap/"' not in html:
                 continue
+            prefix = "../" * len(page.relative_to(staged).parts[:-1])
             html = html.replace('data-color-scheme="auto"', 'data-color-scheme="light"')
             html = html.replace('/LinkMap/favicon.', '/LinkMap/documentation/favicon.')
             html = html.replace('/documentation/linkmap/', '/documentation/')
             html = html.replace('<p>API Collection</p>', '<p>LinkMap Guide</p>')
             html = html.replace(
                 "</head>",
-                '<link rel="stylesheet" href="/LinkMap/documentation/doc-theme.css"></head>',
+                f'<link rel="stylesheet" href="/LinkMap/documentation/doc-theme.css">'
+                f'<link rel="stylesheet" href="{prefix}components/site-chrome.css">'
+                f'{render_auth_scripts(prefix)}</head>',
             )
+            html = html.replace('<body data-color-scheme="light">',
+                                '<body data-color-scheme="light">' + render_header(prefix, docs=True))
+            html = html.replace('</body>', render_footer(prefix) + '</body>')
             page.write_text(html)
 
         # Replace only paths owned by this generator, preserving website pages.
