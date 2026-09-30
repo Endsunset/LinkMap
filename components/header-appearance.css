@@ -7,6 +7,7 @@
     --accent: #ff747d;
     --accent-hover: #ff9ba1;
     --line: #3a3a3c;
+    color: var(--ink);
     background: rgba(28, 28, 30, .96);
   }
 }
