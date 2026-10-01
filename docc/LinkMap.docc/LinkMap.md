@@ -2,18 +2,18 @@
 
 Learn how to organize places and work in LinkMap on iOS and the web.
 
-Start with Platforms to see how the two apps differ. The task sections below cover getting started, Projects and the Map, planning work, and collaboration. Essentials provides a short introduction.
+Start with Essentials to learn what LinkMap does and get started on the web or iOS. Then follow the task guides to organize your places, plan work, and collaborate.
 
 ## Topics
 
-### Platforms
+### Essentials
 
+- <doc:How-LinkMap-Works>
 - <doc:Web-Platform>
 - <doc:iOS-Platform>
 
 ### Start Here
 
-- <doc:Using-LinkMap-for-iOS>
 - <doc:Basic-Workflow>
 
 ### Project and Map
@@ -28,7 +28,3 @@ Start with Platforms to see how the two apps differ. The task sections below cov
 ### Collaborate
 
 - <doc:Sharing>
-
-### Essentials
-
-- <doc:Essentials>

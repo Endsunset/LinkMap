@@ -33,14 +33,19 @@ def check_navigation():
     assert library["path"] == "/documentation"
     entries = library["children"]
     assert [entry["title"] for entry in entries if entry["type"] == "groupMarker"] == [
-        "Platforms", "Start Here", "Project and Map", "Plan Work", "Collaborate", "Essentials"
+        "Essentials", "Start Here", "Project and Map", "Plan Work", "Collaborate"
     ]
     pages = children(library)
     assert list(pages) == [
-        "LinkMap for Web", "LinkMap for iOS", "Get Started on iOS", "Basic Workflow Example",
-        "Project", "Map", "Activities", "Sharing", "Essentials"
+        "How LinkMap Works", "LinkMap for Web", "LinkMap for iOS", "Basic Workflow Example",
+        "Project", "Map", "Activities", "Sharing"
     ]
-    assert "Use the Web Map" in children(pages["LinkMap for Web"])
+    assert not children(pages["LinkMap for Web"])
+    assert not children(pages["LinkMap for iOS"])
+    essentials = entries[1:next(i for i, entry in enumerate(entries) if entry["title"] == "Start Here")]
+    assert [entry["title"] for entry in essentials] == [
+        "How LinkMap Works", "LinkMap for Web", "LinkMap for iOS"
+    ]
     assert "Regions and Layers" in children(pages["Project"])
     assert "Locations" in children(pages["Map"])
     assert "Routes and Stops" in children(pages["Activities"])
@@ -60,6 +65,16 @@ def main():
     assert not (SITE / "linkmap" / "essentials").exists()
     assert 'url=../ios-platform/' in (SITE / "ios" / "index.html").read_text()
     assert 'url=../web-platform/' in (SITE / "web" / "index.html").read_text()
+    for former, destination in {
+        "essentials": "how-linkmap-works",
+        "using-linkmap-for-ios": "ios-platform",
+        "using-linkmap-on-web": "web-platform",
+        "sign-in": "web-platform",
+        "explore-projects": "web-platform",
+        "search-and-coordinates": "web-platform",
+    }.items():
+        assert f'url=../{destination}/' in (SITE / former / "index.html").read_text()
+        assert not (ROOT / "data" / "documentation" / f"{former}.json").exists()
     assert not (ROOT / "data" / "documentation" / "ios.json").exists()
     assert not (ROOT / "data" / "documentation" / "web.json").exists()
     assert not any(path.stem in {"reference", "resource-workflows", "ios-cloudkit", "mapkit-js",

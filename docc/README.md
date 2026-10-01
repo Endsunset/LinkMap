@@ -1,11 +1,12 @@
 # LinkMap documentation library
 
 `LinkMap.docc` is the single authored Swift-DocC catalog. Its root page curates
-Platforms, Start Here, Project and Map, Plan Work, Collaborate, and Essentials,
-in that order. Platform pages explain the differences between web and iOS,
-including account access. The task sections directly curate the existing iOS
-guides; Project and Map are separate pages. The Web platform page curates the
-existing web guide. Keep each child in a parent's `## Topics` section; folders
+Essentials, Start Here, Project and Map, Plan Work, and Collaborate, in that
+order. Essentials directly contains How LinkMap Works and one getting-started
+article each for web and iOS, including account access and available actions.
+There is no Essentials wrapper article or Platforms section. The task sections
+directly curate the existing iOS guides; Project and Map are separate pages.
+Keep each child in a parent's `## Topics` section; folders
 and filenames alone do not define the visible navigator hierarchy.
 
 Write for people using LinkMap. Use the read-only native repository at
@@ -20,7 +21,9 @@ builds the catalog with warnings treated as errors and the `/LinkMap` hosting
 base path, then checks in the static output. The landing article is served
 directly at `/documentation/`, with topics beneath it.
 Former `/documentation/ios/` and `/documentation/web/` roots redirect to their
-platform pages, and `/docs/` still leads to the library for the native app.
+getting-started articles, as do the former platform guide subpages. The former
+Essentials wrapper redirects to How LinkMap Works, and `/docs/` still leads to
+the library for the native app.
 DocC's shared static assets live at the repository root because DocC's route
 base is `/LinkMap`.
 

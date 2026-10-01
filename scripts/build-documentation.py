@@ -105,6 +105,16 @@ def main():
         # Former platform roots lead to their pages in this one library.
         redirect(documentation / "ios", documentation / "ios-platform")
         redirect(documentation / "web", documentation / "web-platform")
+        # Keep bookmarks working after consolidating introductory articles.
+        for former, destination in {
+            "essentials": "how-linkmap-works",
+            "using-linkmap-for-ios": "ios-platform",
+            "using-linkmap-on-web": "web-platform",
+            "sign-in": "web-platform",
+            "explore-projects": "web-platform",
+            "search-and-coordinates": "web-platform",
+        }.items():
+            redirect(documentation / former, documentation / destination)
 
         for page in documentation.rglob("*.html"):
             html = page.read_text()
