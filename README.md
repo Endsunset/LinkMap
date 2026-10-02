@@ -1,6 +1,6 @@
 # LinkMap Web
 
-> **This repository has been archived.**
+> **This repository is no longer maintained.**
 
 The LinkMap web project has been merged into the [Endsunset/endsunset.github.io](https://github.com/Endsunset/endsunset.github.io) repository, where its source now lives under the `LinkMap/` directory. All future development, documentation updates, issues, pull requests, and maintenance for LinkMap Web will take place there.
 
